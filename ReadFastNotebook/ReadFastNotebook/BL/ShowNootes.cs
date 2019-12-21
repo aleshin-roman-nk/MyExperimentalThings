@@ -17,7 +17,7 @@ using System.Text;
 
 namespace ReadFastNotebook.BL
 {
-	static class ShowNootes
+	public static class ShowNootes
 	{
 		public static List<Dictionary<int, string>> GetIndexes(string fname)
 		{
@@ -66,12 +66,22 @@ namespace ReadFastNotebook.BL
 
 			foreach (var item in index)
 				if (bodyes.ContainsKey($"_{item[0]}"))
-					result.Add(new Note {Id =item[0], Date = new DateTime(int.Parse(item[3])), Text = bodyes[$"_{item[0]}"] });
+				{
+					int seconds = int.Parse(item[3]);
+					DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime().AddSeconds(seconds);
+
+					result.Add(new Note {
+						Id = item[0],
+						Date = dt,
+						DateStr = dt.ToString("G"),
+						Text = bodyes[$"_{item[0]}"]
+					}); ;
+				}
 
 			result = result.OrderByDescending(x => x.Date).ToList();
 
-			string j = JsonConvert.SerializeObject(result, Formatting.Indented);
-			Console.WriteLine(j);
+			//string j = JsonConvert.SerializeObject(result, Formatting.Indented);
+			//Console.WriteLine(j);
 
 			return result;
 		}
@@ -89,10 +99,11 @@ namespace ReadFastNotebook.BL
 		}
 	}
 
-	class Note
+	public class Note
 	{
 		public string Id { get; set; }
 		public DateTime Date { get; set; }
+		public string DateStr { get; set; }
 		public string Text { get; set; }
 	}
 }

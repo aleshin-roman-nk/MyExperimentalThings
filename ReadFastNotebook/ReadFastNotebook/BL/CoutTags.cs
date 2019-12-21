@@ -25,7 +25,26 @@ namespace ReadFastNotebook.BL
 
 	public class CoutTags
 	{
+		public string[] GetObjs(string src)
+		{
+			List<string> result = new List<string>();
 
+			string currStr = "";
+			int cmCnt = 0;
+			bool objStarted = false;
+			foreach (var item in src)
+			{
+				currStr += item;
+				if (item == '{')
+				{
+					cmCnt++;
+				}
+				else if (item == '}')
+				{
+					cmCnt--;
+				}
+			}
+		}
 	}
 
 	class Node

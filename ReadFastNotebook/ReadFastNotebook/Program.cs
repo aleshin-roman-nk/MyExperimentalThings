@@ -19,7 +19,7 @@ namespace ReadFastNotebook
 
 				//ShowNootes.GetIndexes("Заметки 20-12-2019-02-47Индексы.txt");
 
-				ShowNootes.GetNotes("notes.text", "notes.index");
+				//ShowNootes.GetNotes(@"..\..\..\DataFiles\notes.text", @"..\..\..\DataFiles\notes.index");
 			}
 			catch (Exception ex)
 			{
