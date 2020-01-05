@@ -28,7 +28,7 @@ namespace UIFastNote
 		{
 			bsMain.DataSource = notes;
 			lbNotes.DataSource = bsMain;
-			lbNotes.DisplayMember = "DateStr";
+			lbNotes.DisplayMember = "Title";
 			txtNoteText.DataBindings.Add("Text", bsMain, "Text");
 			bsMain.ResetBindings(false);
 		}

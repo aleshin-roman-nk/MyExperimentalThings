@@ -20,6 +20,19 @@ namespace ReadFastNotebook
 				//ShowNootes.GetIndexes("Заметки 20-12-2019-02-47Индексы.txt");
 
 				//ShowNootes.GetNotes(@"..\..\..\DataFiles\notes.text", @"..\..\..\DataFiles\notes.index");
+
+				string str = File.ReadAllText(@"..\..\..\DataFiles\FastNotepad_2019-12-20");
+
+				//var l = CoutTags.GetObjs("{Name=Roman{Age=41;Color=Black}}{Name=Natasha{Age=37;Color=Yellow}}");
+				var l = CoutTags.GetObjs(str);
+
+				int c = 0;
+				foreach (var item in l)
+				{
+					Console.WriteLine($"Object {c++} :");
+					Console.WriteLine(item);
+					Console.WriteLine("");
+				}
 			}
 			catch (Exception ex)
 			{

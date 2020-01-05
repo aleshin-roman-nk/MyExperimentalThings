@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\CoutTags.cs" />
-    <Compile Include="BL\ShowNootes.cs" />
+    <Compile Include="BL\ShowNotes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

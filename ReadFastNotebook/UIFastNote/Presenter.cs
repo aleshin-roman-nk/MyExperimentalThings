@@ -15,7 +15,7 @@ namespace UIFastNote
 		{
 			view = v;
 
-			var items = ShowNootes.GetNotes(@"..\..\..\DataFiles\notes.text", @"..\..\..\DataFiles\notes.index");
+			var items = ShowNotes.GetNotes(@"..\..\..\DataFiles\FastNotepad_2019-12-20");
 
 			view.SetNotes(items);
 		}

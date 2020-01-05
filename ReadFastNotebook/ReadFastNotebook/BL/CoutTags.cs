@@ -23,9 +23,9 @@ namespace ReadFastNotebook.BL
 	 * 
 	 */
 
-	public class CoutTags
+	public static class CoutTags
 	{
-		public string[] GetObjs(string src)
+		public static string[] GetObjs(string src)
 		{
 			List<string> result = new List<string>();
 
@@ -34,16 +34,29 @@ namespace ReadFastNotebook.BL
 			bool objStarted = false;
 			foreach (var item in src)
 			{
-				currStr += item;
 				if (item == '{')
 				{
 					cmCnt++;
+					objStarted = true;
 				}
 				else if (item == '}')
 				{
 					cmCnt--;
+					currStr += item;
+
+					if (cmCnt == 0)
+					{
+						objStarted = false;
+						result.Add(currStr);
+						currStr = "";
+					}
 				}
+
+				if(objStarted)
+					currStr += item;
 			}
+
+			return result.ToArray(); ;
 		}
 	}
 
