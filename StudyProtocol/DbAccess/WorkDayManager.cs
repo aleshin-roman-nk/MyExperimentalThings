@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudyProtocol.DbAccess
 {
+
 	public class WorkDayManager
 	{
 		bool sqlite_initialized { get; set; } = false;// в этом проекте хочу иметь DbContext на весь жизненный цикл.
