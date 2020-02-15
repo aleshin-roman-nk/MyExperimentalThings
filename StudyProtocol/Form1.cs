@@ -139,7 +139,7 @@ namespace StudyProtocol
 
 		private void insertText(string str)
 		{
-			var insertText = str + Environment.NewLine;
+			var insertText = Environment.NewLine + str + Environment.NewLine;
 			var selectionIndex = richTextBox1.SelectionStart;
 			richTextBox1.Text = richTextBox1.Text.Insert(selectionIndex, insertText);
 			richTextBox1.SelectionStart = selectionIndex + insertText.Length;
@@ -152,7 +152,9 @@ namespace StudyProtocol
             listBox1.Items.Clear();
             foreach (var item in dlist)
             {
-                listBox1.Items.Add(item);
+                var l = item.Split(new char[] { '\\', '/' });
+
+                listBox1.Items.Add(l.Last());
             }
         }
     }

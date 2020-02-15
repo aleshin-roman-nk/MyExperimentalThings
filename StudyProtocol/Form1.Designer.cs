@@ -34,7 +34,6 @@
 			this.btnStop = new System.Windows.Forms.Button();
 			this.btnContinue = new System.Windows.Forms.Button();
 			this.listBox1 = new System.Windows.Forms.ListBox();
-			this.listBox2 = new System.Windows.Forms.ListBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
@@ -43,12 +42,12 @@
 			this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+			this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.richTextBox1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.richTextBox1.Location = new System.Drawing.Point(1081, 12);
+			this.richTextBox1.Location = new System.Drawing.Point(857, 12);
 			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(380, 404);
+			this.richTextBox1.Size = new System.Drawing.Size(604, 404);
 			this.richTextBox1.TabIndex = 0;
 			this.richTextBox1.Text = "";
 			// 
@@ -97,16 +96,8 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(12, 12);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(979, 407);
+			this.listBox1.Size = new System.Drawing.Size(358, 407);
 			this.listBox1.TabIndex = 5;
-			// 
-			// listBox2
-			// 
-			this.listBox2.FormattingEnabled = true;
-			this.listBox2.Location = new System.Drawing.Point(997, 12);
-			this.listBox2.Name = "listBox2";
-			this.listBox2.Size = new System.Drawing.Size(78, 407);
-			this.listBox2.TabIndex = 6;
 			// 
 			// button1
 			// 
@@ -124,7 +115,6 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1473, 476);
 			this.Controls.Add(this.button1);
-			this.Controls.Add(this.listBox2);
 			this.Controls.Add(this.listBox1);
 			this.Controls.Add(this.btnContinue);
 			this.Controls.Add(this.btnStop);
@@ -146,7 +136,6 @@
 		private System.Windows.Forms.Button btnStop;
 		private System.Windows.Forms.Button btnContinue;
 		private System.Windows.Forms.ListBox listBox1;
-		private System.Windows.Forms.ListBox listBox2;
 		private System.Windows.Forms.Button button1;
 	}
 }
