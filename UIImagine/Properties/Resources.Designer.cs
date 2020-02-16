@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UIImagine.Properties
+namespace DrRomic.Properties
 {
 
 

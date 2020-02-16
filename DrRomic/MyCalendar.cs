@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UIImagine
+namespace DrRomic.UI
 {
 	public interface IMyCalendar
 	{
@@ -25,6 +25,10 @@ namespace UIImagine
 		{
 			InitializeComponent();
 			gridCalendar.SelectionChanged += GridCalendar_SelectionChanged;
+			UpdateUIMonth(Date);
+			foreach (DataGridViewColumn item in gridCalendar.Columns)
+				item.SortMode = DataGridViewColumnSortMode.NotSortable;
+			highlightDate(Date);
 		}
 
 		private void GridCalendar_SelectionChanged(object sender, EventArgs e)
@@ -33,15 +37,15 @@ namespace UIImagine
 			if (gridCalendar.SelectedCells[0] == null) return;
 			if (gridCalendar.SelectedCells[0].Value == null)
 			{
-				btnDateDay.Text = "-";
+				btnSetCurrentMonth.Text = Date.ToString("MMMM.yyyy");
 				return;
 			}
 
-			int day = (int)gridCalendar.SelectedCells[0].Value;
+			int day = int.Parse(gridCalendar.SelectedCells[0].Value.ToString());
 
 			Date = new DateTime(Date.Year, Date.Month, day);
 
-			btnDateDay.Text = day.ToString();
+			btnSetCurrentMonth.Text = Date.ToString("dd.MMMM.yyyy");
 
 			DateChoosed?.Invoke(Date);
 		}
@@ -56,6 +60,23 @@ namespace UIImagine
 		{
 			Date = DateTime.Today;
 			UpdateUIMonth(Date);
+			highlightDate(Date);
+		}
+
+		void highlightDate(DateTime dt)
+		{
+			foreach (DataGridViewRow week in gridCalendar.Rows)
+			{
+				foreach (DataGridViewCell dayw in week.Cells)
+				{
+					if (dayw.Tag == null) continue;
+					if (dt.Equals((DateTime)dayw.Tag))
+					{
+						dayw.Selected = true;
+						break;
+					}
+				}
+			}
 		}
 
 		private void btnUp_Click(object sender, EventArgs e)
@@ -64,17 +85,10 @@ namespace UIImagine
 			UpdateUIMonth(Date);
 		}
 
-		private void btnDateDay_Click(object sender, EventArgs e)
-		{
-			Date = DateTime.Today;
-			btnDateDay.Text = Date.Day.ToString();
-			UpdateUIMonth(Date);
-		}
-
 		private void UpdateUIMonth(DateTime dt)
 		{
 			fetchCalendar(dt);
-			btnSetCurrentMonth.Text = dt.ToString("yyyy.MMMM");
+			btnSetCurrentMonth.Text = dt.ToString("dd.MMMM.yyyy");
 			DateChoosed?.Invoke(dt);
 		}
 
@@ -98,10 +112,14 @@ namespace UIImagine
 				if (dayOfWeek == 6)
 				{
 					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = txt;
+					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Tag = item;
 					weekOfMonth = gridCalendar.Rows.Add();
 				}
 				else
+				{
 					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = txt;
+					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Tag = item;
+				}
 			}
 		}
 

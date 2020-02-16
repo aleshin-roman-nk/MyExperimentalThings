@@ -64,12 +64,6 @@
     <Compile Include="MonthChoose.Designer.cs">
       <DependentUpon>MonthChoose.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyCalendar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyCalendar.Designer.cs">
-      <DependentUpon>MyCalendar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProjItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,9 +72,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MonthChoose.resx">
       <DependentUpon>MonthChoose.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyCalendar.resx">
-      <DependentUpon>MyCalendar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,6 +97,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DrRomic\DrRomic.csproj">
+      <Project>{98b129e2-2e5b-4cf8-b7fc-325266320579}</Project>
+      <Name>DrRomic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

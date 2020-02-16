@@ -1,4 +1,4 @@
-﻿namespace UIImagine
+﻿namespace DrRomic.UI
 {
 	partial class MyCalendar
 	{
@@ -40,7 +40,6 @@
 			this.d5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.d6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.d7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnDateDay = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnSetCurrentMonth = new System.Windows.Forms.Button();
 			this.btnUp = new System.Windows.Forms.Button();
@@ -66,18 +65,18 @@
 			this.gridCalendar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gridCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridCalendar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.d1,
-            this.d2,
-            this.d3,
-            this.d4,
-            this.d5,
-            this.d6,
-            this.d7});
+			this.d1,
+			this.d2,
+			this.d3,
+			this.d4,
+			this.d5,
+			this.d6,
+			this.d7});
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Lime;
 			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Navy;
 			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.gridCalendar.DefaultCellStyle = dataGridViewCellStyle2;
@@ -144,25 +143,12 @@
 			this.d7.Name = "d7";
 			this.d7.ReadOnly = true;
 			// 
-			// btnDateDay
-			// 
-			this.btnDateDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnDateDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnDateDay.Location = new System.Drawing.Point(632, 1);
-			this.btnDateDay.Name = "btnDateDay";
-			this.btnDateDay.Size = new System.Drawing.Size(75, 44);
-			this.btnDateDay.TabIndex = 21;
-			this.btnDateDay.Text = "000";
-			this.btnDateDay.UseVisualStyleBackColor = true;
-			this.btnDateDay.Click += new System.EventHandler(this.btnDateDay_Click);
-			// 
 			// panel1
 			// 
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.panel1.Controls.Add(this.btnSetCurrentMonth);
 			this.panel1.Controls.Add(this.btnUp);
 			this.panel1.Controls.Add(this.btnDown);
-			this.panel1.Controls.Add(this.btnDateDay);
 			this.panel1.Controls.Add(this.gridCalendar);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -228,7 +214,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn d5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d6;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d7;
-		private System.Windows.Forms.Button btnDateDay;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Button btnSetCurrentMonth;
 		private System.Windows.Forms.Button btnUp;

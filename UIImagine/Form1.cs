@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DrRomic.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,38 +54,35 @@ using System.Windows.Forms;
  * 
  */
 
-namespace UIImagine
+namespace DrRomic
 {
 	public partial class Form1 : Form
 	{
         List<Entity1> markers = new List<Entity1>();
         List<ProjItem> projItems = new List<ProjItem>();
-        IMonthChoose monthChoose;
+        IMyCalendar calendar;
 
         public Form1()
 		{
 			InitializeComponent();
-            entity1BindingSource1.DataSource = markers;
-            entity1BindingSource1.ResetBindings(false);
+            //entity1BindingSource1.DataSource = markers;
+            //entity1BindingSource1.ResetBindings(false);
 
-            foreach (DataGridViewColumn item in gridCalendar.Columns)
-                item.SortMode = DataGridViewColumnSortMode.NotSortable;
+            //foreach (DataGridViewColumn item in gridCalendar.Columns)
+            //    item.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            lvMain.ItemSelectionChanged += LvMain_ItemSelectionChanged;
+            //lvMain.ItemSelectionChanged += LvMain_ItemSelectionChanged;
 
-            MakeItems();
+            //MakeItems();
 
-            monthChoose = monthChoose1;
+            //monthChoose = monthChoose1;
 
-            monthChoose.MonthChoosed += MonthChoose_MonthChoosed;
-            fetchMobthGrid(monthChoose.Date);
+            //monthChoose.MonthChoosed += MonthChoose_MonthChoosed;
+            //fetchMobthGrid(monthChoose.Date);
+
+            calendar = myCalendar1;
+
         }
-
-        private void MonthChoose_MonthChoosed(DateTime obj)
-        {
-            fetchMobthGrid(obj);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             markers.Add(Entity1.StartMarker());
@@ -111,34 +109,6 @@ namespace UIImagine
         {
         }
 
-        void fetchMobthGrid(DateTime dt)
-        {
-            gridCalendar.Rows.Clear();
-
-            var month = GetDates(dt.Year, dt.Month);
-
-            int weekOfMonth = gridCalendar.Rows.Add();
-            listBox2.Items.Clear();
-
-            foreach (var item in month)
-            {
-                int dayOfWeek = int.Parse(item.DayOfWeek.ToString("d"));
-				if (dayOfWeek == 0) dayOfWeek = 6;
-				else
-					dayOfWeek = dayOfWeek - 1;
-
-				string txt = $"{item.Day}";
-
-                if(dayOfWeek == 6)
-                {
-                    gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = txt;
-                    weekOfMonth = gridCalendar.Rows.Add();
-                }
-                else
-                    gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = txt;
-            }
-        }
-
         private void btnReloadItems_Click(object sender, EventArgs e)
         {
             lvMain.Items.Clear();
@@ -152,27 +122,8 @@ namespace UIImagine
             }
         }
 
-        public List<DateTime> GetDates(int year, int month)
-        {
-            return Enumerable.Range(1, DateTime.DaysInMonth(year, month))
-                             // Days: 1, 2 ... 31 etc.
-                             .Select(day => new DateTime(year, month, day))
-                             // Map each day to a date
-                             .ToList(); // Load dates into a list
-        }
-
         private void MakeItems()
         {
-            foreach (var item in GetDates(2020, 2))
-            {
-                projItems.Add(new ProjItem
-                {
-                    Name = $"{item.Day} ({item.ToString("dddd")})",
-                    Body = "Some text"
-                });
-            }
-
-
             //projItems.Add(new ProjItem { 
             //    Name = "Понедельник",
             //    Body = "Some text"
@@ -200,17 +151,9 @@ namespace UIImagine
                 //listBox1.Items.Add(e.Item.Text);
         }
 
-        private void gridCalendar_SelectionChanged(object sender, EventArgs e)
+        private void myCalendar1_DateChoosed(DateTime obj)
         {
-            if (gridCalendar.SelectedCells.Count == 0) return;
-            if (gridCalendar.SelectedCells[0] == null) return;
-            if (gridCalendar.SelectedCells[0].Value == null)
-            {
-                txtDay.Text = "-";
-                return;
-            }
 
-            txtDay.Text = gridCalendar.SelectedCells[0].Value.ToString();
         }
     }
 }
