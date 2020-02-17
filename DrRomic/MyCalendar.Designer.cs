@@ -65,13 +65,13 @@
 			this.gridCalendar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gridCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridCalendar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-			this.d1,
-			this.d2,
-			this.d3,
-			this.d4,
-			this.d5,
-			this.d6,
-			this.d7});
+            this.d1,
+            this.d2,
+            this.d3,
+            this.d4,
+            this.d5,
+            this.d6,
+            this.d7});
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -100,6 +100,7 @@
 			this.gridCalendar.RowTemplate.Height = 40;
 			this.gridCalendar.Size = new System.Drawing.Size(705, 332);
 			this.gridCalendar.TabIndex = 19;
+			this.gridCalendar.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gridCalendar_CellPainting);
 			// 
 			// d1
 			// 

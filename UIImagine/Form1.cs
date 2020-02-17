@@ -51,6 +51,20 @@ using System.Windows.Forms;
  *      папка каждого проекта содержит файл плана
  *          при загрузке приложения, читаются все файлы планов из папки каждого проекта и строится общая коллекция планов.
  * 
+ * >>>
+ * 17.02.2020
+ * Состав формы:
+ *  календарь
+ *  список проектов
+ *  к каждомупроекту
+ *      информация о планах
+ *      информация о затраченном времени
+ *  кнопка отметить весь месяц (без выбора конкретного дня)
+ *      или переключатель показывать онформацию по выбранному дню либо по месяцу
+ *  
+ *  
+ *      
+ * 
  * 
  */
 
@@ -65,13 +79,13 @@ namespace DrRomic
         public Form1()
 		{
 			InitializeComponent();
-            //entity1BindingSource1.DataSource = markers;
-            //entity1BindingSource1.ResetBindings(false);
+            entity1BindingSource1.DataSource = markers;
+            entity1BindingSource1.ResetBindings(false);
 
             //foreach (DataGridViewColumn item in gridCalendar.Columns)
             //    item.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            //lvMain.ItemSelectionChanged += LvMain_ItemSelectionChanged;
+            lvProjects.ItemSelectionChanged += lvProjects_ItemSelectionChanged;
 
             //MakeItems();
 
@@ -82,17 +96,21 @@ namespace DrRomic
 
             calendar = myCalendar1;
 
+            MakeItems();
+            fetchProjects();
         }
         private void button1_Click(object sender, EventArgs e)
         {
             markers.Add(Entity1.StartMarker());
             entity1BindingSource1.ResetBindings(false);
+            lvProjects.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             markers.Add(Entity1.StopMarker());
             entity1BindingSource1.ResetBindings(false);
+            lvProjects.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -111,11 +129,16 @@ namespace DrRomic
 
         private void btnReloadItems_Click(object sender, EventArgs e)
         {
-            lvMain.Items.Clear();
+            fetchProjects();
+        }
+
+        private void fetchProjects()
+        {
+            lvProjects.Items.Clear();
 
             foreach (var item in projItems)
             {
-                var o = lvMain.Items.Add(item.Name);
+                var o = lvProjects.Items.Add(item.Name);
                 o.Tag = item;
                 o.SubItems.Add(item.Body);
                 o.ImageIndex = 0;
@@ -124,36 +147,39 @@ namespace DrRomic
 
         private void MakeItems()
         {
-            //projItems.Add(new ProjItem { 
-            //    Name = "Понедельник",
-            //    Body = "Some text"
-            //});
-            //projItems.Add(new ProjItem
-            //{
-            //    Name = "Вторник",
-            //    Body = "Some text practice"
-            //});
-            //projItems.Add(new ProjItem
-            //{
-            //    Name = "Среда",
-            //    Body = "Some text about"
-            //});
-            //projItems.Add(new ProjItem
-            //{
-            //    Name = "Четверг",
-            //    Body = "Articles"
-            //});
+            projItems.Add(new ProjItem
+            {
+                Name = "Английский",
+                Body = "Some text"
+            });
+            projItems.Add(new ProjItem
+            {
+                Name = "Проект ПЛАН",
+                Body = "Some text practice"
+            });
+            projItems.Add(new ProjItem
+            {
+                Name = "Проект .NET CORE",
+                Body = "Some text about"
+            });
         }
 
-        private void LvMain_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void lvProjects_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (e.IsSelected) ;
-                //listBox1.Items.Add(e.Item.Text);
+            if (e.IsSelected)
+                tbListViewSelected.Text = e.Item.Text;
+            else
+                tbListViewSelected.Text = "-";
         }
 
         private void myCalendar1_DateChoosed(DateTime obj)
         {
 
+        }
+
+        private void btnUnselect_Click(object sender, EventArgs e)
+        {
+            lvProjects.SelectedItems.Clear();
         }
     }
 }

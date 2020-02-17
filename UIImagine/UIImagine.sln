@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIImagine", "UIImagine.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrRomic", "..\DrRomic\DrRomic.csproj", "{98B129E2-2E5B-4CF8-B7FC-325266320579}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLModel", "BLModel\BLModel.csproj", "{F630E868-76EE-49B0-9F06-32CD149D12BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
