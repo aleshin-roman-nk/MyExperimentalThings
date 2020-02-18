@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocBuilder", "DocBuilder.csproj", "{6A5E3B37-4E86-4FC0-960B-D830C861E35F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocBuild", "DocBuild\DocBuild.csproj", "{26E47C3C-B7E9-431E-A7DD-32EF54A11523}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A5E3B37-4E86-4FC0-960B-D830C861E35F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A5E3B37-4E86-4FC0-960B-D830C861E35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A5E3B37-4E86-4FC0-960B-D830C861E35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A5E3B37-4E86-4FC0-960B-D830C861E35F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26E47C3C-B7E9-431E-A7DD-32EF54A11523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E47C3C-B7E9-431E-A7DD-32EF54A11523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E47C3C-B7E9-431E-A7DD-32EF54A11523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E47C3C-B7E9-431E-A7DD-32EF54A11523}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB0DBE6D-034A-4743-BE78-D3072E49D5C1}
+	EndGlobalSection
+EndGlobal
