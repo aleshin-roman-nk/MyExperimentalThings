@@ -1,5 +1,5 @@
-﻿using PanelsManagmentExample.BL;
-using PanelsManagmentExample.Panels;
+﻿using DrRomic.BL;
+using DrRomic.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PanelsManagmentExample
+namespace DrRomic
 {
 	public partial class Form1 : Form, IMainView
 	{
@@ -25,29 +25,25 @@ namespace PanelsManagmentExample
 			panelController.Add(yearPanel1);
 			panelController.Add(monthPanel1);
 
-			panelController.Message += PanelController_Message;
-			panelController.Request += PanelController_Request;
-
-			
+			panelController.OnMessage += PanelController_Message;
+			panelController.OnRequest += PanelController_Request;
 		}
 
-		private void PanelController_Request(ReqData obj)
+		private void PanelController_Request(Requset obj)
 		{
-			Request?.Invoke(obj);
+			OnRequest?.Invoke(obj);
 		}
 
-		public event Action<string> Message;
-		public event Action<ReqData> Request;
+		public event Action<string> OnMessage;
+		public event Action<Requset> OnRequest;
 
 		public void SetText(string msg)
 		{
-			txtOut.Text = msg;
-			//textBox1.AppendText($"{msg}{Environment.NewLine}");
 		}
 
 		private void PanelController_Message(string obj)
 		{
-			Message?.Invoke(obj);
+			OnMessage?.Invoke(obj);
 		}
 
 		public void Init()

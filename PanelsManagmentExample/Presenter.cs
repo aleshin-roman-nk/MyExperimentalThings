@@ -1,34 +1,34 @@
-﻿using PanelsManagmentExample.BL;
+﻿using DrRomic.BL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PanelsManagmentExample
+namespace DrRomic
 {
 	public class Presenter
 	{
-		DataModel model;
+		RequestRouter requestModel;
 		IMainView view;
 
 		public Presenter(IMainView v)
 		{
 			view = v;
-			model = new DataModel();
+			requestModel = new RequestRouter();
 
-			view.Message += View_Message;
-			view.Request += View_Request;
+			view.OnMessage += View_OnMessage;
+			view.OnRequest += View_OnRequest;
 
 			view.Init();
 		}
 
-		private void View_Request(ReqData obj)
+		private void View_OnRequest(Requset obj)
 		{
-			model.Routing(obj);
+			requestModel.GetResponse(obj);
 		}
 
-		private void View_Message(string obj)
+		private void View_OnMessage(string obj)
 		{
 			view.SetText($"handled by model: {obj}");
 		}

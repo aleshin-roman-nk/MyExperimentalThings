@@ -1,4 +1,4 @@
-﻿namespace PanelsManagmentExample
+﻿namespace DrRomic
 {
 	partial class Form1
 	{
@@ -29,11 +29,10 @@
 		private void InitializeComponent()
 		{
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.gridPanel1 = new DrRomic.UI.GridPanel();
+			this.monthPanel1 = new DrRomic.UI.MonthPanel();
+			this.yearPanel1 = new DrRomic.UI.YearPanel();
 			this.txtOut = new System.Windows.Forms.Label();
-			this.gridPanel1 = new PanelsManagmentExample.Panels.GridPanel();
-			this.monthPanel1 = new PanelsManagmentExample.Panels.MonthPanel();
-			this.yearPanel1 = new PanelsManagmentExample.Panels.YearPanel();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -54,25 +53,14 @@
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.textBox1);
 			this.splitContainer1.Panel2.Controls.Add(this.monthPanel1);
 			this.splitContainer1.Panel2.Controls.Add(this.yearPanel1);
 			this.splitContainer1.Size = new System.Drawing.Size(1098, 550);
 			this.splitContainer1.SplitterDistance = 385;
 			this.splitContainer1.TabIndex = 1;
 			// 
-			// txtOut
-			// 
-			this.txtOut.AutoSize = true;
-			this.txtOut.Location = new System.Drawing.Point(12, 9);
-			this.txtOut.Name = "txtOut";
-			this.txtOut.Size = new System.Drawing.Size(25, 13);
-			this.txtOut.TabIndex = 2;
-			this.txtOut.Text = "000";
-			// 
 			// gridPanel1
 			// 
-			this.gridPanel1.AttachedPanel = null;
 			this.gridPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.gridPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridPanel1.Location = new System.Drawing.Point(0, 0);
@@ -83,26 +71,29 @@
 			// monthPanel1
 			// 
 			this.monthPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.monthPanel1.Location = new System.Drawing.Point(43, 3);
+			this.monthPanel1.Location = new System.Drawing.Point(3, 202);
 			this.monthPanel1.Name = "monthPanel1";
-			this.monthPanel1.Size = new System.Drawing.Size(331, 223);
+			this.monthPanel1.Size = new System.Drawing.Size(198, 128);
 			this.monthPanel1.TabIndex = 1;
+			this.monthPanel1.Visible = false;
 			// 
 			// yearPanel1
 			// 
 			this.yearPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.yearPanel1.Location = new System.Drawing.Point(3, 3);
 			this.yearPanel1.Name = "yearPanel1";
-			this.yearPanel1.Size = new System.Drawing.Size(252, 169);
+			this.yearPanel1.Size = new System.Drawing.Size(270, 193);
 			this.yearPanel1.TabIndex = 0;
+			this.yearPanel1.Visible = false;
 			// 
-			// textBox1
+			// txtOut
 			// 
-			this.textBox1.Location = new System.Drawing.Point(3, 258);
-			this.textBox1.Multiline = true;
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(579, 280);
-			this.textBox1.TabIndex = 2;
+			this.txtOut.AutoSize = true;
+			this.txtOut.Location = new System.Drawing.Point(12, 9);
+			this.txtOut.Name = "txtOut";
+			this.txtOut.Size = new System.Drawing.Size(25, 13);
+			this.txtOut.TabIndex = 2;
+			this.txtOut.Text = "000";
 			// 
 			// Form1
 			// 
@@ -115,7 +106,6 @@
 			this.Text = "Form1";
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
-			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -125,12 +115,11 @@
 
 		#endregion
 
-		private Panels.GridPanel gridPanel1;
+		private UI.GridPanel gridPanel1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
-		private Panels.YearPanel yearPanel1;
-		private Panels.MonthPanel monthPanel1;
+		private UI.YearPanel yearPanel1;
+		private UI.MonthPanel monthPanel1;
 		private System.Windows.Forms.Label txtOut;
-		private System.Windows.Forms.TextBox textBox1;
 	}
 }
 

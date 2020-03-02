@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PanelsManagmentExample.BL
+namespace DrRomic.BL
 {
-	public class ReqData
+	public class Requset
 	{
-		public string DataType { get; set; }
+		public string Request { get; set; }
+		public object Data { get; set; }
 		public object Responce { get; set; }
 		public string Message { get; set; }
 	}

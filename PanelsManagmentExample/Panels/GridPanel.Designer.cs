@@ -1,4 +1,4 @@
-﻿namespace PanelsManagmentExample.Panels
+﻿namespace DrRomic.UI
 {
 	partial class GridPanel
 	{

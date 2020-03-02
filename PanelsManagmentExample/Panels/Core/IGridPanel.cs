@@ -5,17 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PanelsManagmentExample.Panels
+namespace DrRomic.UI
 {
 	public interface IGridPanel
 	{
-		void SetBindingSource(BindingSource bs);
-		void AddColumn(GridPanelColumn col);
+		//void SetBindingSource(BindingSource bs);
+		//void SetColumns(IEnumerable<GridPanelColumn> columns);
 		/// <summary>
 		/// Clear both bindings and columns
 		/// </summary>
 		void Clear();
-		IPanel AttachedPanel { get; set; }
+		void Attach(IPanel panel);
 		event Action Next;
 		event Action Back;
 	}

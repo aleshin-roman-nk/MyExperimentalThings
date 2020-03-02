@@ -4,63 +4,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PanelsManagmentExample.BL
+namespace DrRomic.BL
 {
-	public class EntA
+	public class Year
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
 	}
+	public class Month
+	{
+		public int Id { get; set; }
+		public int YearId { get; set; }
+		public string MName { get; set; }
+	}
 
 	public class DataModel
 	{
-		public ReqData Routing(ReqData rd)
+		List<Year> years = new List<Year>();
+		List<Month> months = new List<Month>();
+
+		public DataModel()
 		{
-			var route = new Dictionary<string, Action<ReqData>>();
+			years.Add(new Year { Id = 1, Name = "2015" });
+			years.Add(new Year { Id = 2, Name = "2016" });
+			years.Add(new Year { Id = 3, Name = "2017" });
 
-			route["years"] = (x) =>
-			{
-				x.Responce = GetYears();
-				x.Message = "DM: YEARS";
-			};
-
-			route["months"] = (x) =>
-			{
-				x.Responce = GetMonths();
-				x.Message = "DM: MONTHS";
-			};
-
-			route[rd.DataType](rd);
-
-			return rd;
+			months.Add(new Month { Id = 1, MName = "Январь", YearId = 1});
+			months.Add(new Month { Id = 2, MName = "Февраль", YearId = 1});
+			months.Add(new Month { Id = 3, MName = "Март", YearId = 1});
+			months.Add(new Month { Id = 4, MName = "Апрель", YearId = 2});
+			months.Add(new Month { Id = 5, MName = "Май", YearId = 2});
+			months.Add(new Month { Id = 6, MName = "Июнь", YearId = 2});
+			months.Add(new Month { Id = 7, MName = "Декабрь", YearId = 3});
+			months.Add(new Month { Id = 8, MName = "Октобер", YearId = 3});
+			months.Add(new Month { Id = 9, MName = "Новомб", YearId = 1});
+			months.Add(new Month { Id = 10, MName = "Куралесь", YearId = 3});
 		}
 
-		public IEnumerable<EntA> GetYears()
+		public void AddYear(Year y)
 		{
-			var res = new List<EntA>();
-
-			res.Add(new EntA { Id = 0, Name = "123123" });
-			res.Add(new EntA { Id = 0, Name = "34345" });
-			res.Add(new EntA { Id = 0, Name = "456 4545674" });
-			res.Add(new EntA { Id = 0, Name = "3456 567546" });
-			res.Add(new EntA { Id = 0, Name = "456456 455666" });
-			res.Add(new EntA { Id = 0, Name = "55345  786879" });
-			res.Add(new EntA { Id = 0, Name = "345 90900" });
-
-			return res;
+			years.Add(y);
 		}
 
-		public IEnumerable<EntA> GetMonths()
+		public IEnumerable<Year> GetYears()
 		{
-			var res = new List<EntA>();
+			return years;
+		}
 
-			res.Add(new EntA { Id = 0, Name = "Janv" });
-			res.Add(new EntA { Id = 0, Name = "Febr" });
-			res.Add(new EntA { Id = 0, Name = "Mart" });
-			res.Add(new EntA { Id = 0, Name = "April" });
-			res.Add(new EntA { Id = 0, Name = "May" });
-
-			return res;
+		public IEnumerable<Month> GetMonths(Year y)
+		{
+			return months.Where(x => x.YearId == y.Id).ToList();
 		}
 	}
 }

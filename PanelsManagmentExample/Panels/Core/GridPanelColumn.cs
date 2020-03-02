@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PanelsManagmentExample.Panels
+namespace DrRomic.UI
 {
 	public class GridPanelColumn
 	{

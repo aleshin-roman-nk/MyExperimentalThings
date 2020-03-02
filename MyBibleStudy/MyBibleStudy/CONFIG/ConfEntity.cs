@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkDataModel
+namespace MyBibleStudy.CONFIG
 {
-    public class Class1
-    {
-    }
+	public class ConfEntity
+	{
+		public string DataPath { get; set; }
+	}
 }

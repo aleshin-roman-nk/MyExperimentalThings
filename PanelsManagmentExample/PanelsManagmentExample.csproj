@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F680AF10-1803-420E-AFE0-DB3A06A326AF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PanelsManagmentExample</RootNamespace>
+    <RootNamespace>DrRomic</RootNamespace>
     <AssemblyName>PanelsManagmentExample</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -50,7 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\DataModel.cs" />
-    <Compile Include="BL\ReqData.cs" />
+    <Compile Include="BL\Requset.cs" />
+    <Compile Include="BL\RequestRouter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,22 +59,23 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IMainView.cs" />
+    <Compile Include="JsonTextLog.cs" />
     <Compile Include="Panels\GridPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Panels\GridPanel.Designer.cs">
       <DependentUpon>GridPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panels\GridPanelColumn.cs" />
-    <Compile Include="Panels\IGridPanel.cs" />
-    <Compile Include="Panels\IPanel.cs" />
+    <Compile Include="Panels\Core\GridPanelColumn.cs" />
+    <Compile Include="Panels\Core\IGridPanel.cs" />
+    <Compile Include="Panels\Core\IPanel.cs" />
     <Compile Include="Panels\MonthPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Panels\MonthPanel.Designer.cs">
       <DependentUpon>MonthPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panels\PanelController.cs" />
+    <Compile Include="Panels\Core\PanelController.cs" />
     <Compile Include="Panels\YearPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,6 +105,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

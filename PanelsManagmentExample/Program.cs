@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PanelsManagmentExample
+namespace DrRomic
 {
 	static class Program
 	{
@@ -19,9 +19,16 @@ namespace PanelsManagmentExample
 
 			Form1 view = new Form1();
 
+			COMMON.MainView = view;
+
 			Presenter p = new Presenter(view);
 
 			Application.Run(view);
 		}
+	}
+
+	public static class COMMON
+	{
+		public static IMainView MainView { get; set; }
 	}
 }

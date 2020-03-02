@@ -1,4 +1,4 @@
-﻿namespace PanelsManagmentExample.Panels
+﻿namespace DrRomic.UI
 {
 	partial class YearPanel
 	{
@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.label1 = new System.Windows.Forms.Label();
+			this.btnAddYear = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -40,11 +41,22 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "YEAR";
 			// 
+			// btnAddYear
+			// 
+			this.btnAddYear.Location = new System.Drawing.Point(185, 160);
+			this.btnAddYear.Name = "btnAddYear";
+			this.btnAddYear.Size = new System.Drawing.Size(75, 23);
+			this.btnAddYear.TabIndex = 1;
+			this.btnAddYear.Text = "Добавить";
+			this.btnAddYear.UseVisualStyleBackColor = true;
+			this.btnAddYear.Click += new System.EventHandler(this.btnAddYear_Click);
+			// 
 			// YearPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.Controls.Add(this.btnAddYear);
 			this.Controls.Add(this.label1);
 			this.Name = "YearPanel";
 			this.Size = new System.Drawing.Size(383, 307);
@@ -56,5 +68,6 @@
 		#endregion
 
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button btnAddYear;
 	}
 }

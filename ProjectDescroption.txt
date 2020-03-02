@@ -1,0 +1,3 @@
+PanelControllerExp02
+PanelsManagmentExample
+Проработка идеи коллекции панелей и маршрутизации запросов к BL

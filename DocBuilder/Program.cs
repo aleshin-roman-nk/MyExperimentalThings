@@ -11,13 +11,13 @@ namespace DocBuilder
 	{
 		static void Main(string[] args)
 		{
-			string tempDoc = File.ReadAllText("contract.htmltemplate");
+			string tempDoc = File.ReadAllText("contract.html");
 
 			var table = new Dictionary<string, string>();
 
 			string body = "Адрес %kv:<, кв kv>%";
 
-			table["kv"] = "";
+			table["kv"] = "123";
 
 
 			DBiuld doc = new DBiuld(table, body);
@@ -25,12 +25,12 @@ namespace DocBuilder
 
 			//File.WriteAllText("out.html", doc.Document, Encoding.UTF8);
 
-			//var vars = DBiuld.AllVariables(tempDoc);
+			var vars = DBiuld.AllVariables(tempDoc);
 
-			//foreach (var item in vars)
-			//{
-			//	Console.WriteLine(item);
-			//}
+			foreach (var item in vars)
+			{
+				Console.WriteLine(item);
+			}
 
 			//Console.WriteLine("Done!!!");
 			Console.ReadLine();
