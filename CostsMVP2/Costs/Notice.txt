@@ -1,0 +1,24 @@
+﻿Контроллеры MVP-блоков
+Обеспечение взаимодействия блоков трио-паттернов
+
+
+
+
+Controller1 (или Block1 ?)
+-Model1-View1-Presenter1
+
+Controller2
+-Model2-View2-Presenter2
+
+Controller1.
+
+
+
+Или назвать ViewPresenterContainer
+
+MVPStarter
+
+
+
+или можно один презентер много view
+тогда создание, конфигурирование в program.cs

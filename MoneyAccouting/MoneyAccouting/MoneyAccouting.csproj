@@ -49,11 +49,11 @@
     <Compile Include="BL\Entities\Category.cs" />
     <Compile Include="BL\Entities\Product.cs" />
     <Compile Include="BL\Entities\ProductType.cs" />
-    <Compile Include="BL\Entities\PurchaseDocument.cs" />
+    <Compile Include="BL\Entities\CashDocument.cs" />
     <Compile Include="BL\Entities\Shop.cs" />
     <Compile Include="BL\Entities\Tag.cs" />
     <Compile Include="BL\Models\ProductsModel.cs" />
-    <Compile Include="BL\Models\PurchaseDocumentModel.cs" />
+    <Compile Include="BL\Models\CashDocumentModel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

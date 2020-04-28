@@ -10,7 +10,7 @@ namespace MoneyAccouting.BL.Entities
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public int PurchaseDocumentId { get; set; }
+		public int CashDocumentId { get; set; }
 		public int ShopId { get; set; }
 		public int CategoryId { get; set; }
 		public int TagId { get; set; }

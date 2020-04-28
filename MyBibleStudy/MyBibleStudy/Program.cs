@@ -19,7 +19,7 @@ namespace MyBibleStudy
 
 			Form1 f = new Form1();
 
-			Presenter p = new Presenter(f);
+			MainPresenter p = new MainPresenter(f);
 
 			Application.Run(f);
 		}

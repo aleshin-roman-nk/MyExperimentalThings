@@ -13,6 +13,22 @@ namespace MyBibleStudy.BL
 		public string Title { get; set; }
 		public string Notes { get; set; }
 		public bool Finished { get; set; }
+		public List<SessionPause> Pauses { get; set; } = new List<SessionPause>();
+		public long AllPausesMinutes
+		{
+			get
+			{
+				return (long)Pauses.Sum(x => x.Total.TotalMinutes);
+			}
+		}
+		public long TotalTimeMinutes
+		{
+			get
+			{
+				var totalWork = (Ended - Started).TotalMinutes;
+				return ((long)totalWork - AllPausesMinutes);
+			}
+		}
 		public string VisibleTitle 
 		{ 
 			get 
@@ -20,13 +36,15 @@ namespace MyBibleStudy.BL
 				DateTime _s = new DateTime(Started.Year, Started.Month, Started.Day);
 				DateTime _e = new DateTime(Ended.Year, Ended.Month, Ended.Day);
 
-				string endFormat;
+				//string endFormat;
 
-				if (_e == _s) endFormat = "H:mm:ss";
-				else endFormat = "dd.MM.yyyy H:mm:ss";
+				//if (_e == _s) endFormat = "H:mm";
+				//else endFormat = "dd.MM.yyyy H:mm";
 
-				string end_time = Finished ? Ended.ToString(endFormat) : "*";
-				return $"{Started.ToString("dd.MM.yyyy H:mm:ss")} - {end_time}"; 
+				//string total_minutes = Finished ? Ended.ToString(endFormat) : "*";
+				string total_minutes = Finished ? TotalTimeMinutes.ToString() : "*";
+
+				return $"{Started.ToString("dd.MM.yyyy H:mm")} - {total_minutes}"; 
 			} 
 		}
 	}
