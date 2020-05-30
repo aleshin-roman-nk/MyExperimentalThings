@@ -26,17 +26,28 @@ namespace MyBibleStudy.BL
 {
 	public class WeeksModel
 	{
+		public Week Week { get; set; } = null;
+
+		public SessionState GetLastSessionState()
+		{
+			var last = Week.LastSession;
+
+			if (last == null) return SessionState.NoSession;
+			return last.SessionState;
+		}
+
 		public void CheckThisWeek(DateTime dt)
 		{
 			FileManager.CreateWeekWork(dt);
 		}
-		public void Save(Week week)
+		public void Save()
 		{
-			WeekFile.Save(week);
+			if (Week == null) return;
+			WeekFile.Save(Week);
 		}
-		public Week Load(string week_name)
+		public void Load(string week_name)
 		{
-			return WeekFile.Load(week_name);
+			Week = WeekFile.Load(week_name);
 		}
 		public string[] Weeks
 		{
@@ -45,9 +56,11 @@ namespace MyBibleStudy.BL
 				return WeekFile.Weeks;
 			}
 		}
-		public void OpenWeekPlan(string week_name)
+		public void OpenWeekPlan()
 		{
-			var fname = FileManager.WeekPlanFileName(week_name);
+			if (Week == null) return;
+
+			var fname = FileManager.WeekPlanFileName(Week.Name);
 
 			Process myProcess = new Process();
 			Process.Start("notepad++.exe", fname);

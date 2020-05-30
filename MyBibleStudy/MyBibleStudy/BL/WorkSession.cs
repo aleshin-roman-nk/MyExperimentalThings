@@ -12,21 +12,35 @@ namespace MyBibleStudy.BL
 		public DateTime Ended { get; set; }
 		public string Title { get; set; }
 		public string Notes { get; set; }
-		public bool Finished { get; set; }
+		public SessionState SessionState {get;set;}
+		public bool IsClosed
+		{
+			get
+			{
+				return SessionState == SessionState.Closed;
+			}
+		}
 		public List<SessionPause> Pauses { get; set; } = new List<SessionPause>();
-		public long AllPausesMinutes
+		public SessionPause LastPause
+		{
+			get
+			{
+				return Pauses.LastOrDefault();
+			}
+		}
+		public long TotalPausesInMinutes
 		{
 			get
 			{
 				return (long)Pauses.Sum(x => x.Total.TotalMinutes);
 			}
 		}
-		public long TotalTimeMinutes
+		public long TotalTimeInMinutes
 		{
 			get
 			{
 				var totalWork = (Ended - Started).TotalMinutes;
-				return ((long)totalWork - AllPausesMinutes);
+				return ((long)totalWork - TotalPausesInMinutes);
 			}
 		}
 		public string VisibleTitle 
@@ -36,16 +50,16 @@ namespace MyBibleStudy.BL
 				DateTime _s = new DateTime(Started.Year, Started.Month, Started.Day);
 				DateTime _e = new DateTime(Ended.Year, Ended.Month, Ended.Day);
 
-				//string endFormat;
+				string total_minutes = "";
 
-				//if (_e == _s) endFormat = "H:mm";
-				//else endFormat = "dd.MM.yyyy H:mm";
+				if (SessionState == SessionState.Closed) total_minutes = TotalTimeInMinutes.ToString();
+				else if (SessionState == SessionState.Paused) total_minutes = "[*]";
+				else if (SessionState == SessionState.Working) total_minutes = "*";
 
-				//string total_minutes = Finished ? Ended.ToString(endFormat) : "*";
-				string total_minutes = Finished ? TotalTimeMinutes.ToString() : "*";
-
-				return $"{Started.ToString("dd.MM.yyyy H:mm")} - {total_minutes}"; 
+				return $"{Started:dd.MM.yyyy H:mm} - {total_minutes}"; 
 			} 
 		}
 	}
+
+	public enum SessionState { Closed = 0, Working = 1, Paused = 2, NoSession = 3 }
 }

@@ -79,14 +79,14 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn7});
 			this.dgvPurchases.DataSource = this.purchaseBindingSource;
-			this.dgvPurchases.Location = new System.Drawing.Point(522, 93);
+			this.dgvPurchases.Location = new System.Drawing.Point(522, 167);
 			this.dgvPurchases.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.dgvPurchases.MultiSelect = false;
 			this.dgvPurchases.Name = "dgvPurchases";
 			this.dgvPurchases.ReadOnly = true;
 			this.dgvPurchases.RowHeadersVisible = false;
 			this.dgvPurchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvPurchases.Size = new System.Drawing.Size(606, 467);
+			this.dgvPurchases.Size = new System.Drawing.Size(606, 504);
 			this.dgvPurchases.TabIndex = 1;
 			// 
 			// DirName
@@ -121,12 +121,12 @@
 			this.tvDirectories.FullRowSelect = true;
 			this.tvDirectories.HideSelection = false;
 			this.tvDirectories.Indent = 15;
-			this.tvDirectories.Location = new System.Drawing.Point(14, 93);
+			this.tvDirectories.Location = new System.Drawing.Point(14, 97);
 			this.tvDirectories.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tvDirectories.Name = "tvDirectories";
 			this.tvDirectories.PathSeparator = ".";
 			this.tvDirectories.ShowLines = false;
-			this.tvDirectories.Size = new System.Drawing.Size(500, 501);
+			this.tvDirectories.Size = new System.Drawing.Size(500, 608);
 			this.tvDirectories.TabIndex = 2;
 			this.tvDirectories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
@@ -153,7 +153,7 @@
 			// 
 			// btnAddPurchasedProduct
 			// 
-			this.btnAddPurchasedProduct.Location = new System.Drawing.Point(522, 55);
+			this.btnAddPurchasedProduct.Location = new System.Drawing.Point(522, 129);
 			this.btnAddPurchasedProduct.Name = "btnAddPurchasedProduct";
 			this.btnAddPurchasedProduct.Size = new System.Drawing.Size(193, 35);
 			this.btnAddPurchasedProduct.TabIndex = 3;
@@ -163,7 +163,7 @@
 			// 
 			// tbDirFullPath
 			// 
-			this.tbDirFullPath.Location = new System.Drawing.Point(14, 59);
+			this.tbDirFullPath.Location = new System.Drawing.Point(14, 63);
 			this.tbDirFullPath.Name = "tbDirFullPath";
 			this.tbDirFullPath.ReadOnly = true;
 			this.tbDirFullPath.Size = new System.Drawing.Size(500, 26);
@@ -172,7 +172,7 @@
 			// tbCurrentAmount
 			// 
 			this.tbCurrentAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.tbCurrentAmount.Location = new System.Drawing.Point(591, 562);
+			this.tbCurrentAmount.Location = new System.Drawing.Point(591, 673);
 			this.tbCurrentAmount.Name = "tbCurrentAmount";
 			this.tbCurrentAmount.ReadOnly = true;
 			this.tbCurrentAmount.Size = new System.Drawing.Size(370, 26);
@@ -182,7 +182,7 @@
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(518, 565);
+			this.label1.Location = new System.Drawing.Point(518, 676);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(67, 20);
 			this.label1.TabIndex = 11;
@@ -196,9 +196,9 @@
             this.columnHeader1});
 			this.lvProductTypes.GridLines = true;
 			this.lvProductTypes.HideSelection = false;
-			this.lvProductTypes.Location = new System.Drawing.Point(1134, 125);
+			this.lvProductTypes.Location = new System.Drawing.Point(1134, 199);
 			this.lvProductTypes.Name = "lvProductTypes";
-			this.lvProductTypes.Size = new System.Drawing.Size(431, 435);
+			this.lvProductTypes.Size = new System.Drawing.Size(431, 472);
 			this.lvProductTypes.TabIndex = 12;
 			this.lvProductTypes.UseCompatibleStateImageBehavior = false;
 			this.lvProductTypes.View = System.Windows.Forms.View.List;
@@ -214,7 +214,7 @@
 			// txtCurrentCategory
 			// 
 			this.txtCurrentCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtCurrentCategory.Location = new System.Drawing.Point(1134, 59);
+			this.txtCurrentCategory.Location = new System.Drawing.Point(1134, 133);
 			this.txtCurrentCategory.Name = "txtCurrentCategory";
 			this.txtCurrentCategory.ReadOnly = true;
 			this.txtCurrentCategory.Size = new System.Drawing.Size(390, 26);
@@ -224,7 +224,7 @@
 			// btnCreateProductType
 			// 
 			this.btnCreateProductType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCreateProductType.Location = new System.Drawing.Point(1530, 93);
+			this.btnCreateProductType.Location = new System.Drawing.Point(1530, 167);
 			this.btnCreateProductType.Name = "btnCreateProductType";
 			this.btnCreateProductType.Size = new System.Drawing.Size(35, 26);
 			this.btnCreateProductType.TabIndex = 14;
@@ -235,7 +235,7 @@
 			// btnExitCategory
 			// 
 			this.btnExitCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnExitCategory.Location = new System.Drawing.Point(1134, 93);
+			this.btnExitCategory.Location = new System.Drawing.Point(1134, 167);
 			this.btnExitCategory.Name = "btnExitCategory";
 			this.btnExitCategory.Size = new System.Drawing.Size(51, 26);
 			this.btnExitCategory.TabIndex = 15;
@@ -291,7 +291,7 @@
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1577, 676);
+			this.ClientSize = new System.Drawing.Size(1577, 713);
 			this.Controls.Add(this.ucDateView1);
 			this.Controls.Add(this.btnExitCategory);
 			this.Controls.Add(this.btnCreateProductType);

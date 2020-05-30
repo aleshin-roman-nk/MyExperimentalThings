@@ -232,7 +232,7 @@
 			this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLoad.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnLoad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(142)))), ((int)(((byte)(192)))));
-			this.btnLoad.Location = new System.Drawing.Point(213, 12);
+			this.btnLoad.Location = new System.Drawing.Point(271, 12);
 			this.btnLoad.Name = "btnLoad";
 			this.btnLoad.Size = new System.Drawing.Size(50, 40);
 			this.btnLoad.TabIndex = 6;
@@ -248,7 +248,7 @@
 			this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(142)))), ((int)(((byte)(192)))));
-			this.btnSave.Location = new System.Drawing.Point(269, 12);
+			this.btnSave.Location = new System.Drawing.Point(327, 12);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(50, 40);
 			this.btnSave.TabIndex = 5;

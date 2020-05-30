@@ -6,6 +6,7 @@ namespace Costs.Entities
 	{
 		public int Id { get; set; }
 		public int DirectoryID { get; set; }
+		public int? PaymentDocId { get; set; }
 		public Directory Directory { get; set; }
 		public string Name { get; set; }
 		public string Info { get; set; }

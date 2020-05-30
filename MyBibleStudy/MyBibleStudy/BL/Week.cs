@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyBibleStudy.BL
 {
@@ -10,24 +11,12 @@ namespace MyBibleStudy.BL
 	{
 		public string Name { get; set; }
 		public List<WorkSession> workSessions { get; set; }
-		//public TimeSpan TotalTime
-		//{
-		//	get
-		//	{
-		//		var items = WorkSessionsOrdered.Select(x => x.Ended - x.Started);
-		//		TimeSpan res = new TimeSpan(0, 0, 0);
-		//		foreach (var item in items)
-		//		{
-		//			res += item;
-		//		}
-		//		return res;
-		//	}
-		//}
+
 		public string TotalTimeTitle
 		{
 			get
 			{
-				var total_minutes = WorkSessionsOrdered.Sum(x => x.Finished ? (x.Ended - x.Started).TotalMinutes : 0);
+				var total_minutes = WorkSessionsOrdered.Sum(x => x.SessionState == SessionState.Closed ? (x.Ended - x.Started).TotalMinutes : 0);
 				var hours = total_minutes / 60;
 				var minutes = (long)((hours - (long)hours) * 60);
 				return $"{(long)hours}:{minutes}";
@@ -44,39 +33,70 @@ namespace MyBibleStudy.BL
 		{ 
 			get => workSessions.OrderByDescending(x => x.Started).ToList(); 
 		}
-		public bool Start(DateTime starttime)
+		public void Start(DateTime starttime)
 		{
 			var last = LastSession;
-			if (last == null)
+			if (last == null || last.IsClosed)
 			{
 				workSessions.Add(new WorkSession
 				{
 					Started = starttime,
-					Finished = false
+					SessionState = SessionState.Working
 				});
 
-				return true;
+				return;
 			}
 
-			if (!last.Finished) return false;
-
-			workSessions.Add(new WorkSession
-			{
-				Started = starttime,
-				Finished = false
-			});
-
-			return true;
+			Resume(starttime);
 		}
 		public void Stop(DateTime stoptime)
 		{
 			var last = LastSession;
 			if (last == null) return;
 
-			if (last.Finished) return;
+			if (last.IsClosed) return;
 
 			last.Ended = stoptime;
-			last.Finished = true;
+			last.SessionState = SessionState.Closed;
+
+			var pause = last.LastPause;
+
+			if (pause == null) return;
+
+			pause.Closed = true;
+			pause.End = stoptime;
+		}
+
+		public void Pause(DateTime pause_start)
+		{
+			var last = LastSession;
+			if (last == null) return;
+			if (last.IsClosed) return;
+
+			if (last.SessionState == SessionState.Paused) return;
+
+			SessionPause pause = new SessionPause();
+			pause.Start = pause_start;
+
+			last.Pauses.Add(pause);
+
+			last.SessionState = SessionState.Paused;
+		}
+		public void Resume(DateTime pause_end)
+		{
+			var last = LastSession;
+			if (last == null) return;
+			if (last.IsClosed) return;
+
+			if (last.SessionState == SessionState.Working) return;
+			if (last.SessionState == SessionState.Closed) return;
+
+			SessionPause pause = last.LastPause;
+
+			pause.Closed = true;
+			pause.End = pause_end;
+
+			last.SessionState = SessionState.Working;
 		}
 	}
 }

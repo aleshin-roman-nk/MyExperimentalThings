@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyBibleStudy
 {
@@ -12,7 +13,6 @@ namespace MyBibleStudy
 	{
 		IMainView view;
 		WeeksModel model;
-		Week current_week = null;
 
 		public MainPresenter(IMainView v)
 		{
@@ -27,16 +27,26 @@ namespace MyBibleStudy
 			view.WeekChanged += View_WeekChanged;
 			view.BtnShowWordBank += View_BtnShowWordBank;
 			view.BtnOpenWeekPlane += View_BtnOpenWeekPlane;
+			view.PauseSession += View_PauseSession;
 
 			view.SetWeeks(model.Weeks);
+		}
 
+		private void View_PauseSession()
+		{
+			if (model.Week == null) return;
+			
+			model.Week.Pause(DateTime.Now);
+			view.SetSessions(model.Week.WorkSessionsOrdered);
+			view.SetTotal(model.Week.TotalTimeTitle);
+			model.Save();
+
+			view.SetSessionState(model.GetLastSessionState());
 		}
 
 		private void View_BtnOpenWeekPlane()
 		{
-			if (current_week == null) return;
-
-			model.OpenWeekPlan(current_week.Name);
+			model.OpenWeekPlan();
 		}
 
 		private void View_BtnShowWordBank()
@@ -47,50 +57,53 @@ namespace MyBibleStudy
 
 		private void View_WeekChanged(string obj)
 		{
-			if(current_week == null)
+			if(model.Week == null)
 			{
-				current_week = model.Load(obj);
+				model.Load(obj);
 			}
 			else
 			{
-				model.Save(current_week);
-				current_week = model.Load(obj);
+				model.Save();
+				model.Load(obj);
 			}
 			
-			view.SetSessions(current_week.WorkSessionsOrdered);
-			view.SetTotal(current_week.TotalTimeTitle);
+			view.SetSessions(model.Week.WorkSessionsOrdered);
+			view.SetTotal(model.Week.TotalTimeTitle);
+
+			view.SetSessionState(model.GetLastSessionState());
 		}
 
 		private void View_CloseForm()
 		{
-			if (current_week == null) return;
-			model.Save(current_week);
+			model.Save();
 		}
 
 		private void View_StopSession()
 		{
-			if (current_week == null) return;
+			if (model.Week == null) return;
 
-			current_week.Stop(DateTime.Now);
-			view.SetSessions(current_week.WorkSessionsOrdered);
-			view.SetTotal(current_week.TotalTimeTitle);
-			model.Save(current_week);
+			model.Week.Stop(DateTime.Now);
+			view.SetSessions(model.Week.WorkSessionsOrdered);
+			view.SetTotal(model.Week.TotalTimeTitle);
+			model.Save();
+
+			view.SetSessionState(model.GetLastSessionState());
 		}
 
 		private void View_StartSession()
 		{
-			if (current_week == null) return;
+			if (model.Week == null) return;
 
-			current_week.Start(DateTime.Now);
-			view.SetSessions(current_week.WorkSessionsOrdered);
-			model.Save(current_week);
+			model.Week.Start(DateTime.Now);
+			view.SetSessions(model.Week.WorkSessionsOrdered);
+			model.Save();
+
+			view.SetSessionState(model.GetLastSessionState());
 		}
 
 		private void View_SaveSessions()
 		{
-			if (current_week == null) return;
-
-			model.Save(current_week);
+			model.Save();
 		}
 	}
 }

@@ -21,6 +21,8 @@ namespace MyBibleStudy
 		BindingSource bsMain;
 		BindingSource bsWeeks;
 
+		SessionState sessionState;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -46,6 +48,7 @@ namespace MyBibleStudy
 		public event Action<string> WeekChanged;
 		public event Action BtnShowWordBank;
 		public event Action BtnOpenWeekPlane;
+		public event Action PauseSession;
 
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
 		{
@@ -137,7 +140,39 @@ namespace MyBibleStudy
 
 		private void btnPause_Click(object sender, EventArgs e)
 		{
+			PauseSession?.Invoke();
+		}
 
+		public void SetSessionState(SessionState state)
+		{
+			setSessionStateInternal(state);
+		}
+
+		void setSessionStateInternal(SessionState state)
+		{
+			sessionState = state;
+
+			switch (sessionState)
+			{
+				case SessionState.Closed:
+				case SessionState.NoSession:
+					btnStart.Enabled = true;
+					btnEnd.Enabled = false;
+					btnPause.Enabled = false;
+					break;
+				case SessionState.Working:
+					btnStart.Enabled = false;
+					btnEnd.Enabled = true;
+					btnPause.Enabled = true;
+					break;
+				case SessionState.Paused:
+					btnStart.Enabled = true;
+					btnEnd.Enabled = false;
+					btnPause.Enabled = false;
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }
