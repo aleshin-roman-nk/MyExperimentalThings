@@ -61,11 +61,11 @@ namespace Costs.Forms
 			view.MovePurchase += View_MovePurchase;
 			view.DeletePurchase += View_DeletePurchase;
 
-			view.RequestValuesChanged += View_RequestValuesChanged;
+			view.ValuesChanged += View_ValuesChanged;
 			view.MoveDirectory += View_MoveDirectory;
-			view.CreateDirectory += View_CreateDirectory;
-			view.DeleteDirectory += View_DeleteDirectory;
-			view.RenameDirectory += View_RenameDirectory;
+			view.BtnCreateDirectory += View_CreateDirectory;
+			view.BtnDeleteDirectory += View_DeleteDirectory;
+			view.BtnRenameDirectory += View_RenameDirectory;
 
 			view.GetCategories += View_GetCategories;
 			view.GetProductTypes += View_GetProductTypes;
@@ -75,7 +75,6 @@ namespace Costs.Forms
 			view.BtnDeleteCategory += View_BtnDeleteCategory;
 			view.BtnDeleteProductType += View_BtnDeleteProductType;
 
-			//view.SetProductTypes(model.ProductTypeModel.ProductTypes());
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
@@ -115,7 +114,7 @@ namespace Costs.Forms
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
-		private void View_RequestValuesChanged(Presenters.Views.EventArgs.MainViewValuesChangedEventArg obj)
+		private void View_ValuesChanged(Presenters.Views.EventArgs.MainViewValuesChangedEventArg obj)
 		{
 			updateViewGridPurchases(obj.Directory, obj.Date, obj.OneDay);
 		}

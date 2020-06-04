@@ -17,15 +17,17 @@ namespace Costs.Forms.Main.InternalViews
 	 * Лучше сделать одно событие без этих ненужных контроллеров.
 	 *	Т.е. при изменении чего либо, вызывать единое событие ValuesChanged и собирать все данные со всех учавствующих показаний.
 	 * 
+	 * 
+	 * 
 	 */
-	internal class RequestsController
+	internal class PurchaseListObserver
 	{
-		TreeViewDirectories treeViewDirectories;
+		DirectoriesTreeView treeViewDirectories;
 		UcDateView ucDate;
 
 		public event Action<MainViewValuesChangedEventArg> ValuesChanged;
 
-		public RequestsController(TreeViewDirectories treeViewDirectories, UcDateView ucDate)
+		public PurchaseListObserver(DirectoriesTreeView treeViewDirectories, UcDateView ucDate)
 		{
 			this.treeViewDirectories = treeViewDirectories;
 			this.ucDate = ucDate;
@@ -34,7 +36,7 @@ namespace Costs.Forms.Main.InternalViews
 			ucDate.ValuesChanged += UcDate_DateChanged;
 		}
 
-		private void UcDate_DateChanged(DateChangedEventArg obj)
+		private void UcDate_DateChanged(UcDateViewDateChangedEventArg obj)
 		{
 			ValuesChanged?.Invoke(new MainViewValuesChangedEventArg(obj.Date, treeViewDirectories.Current, obj.OneMonth));
 		}

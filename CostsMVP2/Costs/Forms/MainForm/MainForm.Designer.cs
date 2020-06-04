@@ -29,9 +29,9 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.dgvPurchases = new System.Windows.Forms.DataGridView();
 			this.DirName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Seller = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,7 +40,6 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsiAddDirectory = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsiDelete = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnAddPurchasedProduct = new System.Windows.Forms.Button();
 			this.tbDirFullPath = new System.Windows.Forms.TextBox();
 			this.tbCurrentAmount = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -50,6 +49,10 @@
 			this.btnCreateProductType = new System.Windows.Forms.Button();
 			this.btnExitCategory = new System.Windows.Forms.Button();
 			this.ucDateView1 = new Costs.Forms.Main.InternalViews.UcDateView();
+			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.btnAddShopItem = new System.Windows.Forms.ToolStripButton();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnDocumentsView = new System.Windows.Forms.Button();
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +60,8 @@
 			this.purchaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
+			this.toolStrip1.SuspendLayout();
+			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.purchaseBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -79,14 +84,14 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn7});
 			this.dgvPurchases.DataSource = this.purchaseBindingSource;
-			this.dgvPurchases.Location = new System.Drawing.Point(522, 167);
+			this.dgvPurchases.Location = new System.Drawing.Point(522, 91);
 			this.dgvPurchases.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.dgvPurchases.MultiSelect = false;
 			this.dgvPurchases.Name = "dgvPurchases";
 			this.dgvPurchases.ReadOnly = true;
 			this.dgvPurchases.RowHeadersVisible = false;
 			this.dgvPurchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvPurchases.Size = new System.Drawing.Size(606, 504);
+			this.dgvPurchases.Size = new System.Drawing.Size(606, 614);
 			this.dgvPurchases.TabIndex = 1;
 			// 
 			// DirName
@@ -121,12 +126,12 @@
 			this.tvDirectories.FullRowSelect = true;
 			this.tvDirectories.HideSelection = false;
 			this.tvDirectories.Indent = 15;
-			this.tvDirectories.Location = new System.Drawing.Point(14, 97);
+			this.tvDirectories.Location = new System.Drawing.Point(14, 157);
 			this.tvDirectories.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tvDirectories.Name = "tvDirectories";
 			this.tvDirectories.PathSeparator = ".";
 			this.tvDirectories.ShowLines = false;
-			this.tvDirectories.Size = new System.Drawing.Size(500, 608);
+			this.tvDirectories.Size = new System.Drawing.Size(500, 548);
 			this.tvDirectories.TabIndex = 2;
 			this.tvDirectories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
@@ -151,19 +156,9 @@
 			this.tsiDelete.Size = new System.Drawing.Size(126, 22);
 			this.tsiDelete.Text = "Удалить";
 			// 
-			// btnAddPurchasedProduct
-			// 
-			this.btnAddPurchasedProduct.Location = new System.Drawing.Point(522, 129);
-			this.btnAddPurchasedProduct.Name = "btnAddPurchasedProduct";
-			this.btnAddPurchasedProduct.Size = new System.Drawing.Size(193, 35);
-			this.btnAddPurchasedProduct.TabIndex = 3;
-			this.btnAddPurchasedProduct.Text = "Добавить расход";
-			this.btnAddPurchasedProduct.UseVisualStyleBackColor = true;
-			this.btnAddPurchasedProduct.Click += new System.EventHandler(this.btnAddPurchasedProduct_Click);
-			// 
 			// tbDirFullPath
 			// 
-			this.tbDirFullPath.Location = new System.Drawing.Point(14, 63);
+			this.tbDirFullPath.Location = new System.Drawing.Point(12, 91);
 			this.tbDirFullPath.Name = "tbDirFullPath";
 			this.tbDirFullPath.ReadOnly = true;
 			this.tbDirFullPath.Size = new System.Drawing.Size(500, 26);
@@ -171,18 +166,16 @@
 			// 
 			// tbCurrentAmount
 			// 
-			this.tbCurrentAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.tbCurrentAmount.Location = new System.Drawing.Point(591, 673);
+			this.tbCurrentAmount.Location = new System.Drawing.Point(83, 123);
 			this.tbCurrentAmount.Name = "tbCurrentAmount";
 			this.tbCurrentAmount.ReadOnly = true;
-			this.tbCurrentAmount.Size = new System.Drawing.Size(370, 26);
+			this.tbCurrentAmount.Size = new System.Drawing.Size(429, 26);
 			this.tbCurrentAmount.TabIndex = 9;
 			// 
 			// label1
 			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(518, 676);
+			this.label1.Location = new System.Drawing.Point(12, 126);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(67, 20);
 			this.label1.TabIndex = 11;
@@ -196,9 +189,9 @@
             this.columnHeader1});
 			this.lvProductTypes.GridLines = true;
 			this.lvProductTypes.HideSelection = false;
-			this.lvProductTypes.Location = new System.Drawing.Point(1134, 199);
+			this.lvProductTypes.Location = new System.Drawing.Point(1134, 74);
 			this.lvProductTypes.Name = "lvProductTypes";
-			this.lvProductTypes.Size = new System.Drawing.Size(431, 472);
+			this.lvProductTypes.Size = new System.Drawing.Size(431, 631);
 			this.lvProductTypes.TabIndex = 12;
 			this.lvProductTypes.UseCompatibleStateImageBehavior = false;
 			this.lvProductTypes.View = System.Windows.Forms.View.List;
@@ -214,17 +207,17 @@
 			// txtCurrentCategory
 			// 
 			this.txtCurrentCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtCurrentCategory.Location = new System.Drawing.Point(1134, 133);
+			this.txtCurrentCategory.Location = new System.Drawing.Point(1191, 42);
 			this.txtCurrentCategory.Name = "txtCurrentCategory";
 			this.txtCurrentCategory.ReadOnly = true;
-			this.txtCurrentCategory.Size = new System.Drawing.Size(390, 26);
+			this.txtCurrentCategory.Size = new System.Drawing.Size(333, 26);
 			this.txtCurrentCategory.TabIndex = 13;
 			this.txtCurrentCategory.Text = "000";
 			// 
 			// btnCreateProductType
 			// 
 			this.btnCreateProductType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCreateProductType.Location = new System.Drawing.Point(1530, 167);
+			this.btnCreateProductType.Location = new System.Drawing.Point(1530, 42);
 			this.btnCreateProductType.Name = "btnCreateProductType";
 			this.btnCreateProductType.Size = new System.Drawing.Size(35, 26);
 			this.btnCreateProductType.TabIndex = 14;
@@ -235,7 +228,7 @@
 			// btnExitCategory
 			// 
 			this.btnExitCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnExitCategory.Location = new System.Drawing.Point(1134, 167);
+			this.btnExitCategory.Location = new System.Drawing.Point(1134, 42);
 			this.btnExitCategory.Name = "btnExitCategory";
 			this.btnExitCategory.Size = new System.Drawing.Size(51, 26);
 			this.btnExitCategory.TabIndex = 15;
@@ -245,10 +238,53 @@
 			// 
 			// ucDateView1
 			// 
-			this.ucDateView1.Location = new System.Drawing.Point(12, 10);
+			this.ucDateView1.Location = new System.Drawing.Point(12, 42);
 			this.ucDateView1.Name = "ucDateView1";
 			this.ucDateView1.Size = new System.Drawing.Size(343, 43);
 			this.ucDateView1.TabIndex = 16;
+			// 
+			// toolStrip1
+			// 
+			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddShopItem});
+			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+			this.toolStrip1.Name = "toolStrip1";
+			this.toolStrip1.Size = new System.Drawing.Size(1577, 39);
+			this.toolStrip1.TabIndex = 17;
+			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// btnAddShopItem
+			// 
+			this.btnAddShopItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddShopItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddShopItem.Image")));
+			this.btnAddShopItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddShopItem.Name = "btnAddShopItem";
+			this.btnAddShopItem.Size = new System.Drawing.Size(36, 36);
+			this.btnAddShopItem.Text = "Добавить расход";
+			this.btnAddShopItem.Click += new System.EventHandler(this.btnAddShopItem_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.btnDocumentsView);
+			this.panel1.Location = new System.Drawing.Point(522, 42);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(606, 43);
+			this.panel1.TabIndex = 18;
+			// 
+			// btnDocumentsView
+			// 
+			this.btnDocumentsView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDocumentsView.Location = new System.Drawing.Point(547, 3);
+			this.btnDocumentsView.Name = "btnDocumentsView";
+			this.btnDocumentsView.Size = new System.Drawing.Size(54, 35);
+			this.btnDocumentsView.TabIndex = 0;
+			this.btnDocumentsView.Text = "...";
+			this.btnDocumentsView.UseVisualStyleBackColor = true;
+			this.btnDocumentsView.Click += new System.EventHandler(this.btnDocumentsView_Click);
 			// 
 			// dataGridViewTextBoxColumn5
 			// 
@@ -292,6 +328,8 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(1577, 713);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.ucDateView1);
 			this.Controls.Add(this.btnExitCategory);
 			this.Controls.Add(this.btnCreateProductType);
@@ -300,7 +338,6 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.tbCurrentAmount);
 			this.Controls.Add(this.tbDirFullPath);
-			this.Controls.Add(this.btnAddPurchasedProduct);
 			this.Controls.Add(this.tvDirectories);
 			this.Controls.Add(this.dgvPurchases);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -311,6 +348,9 @@
 			this.Text = "Form1";
 			((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).EndInit();
 			this.contextMenuStrip1.ResumeLayout(false);
+			this.toolStrip1.ResumeLayout(false);
+			this.toolStrip1.PerformLayout();
+			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.purchaseBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -322,7 +362,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
 		private System.Windows.Forms.TreeView tvDirectories;
-		private System.Windows.Forms.Button btnAddPurchasedProduct;
 		private System.Windows.Forms.TextBox tbDirFullPath;
 		private System.Windows.Forms.TextBox tbCurrentAmount;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
@@ -349,6 +388,10 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
 		private InternalViews.UcDateView ucDateView1;
+		private System.Windows.Forms.ToolStrip toolStrip1;
+		private System.Windows.Forms.ToolStripButton btnAddShopItem;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Button btnDocumentsView;
 	}
 }
 

@@ -32,7 +32,7 @@ namespace TagGenerator
 			var dt = DateTime.Now;
 
 			var str = ">>>\n";
-			var str1 = $"{dt.ToString("dd-MM-yyyy hh:mm")}\n";//10-03-2020 13-25
+			var str1 = $"{dt.ToString("dd-MM-yyyy HH:mm")}\n";//10-03-2020 13-25
 			var strres = new StringBuilder(str).Append(str1);
 			Clipboard.SetText(strres.ToString());
 		}

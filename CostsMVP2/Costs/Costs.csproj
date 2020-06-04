@@ -123,13 +123,14 @@
       <DependentUpon>InputTextForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DlgService\Messages.cs" />
+    <Compile Include="Forms\KbdHandler.cs" />
     <Compile Include="Forms\MainForm\InternalViews\DragDrops\ProductTypeDrag.cs" />
     <Compile Include="Forms\MainForm\CurrentCategoryObserver.cs" />
-    <Compile Include="Forms\PayDocumentsForm\PayDocForm.cs">
+    <Compile Include="Forms\DocumentsForm\DocumentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PayDocumentsForm\PayDocForm.Designer.cs">
-      <DependentUpon>PayDocForm.cs</DependentUpon>
+    <Compile Include="Forms\DocumentsForm\DocumentsForm.Designer.cs">
+      <DependentUpon>DocumentsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ProductTypeForm\SampleProductForm.cs">
       <SubType>Form</SubType>
@@ -144,10 +145,8 @@
       <DependentUpon>FormMonthesSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm\InternalViews\DragDrops\DragDropGridToTree.cs" />
-    <Compile Include="Forms\MainForm\InternalViews\GridPurchasedProducts.cs" />
-    <Compile Include="Forms\MainForm\InternalViews\RequestsController.cs" />
-    <Compile Include="Forms\MainForm\KeyboardHnd\KeyboardTreeDirectories.cs" />
-    <Compile Include="Forms\MainForm\KeyboardHnd\KeyboardGridPurchases.cs" />
+    <Compile Include="Forms\MainForm\InternalViews\PurchasesGrid.cs" />
+    <Compile Include="Forms\MainForm\InternalViews\PurchaseListObserver.cs" />
     <Compile Include="Forms\MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,9 +155,14 @@
     </Compile>
     <Compile Include="BL\Models\PurchaseModel.cs" />
     <Compile Include="BL\Models\MainModel.cs" />
-    <Compile Include="Presenters\ApstractPresenter.cs" />
-    <Compile Include="Presenters\MainPresenter.cs" />
-    <Compile Include="Forms\MainForm\InternalViews\TreeViewDirectories.cs" />
+    <Compile Include="Forms\ViewDocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ViewDocumentForm.Designer.cs">
+      <DependentUpon>ViewDocumentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainPresenter\MainPresenter.cs" />
+    <Compile Include="Forms\MainForm\InternalViews\DirectoriesTreeView.cs" />
     <Compile Include="Forms\PurchaseForm\PurchaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,8 +187,8 @@
     <EmbeddedResource Include="Forms\DlgService\InputTextForm.resx">
       <DependentUpon>InputTextForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PayDocumentsForm\PayDocForm.resx">
-      <DependentUpon>PayDocForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DocumentsForm\DocumentsForm.resx">
+      <DependentUpon>DocumentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductTypeForm\SampleProductForm.resx">
       <DependentUpon>SampleProductForm.cs</DependentUpon>
@@ -197,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PurchaseForm\PurchaseForm.resx">
       <DependentUpon>PurchaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ViewDocumentForm.resx">
+      <DependentUpon>ViewDocumentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -247,6 +254,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\MainForm\KeyboardHnd\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />

@@ -19,7 +19,7 @@ namespace Costs.Forms.Main.InternalViews
 			get => !cbOneDay.Checked;
 		}
 
-		public event Action<DateChangedEventArg> ValuesChanged;
+		public event Action<UcDateViewDateChangedEventArg> ValuesChanged;
 
 		public UcDateView()
 		{
@@ -29,7 +29,7 @@ namespace Costs.Forms.Main.InternalViews
 
 		private void updateDate()
 		{
-			ValuesChanged?.Invoke(new DateChangedEventArg(dtDate.Value, OneDay));
+			ValuesChanged?.Invoke(new UcDateViewDateChangedEventArg(dtDate.Value, OneDay));
 		}
 
 		private void cbOneDay_CheckedChanged(object sender, EventArgs e)
@@ -43,9 +43,9 @@ namespace Costs.Forms.Main.InternalViews
 		}
 	}
 
-	public class DateChangedEventArg
+	public class UcDateViewDateChangedEventArg
 	{
-		public DateChangedEventArg(DateTime date, bool one_month)
+		public UcDateViewDateChangedEventArg(DateTime date, bool one_month)
 		{
 			Date = date;
 			OneMonth = one_month;

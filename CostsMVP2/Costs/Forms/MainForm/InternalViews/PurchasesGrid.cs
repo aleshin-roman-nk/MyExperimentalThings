@@ -24,18 +24,27 @@ namespace Costs.Forms
 
 	// Принимает ленту объектов, возвращает выбранный объект, информирует о изменении выбора
 
-	class GridPurchases
+	class PurchasesGrid
 	{
 		DataGridView gridView = null;
 		BindingSource bs = new BindingSource();
+		KbdHandler kbdHandler = new KbdHandler();
 
-		public GridPurchases(DataGridView dgvDesc)
+		public event Action<Purchase> EditPurchase;
+		public event Action<Purchase> DeletePurchase;
+		public event Action CreatePurchase;
+
+		public PurchasesGrid(DataGridView dgvDesc)
 		{
 			gridView = dgvDesc;
 			gridView.DataSource = bs;
+
+			kbdHandler.SetControl(gridView);
+
+			setupKeys();
 		}
 
-		public void Reload(List<Purchase> list)
+		public void SetItems(List<Purchase> list)
 		{
 			bs.DataSource = list;
 			bs.ResetBindings(false);
@@ -47,6 +56,13 @@ namespace Costs.Forms
 			{
 				return bs.Current as Purchase;
 			}
+		}
+
+		private void setupKeys()
+		{
+			kbdHandler.AddKey(Keys.Enter, ()=> {EditPurchase?.Invoke(Current); });
+			kbdHandler.AddKey(Keys.Delete, () => { DeletePurchase?.Invoke(Current); });
+			kbdHandler.AddKey(Keys.N, () => { CreatePurchase?.Invoke(); });
 		}
 	}
 }

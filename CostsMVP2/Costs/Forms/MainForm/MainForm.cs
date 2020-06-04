@@ -29,10 +29,10 @@ namespace Costs.Forms.Main
 		public event Action<ProductType, DateTime> CreatePurchase;
 
 		public event Action<Directory, Directory> MoveDirectory;
-		public event Action<Directory> CreateDirectory;
-		public event Action<Directory> RenameDirectory;
-		public event Action<Directory> DeleteDirectory;
-		public event Action<MainViewValuesChangedEventArg> RequestValuesChanged;
+		public event Action<Directory> BtnCreateDirectory;
+		public event Action<Directory> BtnRenameDirectory;
+		public event Action<Directory> BtnDeleteDirectory;
+		public event Action<MainViewValuesChangedEventArg> ValuesChanged;
 		public event Action<Category> GetProductTypes;
 		public event Action GetCategories;
 		public event Action<string> BtnCreateCategory;
@@ -41,12 +41,10 @@ namespace Costs.Forms.Main
 		public event Action<ProductType> BtnDeleteProductType;
 
 		// Конфигурирование блоками-элементами сложной вьюшки
-		TreeViewDirectories treeViewDirectories;
-		GridPurchases gridPurchases;
+		DirectoriesTreeView treeViewDirectories;
+		PurchasesGrid purchasesGrid;
 		DragDropGridToTree dragDropGridToTree;
-		KeyboardGridPurchases keyboardGridPurchases;
-		KeyboardTreeDirectories keyboardTreeDirectories;
-		RequestsController requestsController;
+		PurchaseListObserver purchaseListObserver;
 
 		ProductTypeDrag<ProductType> productTypeDrag;
 
@@ -62,27 +60,25 @@ namespace Costs.Forms.Main
 			InitializeComponent();
 			
 			// 1. Конфигурируем view
-			gridPurchases = new GridPurchases(dgvPurchases);
-			treeViewDirectories = new TreeViewDirectories(tvDirectories);
-			dragDropGridToTree = new DragDropGridToTree(dgvPurchases, tvDirectories);
-			keyboardGridPurchases = new KeyboardGridPurchases(dgvPurchases);
-			keyboardTreeDirectories = new KeyboardTreeDirectories(tvDirectories);
-			requestsController = new RequestsController(treeViewDirectories, ucDateView1);
+			purchasesGrid = new PurchasesGrid(dgvPurchases);
+			treeViewDirectories = new DirectoriesTreeView(tvDirectories);
+			purchaseListObserver = new PurchaseListObserver(treeViewDirectories, ucDateView1);
 
+			dragDropGridToTree = new DragDropGridToTree(dgvPurchases, tvDirectories);
 			productTypeDrag = new ProductTypeDrag<ProductType>(lvProductTypes, dgvPurchases, createPurchase);
+
 			viewCurrentObserver = new CurrentCategoryObserver();
 
-			requestsController.ValuesChanged += RequestsController_ValuesChanged;
-
+			purchaseListObserver.ValuesChanged += PurchaseListObserver_ValuesChanged;
 			dragDropGridToTree.MovePurchase += TreeViewDirectories_MovePurchase;
-			keyboardGridPurchases.CreatePurchase += KeyboardGridPurchases_CreatePurchase;
-			keyboardGridPurchases.DeletePurchase += KeyboardGridPurchases_DeletePurchase;
-			keyboardGridPurchases.EditPurchase += KeyboardGridPurchases_EditPurchase;
+			purchasesGrid.CreatePurchase += KeyboardGridPurchases_CreatePurchase;
+			purchasesGrid.DeletePurchase += KeyboardGridPurchases_DeletePurchase;
+			purchasesGrid.EditPurchase += KeyboardGridPurchases_EditPurchase;
 
 			dragDropGridToTree.MoveDirectory += DragDropGridToTree_MoveDirectory;
-			keyboardTreeDirectories.CreateDirectory += KeyboardTreeDirectories_CreateDirectory;
-			keyboardTreeDirectories.DeleteDirectory += KeyboardTreeDirectories_DeleteDirectory;
-			keyboardTreeDirectories.RenameDirectory += KeyboardTreeDirectories_RenameDirectory;
+			treeViewDirectories.CreateDirectory += KeyboardTreeDirectories_CreateDirectory;
+			treeViewDirectories.DeleteDirectory += KeyboardTreeDirectories_DeleteDirectory;
+			treeViewDirectories.RenameDirectory += KeyboardTreeDirectories_RenameDirectory;
 		}
 
 		private void createPurchase(ProductType pt)
@@ -92,24 +88,24 @@ namespace Costs.Forms.Main
 			CreatePurchase?.Invoke(pt, dt);
 		}
 
-		private void RequestsController_ValuesChanged(MainViewValuesChangedEventArg obj)
+		private void PurchaseListObserver_ValuesChanged(MainViewValuesChangedEventArg obj)
 		{
-			RequestValuesChanged?.Invoke(obj);
+			ValuesChanged?.Invoke(obj);
 		}
 
 		private void KeyboardTreeDirectories_RenameDirectory(Directory obj)
 		{
-			RenameDirectory?.Invoke(obj);
+			BtnRenameDirectory?.Invoke(obj);
 		}
 
 		private void KeyboardTreeDirectories_DeleteDirectory(Directory obj)
 		{
-			DeleteDirectory?.Invoke(obj);
+			BtnDeleteDirectory?.Invoke(obj);
 		}
 
 		private void KeyboardTreeDirectories_CreateDirectory(Directory obj)
 		{
-			CreateDirectory?.Invoke(obj);
+			BtnCreateDirectory?.Invoke(obj);
 		}
 
 		private void KeyboardGridPurchases_EditPurchase(Purchase obj)
@@ -152,12 +148,12 @@ namespace Costs.Forms.Main
 
 		public void SetPurchases(List<Purchase> ppList)
 		{
-			gridPurchases.Reload(ppList);
+			purchasesGrid.SetItems(ppList);
 		}
 
 		public void SetDirectories(List<Directory> dirList)
 		{
-			treeViewDirectories.Reload(dirList);
+			treeViewDirectories.SetItems(dirList);
 		}
 		public void SetPurchasesAmount(decimal amount)
 		{
@@ -176,9 +172,7 @@ namespace Costs.Forms.Main
 
 		private void tsiAddDirectory_Click(object sender, EventArgs e)
 		{
-
-			CreateDirectory?.Invoke(keyboardTreeDirectories.current);
-			//MessageBox.Show(CurrentDirectory.Name + " пока не реализовано");
+			BtnCreateDirectory?.Invoke(treeViewDirectories.Current);
 		}
 
 		public void SetProductTypes(IEnumerable<ProductType> items)
@@ -317,6 +311,18 @@ namespace Costs.Forms.Main
 		private void btnExitCategory_Click(object sender, EventArgs e)
 		{
 			exitCategory();
+		}
+
+		private void btnAddShopItem_Click(object sender, EventArgs e)
+		{
+			DateTime dt = ucDateView1.CurrentDate;
+			CreatePurchase?.Invoke(null, dt);
+		}
+
+		private void btnDocumentsView_Click(object sender, EventArgs e)
+		{
+			ViewDocumentForm f = new ViewDocumentForm();
+			f.ShowDialog();
 		}
 	}
 }

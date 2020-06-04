@@ -23,18 +23,25 @@ namespace Costs.Forms
 	/// <summary>
 	/// Обслуживание TreeView дерева директории категорий
 	/// </summary>
-	class TreeViewDirectories
+	class DirectoriesTreeView
 	{
 		TreeView treeView;
+		KbdHandler kbdHandler = new KbdHandler();
 
 		List<int> expandedNodesID = new List<int>();
 		TreeNode current = null;
 
 		public event Action<Directory> CurrentDirectoryChanged;
 
-		public TreeViewDirectories(TreeView trView)
+		public event Action<Directory> DeleteDirectory;
+		public event Action<Directory> CreateDirectory;
+		public event Action<Directory> RenameDirectory;
+
+		public DirectoriesTreeView(TreeView trView)
 		{
 			treeView = trView;
+			kbdHandler.SetControl(treeView);
+			setupKeys();
 			wire();
 		}
 
@@ -66,7 +73,7 @@ namespace Costs.Forms
 			CurrentDirectoryChanged?.Invoke(Current);
 		}
 
-		public void Reload(List<Directory> listDir)
+		public void SetItems(List<Directory> listDir)
 		{
 			this.Fill(listDir);
 
@@ -98,6 +105,13 @@ namespace Costs.Forms
 					treeView.SelectedNode = node1;
 				}
 			}
+		}
+
+		private void setupKeys()
+		{
+			kbdHandler.AddKey(Keys.Delete, () => { DeleteDirectory?.Invoke(Current); });
+			kbdHandler.AddKey(Keys.N, () => { CreateDirectory?.Invoke(Current); });
+			kbdHandler.AddKey(Keys.R, () => { RenameDirectory?.Invoke(Current); });
 		}
 
 		/// <summary>

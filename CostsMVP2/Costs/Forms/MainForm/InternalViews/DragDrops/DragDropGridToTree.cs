@@ -93,9 +93,6 @@ namespace Costs.Forms.Main.InternalViews.DragDrops
 
 		private void treeView_DragDrop(object sender, DragEventArgs e)
 		{
-			//DebugServices.DebugMessage.ShowObject(e.Data.GetFormats());
-			//return;
-
 			// 1. Получаем бросаемый объект
 			TreeView tv = sender as TreeView;
 			Point pt = tv.PointToClient(new Point(e.X, e.Y));
