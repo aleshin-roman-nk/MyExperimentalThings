@@ -67,8 +67,8 @@ namespace Costs.Forms
 			view.BtnDeleteDirectory += View_DeleteDirectory;
 			view.BtnRenameDirectory += View_RenameDirectory;
 
-			view.GetCategories += View_GetCategories;
-			view.GetProductTypes += View_GetProductTypes;
+			view.CategoriesChanged += View_CategoriesChanged;
+			view.ProductTypesChanged += View_ProductTypesChanged;
 
 			view.BtnCreateCategory += View_BtnCreateCategory;
 			view.BtnCreateProductType += View_BtnCreateProductType;
@@ -104,12 +104,12 @@ namespace Costs.Forms
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
-		private void View_GetProductTypes(Category obj)
+		private void View_ProductTypesChanged(Category obj)
 		{
 			view.SetProductTypes(model.ProductTypeModel.ProductTypes(obj));
 		}
 
-		private void View_GetCategories()
+		private void View_CategoriesChanged()
 		{
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}

@@ -33,8 +33,8 @@ namespace Costs.Forms.Main
 		public event Action<Directory> BtnRenameDirectory;
 		public event Action<Directory> BtnDeleteDirectory;
 		public event Action<MainViewValuesChangedEventArg> ValuesChanged;
-		public event Action<Category> GetProductTypes;
-		public event Action GetCategories;
+		public event Action<Category> ProductTypesChanged;
+		public event Action CategoriesChanged;
 		public event Action<string> BtnCreateCategory;
 		public event Action<string, Category> BtnCreateProductType;
 		public event Action<Category> BtnDeleteCategory;
@@ -233,7 +233,7 @@ namespace Costs.Forms.Main
 			viewCurrentObserver.CurrentCategory = cat;// Кстати, храня во view текущий объект, можно делать что то вроде cat.Clone() если боюсь, что кто то в др месте уничтожит этот экземпляр по ссылке.
 			viewCurrentObserver.IsCategoryLevel = false;
 
-			GetProductTypes?.Invoke(cat);
+			ProductTypesChanged?.Invoke(cat);
 		}
 		void exitCategory()
 		{
@@ -241,7 +241,7 @@ namespace Costs.Forms.Main
 
 			if (viewCurrentObserver.CurrentCategory == null) return;
 
-			GetCategories?.Invoke();
+			CategoriesChanged?.Invoke();
 
 			var item = lvProductTypes.Items.Cast<ListViewItem>().FirstOrDefault(x => (x.Tag as Category).Id == viewCurrentObserver.CurrentCategory.Id);
 

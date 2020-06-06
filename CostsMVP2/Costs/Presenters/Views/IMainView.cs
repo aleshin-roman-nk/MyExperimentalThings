@@ -37,8 +37,8 @@ namespace Costs.Presenters.Views
 		event Action<Purchase> EditPurchase;
 		event Action<Purchase> DeletePurchase;
 		event Action<Purchase, Directory> MovePurchase;
-		event Action<Category> GetProductTypes;
-		event Action GetCategories;
+		event Action<Category> ProductTypesChanged;
+		event Action CategoriesChanged;
 		event Action<string> BtnCreateCategory;
 		event Action<string, Category> BtnCreateProductType;
 		event Action<Category> BtnDeleteCategory;
