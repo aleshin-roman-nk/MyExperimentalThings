@@ -22,12 +22,12 @@ namespace Costs.Forms.Main.InternalViews
 	 */
 	internal class PurchaseListObserver
 	{
-		DirectoriesTreeView treeViewDirectories;
+		DirectoriesTreeViewHandler treeViewDirectories;
 		UcDateView ucDate;
 
-		public event Action<MainViewValuesChangedEventArg> ValuesChanged;
+		public event Action<PurchaseFilterValuesChangedEventArg> ValuesChanged;
 
-		public PurchaseListObserver(DirectoriesTreeView treeViewDirectories, UcDateView ucDate)
+		public PurchaseListObserver(DirectoriesTreeViewHandler treeViewDirectories, UcDateView ucDate)
 		{
 			this.treeViewDirectories = treeViewDirectories;
 			this.ucDate = ucDate;
@@ -38,12 +38,12 @@ namespace Costs.Forms.Main.InternalViews
 
 		private void UcDate_DateChanged(UcDateViewDateChangedEventArg obj)
 		{
-			ValuesChanged?.Invoke(new MainViewValuesChangedEventArg(obj.Date, treeViewDirectories.Current, obj.OneMonth));
+			ValuesChanged?.Invoke(new PurchaseFilterValuesChangedEventArg(obj.Date, treeViewDirectories.Current, obj.OneMonth));
 		}
 
 		private void TreeViewDirectories_CurrentDirectoryChanged(Entities.Directory e)
 		{
-			ValuesChanged?.Invoke(new MainViewValuesChangedEventArg(ucDate.CurrentDate, e, ucDate.OneDay));
+			ValuesChanged?.Invoke(new PurchaseFilterValuesChangedEventArg(ucDate.CurrentDate, e, ucDate.OneDay));
 		}
 	}
 }

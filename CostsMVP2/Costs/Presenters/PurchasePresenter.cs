@@ -2,10 +2,10 @@
 using Costs.Forms;
 using Costs.Models;
 using Costs.Presenters.Views;
-using Costs.Entities.Extension;
 using System.Collections.Generic;
 using Costs.DlgService;
 using Costs.Presenters.Views.EventArgs;
+using Costs.BL.Models;
 
 /*
  * Разделение решения на проекты.
@@ -34,20 +34,24 @@ namespace Costs.Presenters
 	public class PurchasePresenter
 	{
 		IPurchaseView view;
-		PurchaseModel model;// Время жизни совпадает с временем жизни PurchasePresenter
+		//PurchaseModel model;// Время жизни совпадает с временем жизни PurchasePresenter
+		ProductTypeModel productTypeModel;
+		DirectoryModel directoryModel;
 
 		public PurchasePresenter(IPurchaseView v)
 		{
 			view = v;
-			model = new PurchaseModel();
-			
+			//model = new PurchaseModel();
+			productTypeModel = new ProductTypeModel();
+			directoryModel = new DirectoryModel();
+
 			view.RequestSampleProductList += View_RequestSampleProductList;
 		}
 
         public PurchasePresenter Go(Purchase editArg)
 		{
 			view.SetPurchase(editArg);
-			view.SetDirectoryName(model.GetDirectory(editArg.DirectoryID).Name);
+			view.SetDirectoryName(directoryModel.GetDirectory(editArg.DirectoryID).Name);
 			return this;
 		}
 		public Purchase Result()
@@ -57,7 +61,7 @@ namespace Costs.Presenters
 		private void View_RequestSampleProductList(string name, List<ProductType> spList)
 		{
 			spList.Clear();
-			spList.AddRange(model.GetProductTypesByName(name));
+			spList.AddRange(productTypeModel.GetProductTypesByName(name));
 		}
 	}
 }

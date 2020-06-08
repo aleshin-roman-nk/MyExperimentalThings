@@ -98,19 +98,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\Domain\Entities\PaymentDoc.cs" />
+    <Compile Include="BL\Entities\PaymentDoc.cs" />
+    <Compile Include="BL\Models\DocumentModel.cs" />
     <Compile Include="BL\Models\ProductTypeModel.cs" />
     <Compile Include="DebugServices\DebugMessage.cs" />
-    <Compile Include="BL\Domain\Entities\Category.cs" />
+    <Compile Include="BL\Entities\Category.cs" />
     <Compile Include="BL\Models\DirectoryModel.cs" />
-    <Compile Include="BL\Domain\DB\ProductTypeDbAccess.cs" />
-    <Compile Include="BL\Domain\DB\DirectoryDB.cs" />
-    <Compile Include="BL\Domain\DB\PurchasesDB.cs" />
-    <Compile Include="BL\Domain\DB\AppData.cs" />
-    <Compile Include="BL\Domain\Entities\ProductType.cs" />
-    <Compile Include="BL\Domain\Entities\Directory.cs" />
-    <Compile Include="BL\Domain\Services\Extension\PurchaseExtension.cs" />
-    <Compile Include="BL\Domain\Entities\Purchase.cs" />
+    <Compile Include="BL\DB\ProductTypeDbAccess.cs" />
+    <Compile Include="BL\DB\DirectoryDB.cs" />
+    <Compile Include="BL\DB\PurchasesDB.cs" />
+    <Compile Include="BL\DB\AppData.cs" />
+    <Compile Include="BL\Entities\ProductType.cs" />
+    <Compile Include="BL\Entities\Directory.cs" />
+    <Compile Include="BL\Entities\Purchase.cs" />
     <Compile Include="Forms\DlgService\ChooseItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,12 +133,6 @@
     <Compile Include="Forms\DocumentsForm\DocumentsForm.Designer.cs">
       <DependentUpon>DocumentsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProductTypeForm\SampleProductForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProductTypeForm\SampleProductForm.Designer.cs">
-      <DependentUpon>SampleProductForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MainForm\InternalViews\DateView\FormMonthesSelect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,7 +140,7 @@
       <DependentUpon>FormMonthesSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm\InternalViews\DragDrops\DragDropGridToTree.cs" />
-    <Compile Include="Forms\MainForm\InternalViews\PurchasesGrid.cs" />
+    <Compile Include="Forms\MainForm\InternalViews\PurchasesGridHandler.cs" />
     <Compile Include="Forms\MainForm\InternalViews\PurchaseListObserver.cs" />
     <Compile Include="Forms\MainForm\MainForm.cs">
       <SubType>Form</SubType>
@@ -162,8 +156,8 @@
     <Compile Include="Forms\ViewDocumentForm.Designer.cs">
       <DependentUpon>ViewDocumentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainPresenter\MainPresenter.cs" />
-    <Compile Include="Forms\MainForm\InternalViews\DirectoriesTreeView.cs" />
+    <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Forms\MainForm\InternalViews\DirectoriesTreeViewHandler.cs" />
     <Compile Include="Forms\PurchaseForm\PurchaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,17 +165,14 @@
       <DependentUpon>PurchaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\PurchasePresenter.cs" />
-    <Compile Include="Presenters\ProductTypePresenter.cs" />
-    <Compile Include="Presenters\Views\AbstractView.cs" />
-    <Compile Include="Presenters\Views\EventArgs\MainViewUpdateFilterValuesEventArg.cs" />
-    <Compile Include="Presenters\Views\ISampleProductsView.cs" />
-    <Compile Include="Presenters\Views\IView.cs" />
-    <Compile Include="Presenters\Views\IViewDialogs.cs" />
-    <Compile Include="Presenters\Views\IViewsContainer.cs" />
+    <Compile Include="Presenters\ViewDocumentPresenter.cs" />
+    <Compile Include="Views\EventArgs\PurchaseFilterValuesChangedEventArg.cs" />
+    <Compile Include="Views\IViewDialogs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Presenters\Views\IMainView.cs" />
-    <Compile Include="Presenters\Views\IPurchaseView.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPurchaseView.cs" />
+    <Compile Include="Views\IViewDocument.cs" />
     <EmbeddedResource Include="Forms\DlgService\ChooseItemForm.resx">
       <DependentUpon>ChooseItemForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,9 +181,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DocumentsForm\DocumentsForm.resx">
       <DependentUpon>DocumentsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProductTypeForm\SampleProductForm.resx">
-      <DependentUpon>SampleProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm\InternalViews\DateView\FormMonthesSelect.resx">
       <DependentUpon>FormMonthesSelect.cs</DependentUpon>
@@ -232,7 +220,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BL\Domain\Note.txt" />
     <Content Include="Forms\MainForm\InternalViews\Notice.txt" />
     <Content Include="Forms\Note.txt" />
     <Content Include="icons8-fund-accounting-32.ico" />
@@ -256,9 +243,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\MainForm\KeyboardHnd\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -17,8 +17,8 @@ namespace Costs.Presenters.Views
 	public interface IMainView
 	{
 		// Позволяет как угодно отображать дерево. Различные внутренние модули типа TreeViewDirectoryKeys предоставляют логику вывода
-		void SetDirectories(List<Directory> dirList);
-		void SetPurchases(List<Purchase> ppList);
+		void SetDirectories(IEnumerable<Directory> dirList);
+		void SetPurchases(IEnumerable<Purchase> ppList);
 		void SetPurchasesAmount(decimal amount);
 		void SetProductTypes(IEnumerable<ProductType> items);
 		void SetCategories(IEnumerable<Category> categs);
@@ -27,25 +27,23 @@ namespace Costs.Presenters.Views
 		bool UserAnsverYes(string msg);
 
 		Directory CurrentDirectory { get; }
-
 		DateTime CurrentDate { get; }
-
-		bool OneDay { get; }
 		Category CurrentCategory { get; }
+		bool OneDay { get; }
 
 		event Action<ProductType, DateTime> CreatePurchase;
 		event Action<Purchase> EditPurchase;
 		event Action<Purchase> DeletePurchase;
 		event Action<Purchase, Directory> MovePurchase;
-		event Action<Category> ProductTypesChanged;
-		event Action CategoriesChanged;
+		event Action<Category> UpdateProductTypes;
+		event Action UpdateCategories;
 		event Action<string> BtnCreateCategory;
 		event Action<string, Category> BtnCreateProductType;
 		event Action<Category> BtnDeleteCategory;
 		event Action<ProductType> BtnDeleteProductType;
 
 		//event Action CurrentDirectoryChanged;
-		event Action<MainViewValuesChangedEventArg> ValuesChanged;
+		event Action<PurchaseFilterValuesChangedEventArg> ValuesChanged;
 		event Action<Directory, Directory> MoveDirectory;
 		event Action<Directory> BtnCreateDirectory;
 		event Action<Directory> BtnRenameDirectory;

@@ -23,7 +23,7 @@ namespace Costs.Forms
 	/// <summary>
 	/// Обслуживание TreeView дерева директории категорий
 	/// </summary>
-	class DirectoriesTreeView
+	class DirectoriesTreeViewHandler
 	{
 		TreeView treeView;
 		KbdHandler kbdHandler = new KbdHandler();
@@ -37,7 +37,7 @@ namespace Costs.Forms
 		public event Action<Directory> CreateDirectory;
 		public event Action<Directory> RenameDirectory;
 
-		public DirectoriesTreeView(TreeView trView)
+		public DirectoriesTreeViewHandler(TreeView trView)
 		{
 			treeView = trView;
 			kbdHandler.SetControl(treeView);
@@ -73,7 +73,7 @@ namespace Costs.Forms
 			CurrentDirectoryChanged?.Invoke(Current);
 		}
 
-		public void SetItems(List<Directory> listDir)
+		public void SetItems(IEnumerable<Directory> listDir)
 		{
 			this.Fill(listDir);
 
@@ -121,7 +121,7 @@ namespace Costs.Forms
 		/// </summary>
 		/// <param name="treeView"></param>
 		/// <param name="listDir"></param>
-		void Fill(List<Directory> listDir)
+		void Fill(IEnumerable<Directory> listDir)
 		{
 			treeView.Nodes.Clear();
 

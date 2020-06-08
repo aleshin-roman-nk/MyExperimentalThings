@@ -30,25 +30,27 @@
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.btnGetShopName = new System.Windows.Forms.Button();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.dateTimeControl = new System.Windows.Forms.DateTimePicker();
+			this.txtShopName = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.treeView1 = new System.Windows.Forms.TreeView();
+			this.treeViewDirectories = new System.Windows.Forms.TreeView();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.panel5 = new System.Windows.Forms.Panel();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dgvPurchases = new System.Windows.Forms.DataGridView();
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.label3 = new System.Windows.Forms.Label();
 			this.tbCurrentAmount = new System.Windows.Forms.TextBox();
 			this.panel3 = new System.Windows.Forms.Panel();
-			this.listView1 = new System.Windows.Forms.ListView();
+			this.listViewCategories = new System.Windows.Forms.ListView();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.btnExitCategory = new System.Windows.Forms.Button();
 			this.txtCurrentCategory = new System.Windows.Forms.TextBox();
 			this.btnCreateProductType = new System.Windows.Forms.Button();
+			this.btnSaveAndClose = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -60,7 +62,7 @@
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
 			this.panel5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).BeginInit();
 			this.panel4.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -69,8 +71,8 @@
 			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.btnGetShopName);
-			this.groupBox1.Controls.Add(this.dateTimePicker1);
-			this.groupBox1.Controls.Add(this.textBox1);
+			this.groupBox1.Controls.Add(this.dateTimeControl);
+			this.groupBox1.Controls.Add(this.txtShopName);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -90,22 +92,22 @@
 			this.btnGetShopName.Text = "...";
 			this.btnGetShopName.UseVisualStyleBackColor = true;
 			// 
-			// dateTimePicker1
+			// dateTimeControl
 			// 
-			this.dateTimePicker1.CustomFormat = "dd-MM-yyyy hh:mm:ss";
-			this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePicker1.Location = new System.Drawing.Point(587, 28);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(198, 27);
-			this.dateTimePicker1.TabIndex = 3;
-			this.dateTimePicker1.Value = new System.DateTime(2020, 6, 4, 0, 0, 0, 0);
+			this.dateTimeControl.CustomFormat = "dd-MM-yyyy HH:mm:ss";
+			this.dateTimeControl.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimeControl.Location = new System.Drawing.Point(587, 28);
+			this.dateTimeControl.Name = "dateTimeControl";
+			this.dateTimeControl.Size = new System.Drawing.Size(198, 27);
+			this.dateTimeControl.TabIndex = 3;
+			this.dateTimeControl.Value = new System.DateTime(2020, 6, 4, 0, 0, 0, 0);
 			// 
-			// textBox1
+			// txtShopName
 			// 
-			this.textBox1.Location = new System.Drawing.Point(136, 30);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(268, 27);
-			this.textBox1.TabIndex = 2;
+			this.txtShopName.Location = new System.Drawing.Point(136, 30);
+			this.txtShopName.Name = "txtShopName";
+			this.txtShopName.Size = new System.Drawing.Size(268, 27);
+			this.txtShopName.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -125,13 +127,13 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Продавец";
 			// 
-			// treeView1
+			// treeViewDirectories
 			// 
-			this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeView1.Location = new System.Drawing.Point(0, 0);
-			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(290, 590);
-			this.treeView1.TabIndex = 1;
+			this.treeViewDirectories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeViewDirectories.Location = new System.Drawing.Point(0, 0);
+			this.treeViewDirectories.Name = "treeViewDirectories";
+			this.treeViewDirectories.Size = new System.Drawing.Size(290, 684);
+			this.treeViewDirectories.TabIndex = 1;
 			// 
 			// panel1
 			// 
@@ -142,7 +144,7 @@
 			this.panel1.Controls.Add(this.splitContainer1);
 			this.panel1.Location = new System.Drawing.Point(12, 85);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1346, 592);
+			this.panel1.Size = new System.Drawing.Size(1346, 686);
 			this.panel1.TabIndex = 2;
 			// 
 			// splitContainer1
@@ -153,12 +155,12 @@
 			// 
 			// splitContainer1.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+			this.splitContainer1.Panel1.Controls.Add(this.treeViewDirectories);
 			// 
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(1344, 590);
+			this.splitContainer1.Size = new System.Drawing.Size(1344, 684);
 			this.splitContainer1.SplitterDistance = 290;
 			this.splitContainer1.TabIndex = 2;
 			// 
@@ -177,28 +179,28 @@
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.panel3);
 			this.splitContainer2.Panel2.Controls.Add(this.panel2);
-			this.splitContainer2.Size = new System.Drawing.Size(1050, 590);
+			this.splitContainer2.Size = new System.Drawing.Size(1050, 684);
 			this.splitContainer2.SplitterDistance = 349;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// panel5
 			// 
 			this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel5.Controls.Add(this.dataGridView1);
+			this.panel5.Controls.Add(this.dgvPurchases);
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel5.Location = new System.Drawing.Point(0, 36);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(349, 554);
+			this.panel5.Size = new System.Drawing.Size(349, 648);
 			this.panel5.TabIndex = 2;
 			// 
-			// dataGridView1
+			// dgvPurchases
 			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(347, 552);
-			this.dataGridView1.TabIndex = 0;
+			this.dgvPurchases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvPurchases.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvPurchases.Location = new System.Drawing.Point(0, 0);
+			this.dgvPurchases.Name = "dgvPurchases";
+			this.dgvPurchases.Size = new System.Drawing.Size(347, 646);
+			this.dgvPurchases.TabIndex = 0;
 			// 
 			// panel4
 			// 
@@ -233,22 +235,22 @@
 			// 
 			// panel3
 			// 
-			this.panel3.Controls.Add(this.listView1);
+			this.panel3.Controls.Add(this.listViewCategories);
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 36);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(697, 554);
+			this.panel3.Size = new System.Drawing.Size(697, 648);
 			this.panel3.TabIndex = 2;
 			// 
-			// listView1
+			// listViewCategories
 			// 
-			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.listView1.HideSelection = false;
-			this.listView1.Location = new System.Drawing.Point(0, 0);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(697, 554);
-			this.listView1.TabIndex = 0;
-			this.listView1.UseCompatibleStateImageBehavior = false;
+			this.listViewCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listViewCategories.HideSelection = false;
+			this.listViewCategories.Location = new System.Drawing.Point(0, 0);
+			this.listViewCategories.Name = "listViewCategories";
+			this.listViewCategories.Size = new System.Drawing.Size(697, 648);
+			this.listViewCategories.TabIndex = 0;
+			this.listViewCategories.UseCompatibleStateImageBehavior = false;
 			// 
 			// panel2
 			// 
@@ -295,11 +297,39 @@
 			this.btnCreateProductType.Text = "+";
 			this.btnCreateProductType.UseVisualStyleBackColor = true;
 			// 
+			// btnSaveAndClose
+			// 
+			this.btnSaveAndClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.btnSaveAndClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSaveAndClose.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnSaveAndClose.Location = new System.Drawing.Point(811, 12);
+			this.btnSaveAndClose.Name = "btnSaveAndClose";
+			this.btnSaveAndClose.Size = new System.Drawing.Size(125, 67);
+			this.btnSaveAndClose.TabIndex = 3;
+			this.btnSaveAndClose.Text = "Сохранить и закрыть";
+			this.btnSaveAndClose.UseVisualStyleBackColor = false;
+			this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnCancel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnCancel.Location = new System.Drawing.Point(942, 12);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(125, 67);
+			this.btnCancel.TabIndex = 4;
+			this.btnCancel.Text = "Отменить";
+			this.btnCancel.UseVisualStyleBackColor = false;
+			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+			// 
 			// ViewDocumentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1370, 689);
+			this.ClientSize = new System.Drawing.Size(1370, 783);
+			this.Controls.Add(this.btnCancel);
+			this.Controls.Add(this.btnSaveAndClose);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.groupBox1);
 			this.Name = "ViewDocumentForm";
@@ -317,7 +347,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).EndInit();
 			this.panel4.ResumeLayout(false);
 			this.panel4.PerformLayout();
 			this.panel3.ResumeLayout(false);
@@ -330,17 +360,17 @@
 		#endregion
 
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.DateTimePicker dateTimeControl;
+		private System.Windows.Forms.TextBox txtShopName;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnGetShopName;
-		private System.Windows.Forms.TreeView treeView1;
+		private System.Windows.Forms.TreeView treeViewDirectories;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.SplitContainer splitContainer2;
-		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.DataGridView dgvPurchases;
+		private System.Windows.Forms.ListView listViewCategories;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.Button btnExitCategory;
 		private System.Windows.Forms.TextBox txtCurrentCategory;
@@ -350,5 +380,7 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox tbCurrentAmount;
 		private System.Windows.Forms.Panel panel5;
+		private System.Windows.Forms.Button btnSaveAndClose;
+		private System.Windows.Forms.Button btnCancel;
 	}
 }

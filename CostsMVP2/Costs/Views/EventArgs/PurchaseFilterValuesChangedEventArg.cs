@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Costs.Presenters.Views.EventArgs
 {
-	public class MainViewValuesChangedEventArg
+	public class PurchaseFilterValuesChangedEventArg
 	{
-		public MainViewValuesChangedEventArg(DateTime dt, Directory Dir, bool oneMonth)
+		public PurchaseFilterValuesChangedEventArg(DateTime dt, Directory Dir, bool oneMonth)
 		{
 			Date = dt;
 			Directory = Dir;

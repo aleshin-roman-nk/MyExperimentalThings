@@ -32,27 +32,25 @@ namespace Costs.Forms.Main
 		public event Action<Directory> BtnCreateDirectory;
 		public event Action<Directory> BtnRenameDirectory;
 		public event Action<Directory> BtnDeleteDirectory;
-		public event Action<MainViewValuesChangedEventArg> ValuesChanged;
-		public event Action<Category> ProductTypesChanged;
-		public event Action CategoriesChanged;
+		public event Action<PurchaseFilterValuesChangedEventArg> ValuesChanged;
+		public event Action<Category> UpdateProductTypes;
+		public event Action UpdateCategories;
 		public event Action<string> BtnCreateCategory;
 		public event Action<string, Category> BtnCreateProductType;
 		public event Action<Category> BtnDeleteCategory;
 		public event Action<ProductType> BtnDeleteProductType;
 
 		// Конфигурирование блоками-элементами сложной вьюшки
-		DirectoriesTreeView treeViewDirectories;
-		PurchasesGrid purchasesGrid;
+		DirectoriesTreeViewHandler directoriesTreeViewHandler;
+		PurchasesGridHandler purchasesGrid;
 		DragDropGridToTree dragDropGridToTree;
 		PurchaseListObserver purchaseListObserver;
 
-		ProductTypeDrag<ProductType> productTypeDrag;
+		CurrentCategoryObserver сurrentCategoryObserver;
 
-		CurrentCategoryObserver viewCurrentObserver;
-
-		public Directory CurrentDirectory => treeViewDirectories.Current;
+		public Directory CurrentDirectory => directoriesTreeViewHandler.Current;
 		public bool OneDay => ucDateView1.OneDay;
-		public Category CurrentCategory => viewCurrentObserver.CurrentCategory;
+		public Category CurrentCategory => сurrentCategoryObserver.CurrentCategory;
 		public DateTime CurrentDate { get => ucDateView1.CurrentDate; }
 
 		public MainForm()
@@ -60,14 +58,14 @@ namespace Costs.Forms.Main
 			InitializeComponent();
 			
 			// 1. Конфигурируем view
-			purchasesGrid = new PurchasesGrid(dgvPurchases);
-			treeViewDirectories = new DirectoriesTreeView(tvDirectories);
-			purchaseListObserver = new PurchaseListObserver(treeViewDirectories, ucDateView1);
+			purchasesGrid = new PurchasesGridHandler(dgvPurchases);
+			directoriesTreeViewHandler = new DirectoriesTreeViewHandler(tvDirectories);
+			purchaseListObserver = new PurchaseListObserver(directoriesTreeViewHandler, ucDateView1);
 
 			dragDropGridToTree = new DragDropGridToTree(dgvPurchases, tvDirectories);
-			productTypeDrag = new ProductTypeDrag<ProductType>(lvProductTypes, dgvPurchases, createPurchase);
-
-			viewCurrentObserver = new CurrentCategoryObserver();
+			_ = new ProductTypeDrag<ProductType>(lvProductTypes, dgvPurchases, createPurchase);
+			
+			сurrentCategoryObserver = new CurrentCategoryObserver();
 
 			purchaseListObserver.ValuesChanged += PurchaseListObserver_ValuesChanged;
 			dragDropGridToTree.MovePurchase += TreeViewDirectories_MovePurchase;
@@ -76,9 +74,9 @@ namespace Costs.Forms.Main
 			purchasesGrid.EditPurchase += KeyboardGridPurchases_EditPurchase;
 
 			dragDropGridToTree.MoveDirectory += DragDropGridToTree_MoveDirectory;
-			treeViewDirectories.CreateDirectory += KeyboardTreeDirectories_CreateDirectory;
-			treeViewDirectories.DeleteDirectory += KeyboardTreeDirectories_DeleteDirectory;
-			treeViewDirectories.RenameDirectory += KeyboardTreeDirectories_RenameDirectory;
+			directoriesTreeViewHandler.CreateDirectory += KeyboardTreeDirectories_CreateDirectory;
+			directoriesTreeViewHandler.DeleteDirectory += KeyboardTreeDirectories_DeleteDirectory;
+			directoriesTreeViewHandler.RenameDirectory += KeyboardTreeDirectories_RenameDirectory;
 		}
 
 		private void createPurchase(ProductType pt)
@@ -88,7 +86,7 @@ namespace Costs.Forms.Main
 			CreatePurchase?.Invoke(pt, dt);
 		}
 
-		private void PurchaseListObserver_ValuesChanged(MainViewValuesChangedEventArg obj)
+		private void PurchaseListObserver_ValuesChanged(PurchaseFilterValuesChangedEventArg obj)
 		{
 			ValuesChanged?.Invoke(obj);
 		}
@@ -146,14 +144,14 @@ namespace Costs.Forms.Main
 			tbDirFullPath.Text = tvDirectories.SelectedNode.FullPath;
 		}
 
-		public void SetPurchases(List<Purchase> ppList)
+		public void SetPurchases(IEnumerable<Purchase> ppList)
 		{
 			purchasesGrid.SetItems(ppList);
 		}
 
-		public void SetDirectories(List<Directory> dirList)
+		public void SetDirectories(IEnumerable<Directory> dirList)
 		{
-			treeViewDirectories.SetItems(dirList);
+			directoriesTreeViewHandler.SetItems(dirList);
 		}
 		public void SetPurchasesAmount(decimal amount)
 		{
@@ -172,7 +170,7 @@ namespace Costs.Forms.Main
 
 		private void tsiAddDirectory_Click(object sender, EventArgs e)
 		{
-			BtnCreateDirectory?.Invoke(treeViewDirectories.Current);
+			BtnCreateDirectory?.Invoke(directoriesTreeViewHandler.Current);
 		}
 
 		public void SetProductTypes(IEnumerable<ProductType> items)
@@ -230,20 +228,20 @@ namespace Costs.Forms.Main
 			var cat = lvProductTypes.SelectedItems[0].Tag as Category;
 			if (cat == null) return;
 
-			viewCurrentObserver.CurrentCategory = cat;// Кстати, храня во view текущий объект, можно делать что то вроде cat.Clone() если боюсь, что кто то в др месте уничтожит этот экземпляр по ссылке.
-			viewCurrentObserver.IsCategoryLevel = false;
+			сurrentCategoryObserver.CurrentCategory = cat;// Кстати, храня во view текущий объект, можно делать что то вроде cat.Clone() если боюсь, что кто то в др месте уничтожит этот экземпляр по ссылке.
+			сurrentCategoryObserver.IsCategoryLevel = false;
 
-			ProductTypesChanged?.Invoke(cat);
+			UpdateProductTypes?.Invoke(cat);
 		}
 		void exitCategory()
 		{
-			viewCurrentObserver.IsCategoryLevel = true;
+			сurrentCategoryObserver.IsCategoryLevel = true;
 
-			if (viewCurrentObserver.CurrentCategory == null) return;
+			if (сurrentCategoryObserver.CurrentCategory == null) return;
 
-			CategoriesChanged?.Invoke();
+			UpdateCategories?.Invoke();
 
-			var item = lvProductTypes.Items.Cast<ListViewItem>().FirstOrDefault(x => (x.Tag as Category).Id == viewCurrentObserver.CurrentCategory.Id);
+			var item = lvProductTypes.Items.Cast<ListViewItem>().FirstOrDefault(x => (x.Tag as Category).Id == сurrentCategoryObserver.CurrentCategory.Id);
 
 			if (item != null)
 			{
@@ -268,22 +266,22 @@ namespace Costs.Forms.Main
 
 			if (string.IsNullOrWhiteSpace(str)) return;
 
-			if (viewCurrentObserver.IsCategoryLevel)
+			if (сurrentCategoryObserver.IsCategoryLevel)
 			{
 				BtnCreateCategory?.Invoke(str);
 			}
 			else
 			{
-				BtnCreateProductType?.Invoke(str, viewCurrentObserver.CurrentCategory);
+				BtnCreateProductType?.Invoke(str, сurrentCategoryObserver.CurrentCategory);
 			}
 		}
 
 		private void btnDeleteProductType()
 		{
-			if (viewCurrentObserver.IsCategoryLevel)
+			if (сurrentCategoryObserver.IsCategoryLevel)
 			{
-				if (UserAnsverYes($"Категория {viewCurrentObserver.CurrentCategory.Name} будет удалена со всеми вложенными элементами. Подтвердите."))
-					BtnDeleteCategory?.Invoke(viewCurrentObserver.CurrentCategory);
+				if (UserAnsverYes($"Категория {сurrentCategoryObserver.CurrentCategory.Name} будет удалена со всеми вложенными элементами. Подтвердите."))
+					BtnDeleteCategory?.Invoke(сurrentCategoryObserver.CurrentCategory);
 			}
 			else
 			{

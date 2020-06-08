@@ -11,6 +11,16 @@ namespace Costs.BL.Models
 {
 	public class ProductTypeModel
 	{
+		public List<ProductType> GetProductTypesByName(string name = null)
+		{
+			if (string.IsNullOrEmpty(name)) return ProductTypeDbAccess.Read().OrderBy(x => x.Name).ToList();
+
+			return ProductTypeDbAccess.Read()
+				.Where(x => x.Name.ToUpper()
+				.Contains(name.ToUpper()))
+				.OrderBy(x => x.Name).ToList();
+		}
+
 		public IEnumerable<Category> Categories
 		{
 			get

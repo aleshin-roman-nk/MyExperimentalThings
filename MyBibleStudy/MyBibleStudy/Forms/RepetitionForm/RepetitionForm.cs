@@ -115,7 +115,7 @@ namespace MyBibleStudy
 
 		public void ShowForm()
 		{
-			this.ShowDialog();
+			this.Show();
 		}
 
 		private void btnCreatePack_Click(object sender, EventArgs e)

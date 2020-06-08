@@ -2,7 +2,6 @@
 using Costs.DlgService;
 using Costs.Domain.Entities;
 using Costs.Entities;
-using Costs.Entities.Extension;
 using Costs.Models;
 using Costs.Presenters;
 using Costs.Presenters.Views;
@@ -53,8 +52,6 @@ namespace Costs.Forms
 
 			// Стопор происходит в TreeViewDirectories строка 124-131 foreach (var item in nodes)...
 			// Косяк был просто смешной )))))). См комментарий в TreeViewDirectories.Fill
-			view.SetDirectories(model.GetDirectories());
-			view.SetPurchases(model.GetPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay));
 
 			view.CreatePurchase += MainForm_CreatePurchase;
 			view.EditPurchase += View_EditPurchase;
@@ -67,14 +64,15 @@ namespace Costs.Forms
 			view.BtnDeleteDirectory += View_DeleteDirectory;
 			view.BtnRenameDirectory += View_RenameDirectory;
 
-			view.CategoriesChanged += View_CategoriesChanged;
-			view.ProductTypesChanged += View_ProductTypesChanged;
+			view.UpdateCategories += View_UpdateCategories;
+			view.UpdateProductTypes += View_UpdateProductTypes;
 
 			view.BtnCreateCategory += View_BtnCreateCategory;
 			view.BtnCreateProductType += View_BtnCreateProductType;
 			view.BtnDeleteCategory += View_BtnDeleteCategory;
 			view.BtnDeleteProductType += View_BtnDeleteProductType;
 
+			view.SetDirectories(model.DirectoryModel.GetDirectories());
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
@@ -104,19 +102,19 @@ namespace Costs.Forms
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
-		private void View_ProductTypesChanged(Category obj)
+		private void View_UpdateProductTypes(Category obj)
 		{
 			view.SetProductTypes(model.ProductTypeModel.ProductTypes(obj));
 		}
 
-		private void View_CategoriesChanged()
+		private void View_UpdateCategories()
 		{
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
-		private void View_ValuesChanged(Presenters.Views.EventArgs.MainViewValuesChangedEventArg obj)
+		private void View_ValuesChanged(Presenters.Views.EventArgs.PurchaseFilterValuesChangedEventArg obj)
 		{
-			updateViewGridPurchases(obj.Directory, obj.Date, obj.OneDay);
+			reloadData(obj.Directory, obj.Date, obj.OneDay);
 		}
 
 		private void View_RenameDirectory(Directory obj)
@@ -125,20 +123,29 @@ namespace Costs.Forms
 
 			if (!string.IsNullOrEmpty(name))
 			{
-				model.RenameDirectory(name, obj);
-				view.SetDirectories(model.GetDirectories());
+				model.DirectoryModel.RenameDirectory(name, obj);
+				view.SetDirectories(model.DirectoryModel.GetDirectories());
 			}
 		}
+
+		/*
+		 * >>>
+		 * 06-06-2020 23:28
+		 * Всю логику UI перенести внутрь view. Именно там идур разборки между уверенностью пользователя.
+		 * На модель идет только результат - удалить дректорию (или что там)
+		 * 
+		 */
+
 		private void View_DeleteDirectory(Directory obj)
 		{
 			if (!Messages.UserAnsweredYes($"Подтвердите удаление [{obj.Name}]", "ПОДТВЕРЖДЕНИЕ"))
 				return;
 
-			if (!model.DeleteDirectory(obj))
+			if (!model.DirectoryModel.DeleteDirectory(obj))
 				Messages.ShowError($"Запрещено удаление директории [{obj.Name}]", "ОШИБКА УДАЛЕНИЯ");
 			else
 			{
-				view.SetDirectories(model.GetDirectories());
+				view.SetDirectories(model.DirectoryModel.GetDirectories());
 			}
 		}
 
@@ -148,8 +155,8 @@ namespace Costs.Forms
 
 			if (!string.IsNullOrEmpty(name))
 			{
-				model.CreateDirectory(name, d);
-				view.SetDirectories(model.GetDirectories());
+				model.DirectoryModel.CreateDirectory(name, d);
+				view.SetDirectories(model.DirectoryModel.GetDirectories());
 			}
 		}
 
@@ -157,8 +164,8 @@ namespace Costs.Forms
 		{
 			if (view.UserAnsverYes($"Удалить покупку {obj.Name} ?"))
 			{
-				model.DeletePurchase(obj);
-				updateViewGridPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+				model.PurchaseModel.DeletePurchase(obj);
+				reloadData(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 			}
 		}
 
@@ -166,23 +173,21 @@ namespace Costs.Forms
 		{
 			if (obj == null) return;
 
-			var purchPresenter = new PurchasePresenter(new PurchaseForm());
-
 			var res = new PurchasePresenter(new PurchaseForm()).Go(obj).Result();
 
 			if (res != null)
 			{
 				obj.Accept(res);
 
-				model.WritePurchase(obj);
-				updateViewGridPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+				model.PurchaseModel.SavePurchase(obj);
+				reloadData(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 			}
 		}
 
 		private void View_MoveDirectory(Directory dir, Directory toDir)
 		{
 
-			if (model.IsParent(dir, toDir, model.GetDirectories()))
+			if (model.DirectoryModel.IsParent(dir, toDir, model.DirectoryModel.GetDirectories()))
 			{
 				view.ShowError("Нельзя переносить в родителей в детей");
 				return;
@@ -191,25 +196,25 @@ namespace Costs.Forms
 			// Можно сделать отдельно IViewDialogs
 			// Просто помнить, что View - UI - это приборная панель с показометрами и кнопками управления
 			//		эта штука показывает и принимает управление от user'а
-			if (!model.MoveDirectory(dir, toDir))
+			if (!model.DirectoryModel.MoveDirectory(dir, toDir))
 				view.ShowError("Попытка перенести директорию саму в себя");
 
 			// Рефактор. Повторяющийся код
-			view.SetDirectories(model.GetDirectories());
-			updateViewGridPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+			view.SetDirectories(model.DirectoryModel.GetDirectories());
+			reloadData(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 		}
 
 		private void View_MovePurchase(Purchase arg1, Directory arg2)
 		{
-			model.MovePurchase(arg1, arg2);
+			model.PurchaseModel.MoveToDir(arg1, arg2);
 
-			updateViewGridPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+			reloadData(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 		}
 
 		// Create a new payed product.
 		private void MainForm_CreatePurchase(ProductType pt, DateTime dt)
 		{
-			Purchase product = model.CreatePurchase(dt);
+			Purchase product = model.PurchaseModel.CreatePurchase(dt);
 
 			if(pt != null) product.Name = pt.Name;
 
@@ -221,14 +226,16 @@ namespace Costs.Forms
 			{
 				product.Accept(res);
 
-				model.WritePurchase(product);
-				updateViewGridPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+				model.PurchaseModel.SavePurchase(product);
+				reloadData(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 			}
 		}
-		private void updateViewGridPurchases(Directory dir, DateTime dt, bool oneDay)
+		private void reloadData(Directory dir, DateTime dt, bool oneDay)
 		{
-			view.SetPurchases(model.GetPurchases(dir, dt, oneDay));
-			view.SetPurchasesAmount(model.Amount);
+			model.PurchaseModel.ReloadPurchases(dir, dt, oneDay);
+
+			view.SetPurchases(model.PurchaseModel.Purchases);
+			view.SetPurchasesAmount(model.PurchaseModel.Amount);
 		}
 	}
 }

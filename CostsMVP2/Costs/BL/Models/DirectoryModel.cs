@@ -1,4 +1,5 @@
-﻿using Costs.Entities;
+﻿using Costs.DB;
+using Costs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Costs.Models
 {
 	public class DirectoryModel
 	{
-		public static Directory Make( string dirName, Directory parent = null )
+		public Directory Make( string dirName, Directory parent = null )
 		{
 			return new Directory { Name = dirName, ParentID = parent == null ? 0 : parent.ID };
 		}
-		public static bool MoveDirectory( Directory directory, Directory targetDir )
+		public bool MoveDirectory( Directory directory, Directory targetDir )
 		{
 			if (directory.ID == targetDir.ID) return false;
 
@@ -27,7 +28,7 @@ namespace Costs.Models
 
 			return true;
 		}
-		public static bool IsParent(Directory movingDir, Directory toDir, List<Directory> dirs)
+		public bool IsParent(Directory movingDir, Directory toDir, IEnumerable<Directory> dirs)
 		{
 			if (movingDir.ParentID == toDir.ID) return true;
 
@@ -47,11 +48,11 @@ namespace Costs.Models
 
 			return false;
 		}
-		static Directory getParentDir(List<Directory> dirs, Directory dir)
+		Directory getParentDir(IEnumerable<Directory> dirs, Directory dir)
 		{
 			return dirs.FirstOrDefault(x => x.ID == dir.ParentID);
 		}
-		public static void CreateDirectory(string dirName, Directory parentDir)
+		public void CreateDirectory(string dirName, Directory parentDir)
 		{
 			if (parentDir == null || string.IsNullOrWhiteSpace(dirName)) return;
 
@@ -62,7 +63,7 @@ namespace Costs.Models
 				db.SaveChanges();
 			}
 		}
-		public static bool DeleteDirectory(Directory dir)
+		public bool DeleteDirectory(Directory dir)
 		{
 			using (AppData db = new AppData())
 			{
@@ -78,7 +79,16 @@ namespace Costs.Models
 
 			return true;
 		}
-		public static void UpdateDirectory(Directory dir)
+		public IEnumerable<Directory> GetDirectories()
+		{
+			return DirectoryDB.Read();
+		}
+		public void RenameDirectory(string dirName, Directory dir)
+		{
+			dir.Name = dirName;
+			UpdateDirectory(dir);
+		}
+		public void UpdateDirectory(Directory dir)
 		{
 			if (dir == null) return;
 
@@ -88,7 +98,7 @@ namespace Costs.Models
 				db.SaveChanges();
 			}
 		}
-		public static Directory GetDirectory(int id)
+		public Directory GetDirectory(int id)
 		{
 			using (AppData db = new AppData())
 			{
