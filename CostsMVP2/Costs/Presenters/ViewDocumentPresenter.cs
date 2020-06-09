@@ -13,12 +13,12 @@ namespace Costs.Presenters
 	public class ViewDocumentPresenter
 	{
 		IViewDocument view;
-		DocumentModel docsModel;
+		PayDocumentModel docsModel;
 
 		public ViewDocumentPresenter(IViewDocument v)
 		{
 			view = v;
-			docsModel = new DocumentModel();
+			docsModel = new PayDocumentModel();
 
 			view.BtnCreateCategory += View_BtnCreateCategory;
 			view.BtnDeleteCategory += View_BtnDeleteCategory;

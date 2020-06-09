@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace Costs.BL.Models
 {
-	public class DocumentModel
+	public class PayDocumentModel
 	{
 		public IEnumerable<PaymentDoc> GetPaymentDocs(int year, int month)
 		{

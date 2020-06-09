@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Entities\PaymentDoc.cs" />
-    <Compile Include="BL\Models\DocumentModel.cs" />
+    <Compile Include="BL\Models\PayDocumentModel.cs" />
     <Compile Include="BL\Models\ProductTypeModel.cs" />
     <Compile Include="DebugServices\DebugMessage.cs" />
     <Compile Include="BL\Entities\Category.cs" />
