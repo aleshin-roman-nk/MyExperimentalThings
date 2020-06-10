@@ -16,10 +16,16 @@ namespace MyBibleStudy.BL
 		{
 			get
 			{
-				var total_minutes = WorkSessionsOrdered.Sum(x => x.SessionState == SessionState.Closed ? (x.Ended - x.Started).TotalMinutes : 0);
-				var hours = total_minutes / 60;
-				var minutes = (long)((hours - (long)hours) * 60);
-				return $"{(long)hours}:{minutes}";
+				//var total_minutes = WorkSessionsOrdered.Sum(x => x.SessionState == SessionState.Closed ? (x.Ended - x.Started).TotalMinutes : 0);
+				var total_minutes = WorkSessionsOrdered.Sum(x => x.SessionState == SessionState.Closed ? x.TotalTimeInMinutes : 0);
+				decimal hours = total_minutes / 60.0m;
+				
+				//var minutes = (long)((hours - (long)hours) * 60.0m);
+				var minutes = ((hours - (long)hours) * 60.0m);
+
+
+				return $"{(long)hours} ч, {minutes:f0} мин";
+				//return $"{total_minutes} мин";
 			}
 		}
 		public WorkSession LastSession
