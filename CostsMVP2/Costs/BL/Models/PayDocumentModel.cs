@@ -20,6 +20,13 @@ using System.Threading.Tasks;
 
 namespace Costs.BL.Models
 {
+	/*
+	 * 1. Загружаем коллекцию документов.
+	 * 2. Можем создавать новый документ и редактировать его
+	 * 3. Можем редактировать существующий документ.
+	 * 
+	 * 
+	 */
 	public class PayDocumentModel
 	{
 
@@ -55,6 +62,10 @@ namespace Costs.BL.Models
 		{
 			throw new NotImplementedException();
 		}
+		/*
+		 * 
+		 * 
+		 */
 		public void RemovePurchase(PaymentDoc doc, Purchase p)
 		{
 			//1. Delete from the doc
