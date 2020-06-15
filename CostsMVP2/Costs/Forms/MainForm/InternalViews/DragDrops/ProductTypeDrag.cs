@@ -7,14 +7,14 @@ using System.Windows.Forms;
 
 namespace Costs.Forms.Main.InternalViews.DragDrops
 {
-	public class ProductTypeDrag<T>
+	public class ProductTypePurchaseDragDrop<T>
 		where T : class
 	{
 		ListView src;
 		DataGridView desc;
 		Action<T> dropProg;
 
-		public ProductTypeDrag(ListView src, DataGridView desc, Action<T> drop_prog)
+		public ProductTypePurchaseDragDrop(ListView src, DataGridView desc, Action<T> drop_prog)
 		{
 			this.src = src;
 			this.desc = desc;

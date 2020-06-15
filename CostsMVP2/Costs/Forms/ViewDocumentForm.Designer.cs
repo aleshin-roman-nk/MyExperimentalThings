@@ -51,6 +51,7 @@
 			this.btnCreateProductType = new System.Windows.Forms.Button();
 			this.btnSaveAndClose = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.chbShowWholeDoc = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -130,6 +131,7 @@
 			// treeViewDirectories
 			// 
 			this.treeViewDirectories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeViewDirectories.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.treeViewDirectories.Location = new System.Drawing.Point(0, 0);
 			this.treeViewDirectories.Name = "treeViewDirectories";
 			this.treeViewDirectories.Size = new System.Drawing.Size(290, 684);
@@ -180,7 +182,7 @@
 			this.splitContainer2.Panel2.Controls.Add(this.panel3);
 			this.splitContainer2.Panel2.Controls.Add(this.panel2);
 			this.splitContainer2.Size = new System.Drawing.Size(1050, 684);
-			this.splitContainer2.SplitterDistance = 349;
+			this.splitContainer2.SplitterDistance = 451;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// panel5
@@ -190,7 +192,7 @@
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel5.Location = new System.Drawing.Point(0, 36);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(349, 648);
+			this.panel5.Size = new System.Drawing.Size(451, 648);
 			this.panel5.TabIndex = 2;
 			// 
 			// dgvPurchases
@@ -199,7 +201,7 @@
 			this.dgvPurchases.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvPurchases.Location = new System.Drawing.Point(0, 0);
 			this.dgvPurchases.Name = "dgvPurchases";
-			this.dgvPurchases.Size = new System.Drawing.Size(347, 646);
+			this.dgvPurchases.Size = new System.Drawing.Size(449, 646);
 			this.dgvPurchases.TabIndex = 0;
 			// 
 			// panel4
@@ -211,7 +213,7 @@
 			this.panel4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.panel4.Location = new System.Drawing.Point(0, 0);
 			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(349, 36);
+			this.panel4.Size = new System.Drawing.Size(451, 36);
 			this.panel4.TabIndex = 1;
 			// 
 			// label3
@@ -230,7 +232,7 @@
 			this.tbCurrentAmount.Location = new System.Drawing.Point(71, 3);
 			this.tbCurrentAmount.Name = "tbCurrentAmount";
 			this.tbCurrentAmount.ReadOnly = true;
-			this.tbCurrentAmount.Size = new System.Drawing.Size(273, 27);
+			this.tbCurrentAmount.Size = new System.Drawing.Size(375, 27);
 			this.tbCurrentAmount.TabIndex = 12;
 			// 
 			// panel3
@@ -239,7 +241,7 @@
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 36);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(697, 648);
+			this.panel3.Size = new System.Drawing.Size(595, 648);
 			this.panel3.TabIndex = 2;
 			// 
 			// listViewCategories
@@ -248,7 +250,7 @@
 			this.listViewCategories.HideSelection = false;
 			this.listViewCategories.Location = new System.Drawing.Point(0, 0);
 			this.listViewCategories.Name = "listViewCategories";
-			this.listViewCategories.Size = new System.Drawing.Size(697, 648);
+			this.listViewCategories.Size = new System.Drawing.Size(595, 648);
 			this.listViewCategories.TabIndex = 0;
 			this.listViewCategories.UseCompatibleStateImageBehavior = false;
 			// 
@@ -261,7 +263,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel2.Location = new System.Drawing.Point(0, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(697, 36);
+			this.panel2.Size = new System.Drawing.Size(595, 36);
 			this.panel2.TabIndex = 1;
 			// 
 			// btnExitCategory
@@ -282,7 +284,7 @@
 			this.txtCurrentCategory.Location = new System.Drawing.Point(60, 3);
 			this.txtCurrentCategory.Name = "txtCurrentCategory";
 			this.txtCurrentCategory.ReadOnly = true;
-			this.txtCurrentCategory.Size = new System.Drawing.Size(591, 27);
+			this.txtCurrentCategory.Size = new System.Drawing.Size(489, 27);
 			this.txtCurrentCategory.TabIndex = 16;
 			this.txtCurrentCategory.Text = "000";
 			// 
@@ -290,7 +292,7 @@
 			// 
 			this.btnCreateProductType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCreateProductType.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnCreateProductType.Location = new System.Drawing.Point(657, 2);
+			this.btnCreateProductType.Location = new System.Drawing.Point(555, 2);
 			this.btnCreateProductType.Name = "btnCreateProductType";
 			this.btnCreateProductType.Size = new System.Drawing.Size(35, 27);
 			this.btnCreateProductType.TabIndex = 17;
@@ -323,11 +325,24 @@
 			this.btnCancel.UseVisualStyleBackColor = false;
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
+			// chbShowWholeDoc
+			// 
+			this.chbShowWholeDoc.AutoSize = true;
+			this.chbShowWholeDoc.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.chbShowWholeDoc.Location = new System.Drawing.Point(1073, 12);
+			this.chbShowWholeDoc.Name = "chbShowWholeDoc";
+			this.chbShowWholeDoc.Size = new System.Drawing.Size(169, 23);
+			this.chbShowWholeDoc.TabIndex = 5;
+			this.chbShowWholeDoc.Text = "Показать документ";
+			this.chbShowWholeDoc.UseVisualStyleBackColor = true;
+			this.chbShowWholeDoc.CheckedChanged += new System.EventHandler(this.chbShowWholeDoc_CheckedChanged);
+			// 
 			// ViewDocumentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 783);
+			this.Controls.Add(this.chbShowWholeDoc);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnSaveAndClose);
 			this.Controls.Add(this.panel1);
@@ -354,6 +369,7 @@
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -382,5 +398,6 @@
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.Button btnSaveAndClose;
 		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.CheckBox chbShowWholeDoc;
 	}
 }

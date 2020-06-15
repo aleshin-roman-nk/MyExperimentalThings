@@ -13,12 +13,12 @@ namespace Costs.Presenters
 	public class ViewDocumentPresenter
 	{
 		IViewDocument view;
-		PayDocumentModel docsModel;
+		ViewDocumentModel model;
 
 		public ViewDocumentPresenter(IViewDocument v)
 		{
 			view = v;
-			docsModel = new PayDocumentModel();
+			model = new ViewDocumentModel();
 
 			view.BtnCreateCategory += View_BtnCreateCategory;
 			view.BtnDeleteCategory += View_BtnDeleteCategory;
@@ -40,14 +40,16 @@ namespace Costs.Presenters
 			view.ValuesChanged += View_ValuesChanged;
 		}
 
-		public void Run(PaymentDoc doc)
+		public PaymentDoc Run(PaymentDoc doc)
 		{
-			view.SetCategories(docsModel.ProductTypeModel.Categories);
+			//view.SetCategories(model.ProductTypeModel.Categories);
+			view.SetDirectories(model.DirectoryModel.GetDirectories());
+			view.SetDoc(doc);
 
+			//if (!view.ShowForm()) return null;
+			view.ShowForm();
 
-			if (!view.ShowForm()) return;
-
-
+			return view.GetResult();
 		}
 
 		private void View_ValuesChanged(DateTime arg1, Entities.Directory arg2)

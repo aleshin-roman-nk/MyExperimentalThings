@@ -15,9 +15,7 @@ namespace Costs.Forms.Main.InternalViews
 	 * Сборка в одну сущность изменений от двух контролов в единый запрос.
 	 * 
 	 * Лучше сделать одно событие без этих ненужных контроллеров.
-	 *	Т.е. при изменении чего либо, вызывать единое событие ValuesChanged и собирать все данные со всех учавствующих показаний.
-	 * 
-	 * 
+	 *	Т.е. при изменении чего либо, вызывать единое событие ValuesChanged и собирать все данные со всех учавствующих показаний. 
 	 * 
 	 */
 	internal class PurchaseListObserver
@@ -25,7 +23,7 @@ namespace Costs.Forms.Main.InternalViews
 		DirectoriesTreeViewHandler treeViewDirectories;
 		UcDateView ucDate;
 
-		public event Action<PurchaseFilterValuesChangedEventArg> ValuesChanged;
+		public event Action<PurchaseFilterChangedEventArg> ValuesChanged;
 
 		public PurchaseListObserver(DirectoriesTreeViewHandler treeViewDirectories, UcDateView ucDate)
 		{
@@ -38,12 +36,12 @@ namespace Costs.Forms.Main.InternalViews
 
 		private void UcDate_DateChanged(UcDateViewDateChangedEventArg obj)
 		{
-			ValuesChanged?.Invoke(new PurchaseFilterValuesChangedEventArg(obj.Date, treeViewDirectories.Current, obj.OneMonth));
+			ValuesChanged?.Invoke(new PurchaseFilterChangedEventArg(obj.Date, treeViewDirectories.Current, obj.OneMonth));
 		}
 
 		private void TreeViewDirectories_CurrentDirectoryChanged(Entities.Directory e)
 		{
-			ValuesChanged?.Invoke(new PurchaseFilterValuesChangedEventArg(ucDate.CurrentDate, e, ucDate.OneDay));
+			ValuesChanged?.Invoke(new PurchaseFilterChangedEventArg(ucDate.CurrentDate, e, ucDate.OneDay));
 		}
 	}
 }

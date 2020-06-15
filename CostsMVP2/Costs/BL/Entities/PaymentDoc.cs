@@ -36,5 +36,32 @@ namespace Costs.BL.Domain.Entities
 		public string Shop { get; set; }
 		public List<Purchase> Purchases { get; set; } = new List<Purchase>();
 		public decimal Amount { get { return Purchases.Sum(x => x.Amount); } }
+
+		public PaymentDoc Clone()
+		{
+			var res = new PaymentDoc
+			{
+				Id = Id,
+				DateTime = DateTime,
+				Shop = Shop,
+				Purchases = new List<Purchase>()
+			};
+
+			foreach (var item in this.Purchases)
+				res.Purchases.Add(item.Clone());
+
+			return res;
+		}
+
+		public void Accept(PaymentDoc doc)
+		{
+			Id = doc.Id;
+			DateTime = doc.DateTime;
+			Shop = doc.Shop;
+			Purchases.Clear();
+
+			foreach (var item in doc.Purchases)
+				this.Purchases.Add(item);
+		}
 	}
 }

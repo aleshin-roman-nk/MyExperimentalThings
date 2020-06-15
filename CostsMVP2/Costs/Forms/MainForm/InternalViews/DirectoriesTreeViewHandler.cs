@@ -1,4 +1,5 @@
 ﻿using Costs.Entities;
+using Costs.Forms.Main.InternalViews.DragDrops;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Costs.Forms
 	{
 		TreeView treeView;
 		KbdHandler kbdHandler = new KbdHandler();
+		public DirectoryDragDrop DragDrop { get; }
 
 		List<int> expandedNodesID = new List<int>();
 		TreeNode current = null;
@@ -40,6 +42,7 @@ namespace Costs.Forms
 		public DirectoriesTreeViewHandler(TreeView trView)
 		{
 			treeView = trView;
+			DragDrop = new DirectoryDragDrop(treeView);
 			kbdHandler.SetControl(treeView);
 			setupKeys();
 			wire();

@@ -22,7 +22,13 @@ namespace Costs.BL.Models
 {
 	public class PayDocumentModel
 	{
-		public IEnumerable<PaymentDoc> GetPaymentDocs(int year, int month)
+
+
+		public static IEnumerable<PaymentDoc> GetPaymentDocs(int year, int month)
+		{
+			throw new NotImplementedException();
+		}
+		public static IEnumerable<PaymentDoc> GetPaymentDocs(int year, int month, int day)
 		{
 			throw new NotImplementedException();
 		}
@@ -48,6 +54,12 @@ namespace Costs.BL.Models
 		public IEnumerable<Purchase> GetPurchases(PaymentDoc doc, Directory dir)
 		{
 			throw new NotImplementedException();
+		}
+		public void RemovePurchase(PaymentDoc doc, Purchase p)
+		{
+			//1. Delete from the doc
+			//	doc.Purchases.Remove(...);
+			//2. Delete from DB
 		}
 	}
 }

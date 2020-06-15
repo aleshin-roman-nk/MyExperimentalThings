@@ -43,10 +43,12 @@ namespace Costs.Presenters.Views
 		event Action<ProductType> BtnDeleteProductType;
 
 		//event Action CurrentDirectoryChanged;
-		event Action<PurchaseFilterValuesChangedEventArg> ValuesChanged;
+		event Action<PurchaseFilterChangedEventArg> ValuesChanged;
 		event Action<Directory, Directory> MoveDirectory;
 		event Action<Directory> BtnCreateDirectory;
 		event Action<Directory> BtnRenameDirectory;
 		event Action<Directory> BtnDeleteDirectory;
+
+		event Action BtnCreatePayDocs;
 	}
 }

@@ -13,8 +13,7 @@ namespace Costs.Views
 	public interface IViewDocument
 	{
 		// Позволяет как угодно отображать дерево. Различные внутренние модули типа TreeViewDirectoryKeys предоставляют логику вывода
-		void SetDirectories(List<Directory> dirList);
-
+		void SetDirectories(IEnumerable<Directory> dirList);
 		void SetProductTypes(IEnumerable<ProductType> items);
 		void SetCategories(IEnumerable<Category> categs);
 		void SetDoc(PaymentDoc doc);
@@ -22,6 +21,8 @@ namespace Costs.Views
 		void ShowError(string msg);
 		bool UserAnsverYes(string msg);
 		bool ShowForm();
+
+		PaymentDoc GetResult();
 
 		Directory CurrentDirectory { get; }
 		DateTime CurrentDate { get; }
@@ -40,6 +41,7 @@ namespace Costs.Views
 		event Action<Category> BtnDeleteCategory;
 		event Action<ProductType> BtnDeleteProductType;
 
+		// Поменяться могут только 
 		event Action<DateTime, Directory> ValuesChanged;
 
 		event Action<Directory, Directory> MoveDirectory;

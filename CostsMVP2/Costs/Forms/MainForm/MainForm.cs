@@ -32,18 +32,18 @@ namespace Costs.Forms.Main
 		public event Action<Directory> BtnCreateDirectory;
 		public event Action<Directory> BtnRenameDirectory;
 		public event Action<Directory> BtnDeleteDirectory;
-		public event Action<PurchaseFilterValuesChangedEventArg> ValuesChanged;
+		public event Action<PurchaseFilterChangedEventArg> ValuesChanged;
 		public event Action<Category> UpdateProductTypes;
 		public event Action UpdateCategories;
 		public event Action<string> BtnCreateCategory;
 		public event Action<string, Category> BtnCreateProductType;
 		public event Action<Category> BtnDeleteCategory;
 		public event Action<ProductType> BtnDeleteProductType;
+		public event Action BtnCreatePayDocs;
 
 		// Конфигурирование блоками-элементами сложной вьюшки
 		DirectoriesTreeViewHandler directoriesTreeViewHandler;
-		PurchasesGridHandler purchasesGrid;
-		DragDropGridToTree dragDropGridToTree;
+		PurchasesGridHandler purchasesGridHandler;
 		PurchaseListObserver purchaseListObserver;
 
 		CurrentCategoryObserver сurrentCategoryObserver;
@@ -58,84 +58,79 @@ namespace Costs.Forms.Main
 			InitializeComponent();
 			
 			// 1. Конфигурируем view
-			purchasesGrid = new PurchasesGridHandler(dgvPurchases);
+			purchasesGridHandler = new PurchasesGridHandler(dgvPurchases);
 			directoriesTreeViewHandler = new DirectoriesTreeViewHandler(tvDirectories);
 			purchaseListObserver = new PurchaseListObserver(directoriesTreeViewHandler, ucDateView1);
-
-			dragDropGridToTree = new DragDropGridToTree(dgvPurchases, tvDirectories);
-			_ = new ProductTypeDrag<ProductType>(lvProductTypes, dgvPurchases, createPurchase);
+			_ = new ProductTypePurchaseDragDrop<ProductType>(lvProductTypes, dgvPurchases, createPurchase);
 			
 			сurrentCategoryObserver = new CurrentCategoryObserver();
 
 			purchaseListObserver.ValuesChanged += PurchaseListObserver_ValuesChanged;
-			dragDropGridToTree.MovePurchase += TreeViewDirectories_MovePurchase;
-			purchasesGrid.CreatePurchase += KeyboardGridPurchases_CreatePurchase;
-			purchasesGrid.DeletePurchase += KeyboardGridPurchases_DeletePurchase;
-			purchasesGrid.EditPurchase += KeyboardGridPurchases_EditPurchase;
 
-			dragDropGridToTree.MoveDirectory += DragDropGridToTree_MoveDirectory;
-			directoriesTreeViewHandler.CreateDirectory += KeyboardTreeDirectories_CreateDirectory;
-			directoriesTreeViewHandler.DeleteDirectory += KeyboardTreeDirectories_DeleteDirectory;
-			directoriesTreeViewHandler.RenameDirectory += KeyboardTreeDirectories_RenameDirectory;
+			purchasesGridHandler.CreatePurchase += btnCreatePurchase;
+			purchasesGridHandler.DeletePurchase += btnDeletePurchase;
+			purchasesGridHandler.EditPurchase += btnEditPurchase;
+
+			directoriesTreeViewHandler.DragDrop.MoveDirectory += DragDrop_MoveDirectory;
+			directoriesTreeViewHandler.DragDrop.MovePurchase += DragDrop_MovePurchase;
+			directoriesTreeViewHandler.CreateDirectory += btnCreateDirectory;
+			directoriesTreeViewHandler.DeleteDirectory += btnDeleteDirectory;
+			directoriesTreeViewHandler.RenameDirectory += btnRenameDirectory;
 		}
 
 		private void createPurchase(ProductType pt)
 		{
-			DateTime dt = ucDateView1.CurrentDate;
-
-			CreatePurchase?.Invoke(pt, dt);
+			CreatePurchase?.Invoke(pt, ucDateView1.CurrentDate);
 		}
 
-		private void PurchaseListObserver_ValuesChanged(PurchaseFilterValuesChangedEventArg obj)
+		private void PurchaseListObserver_ValuesChanged(PurchaseFilterChangedEventArg obj)
 		{
 			ValuesChanged?.Invoke(obj);
 		}
 
-		private void KeyboardTreeDirectories_RenameDirectory(Directory obj)
+		private void btnRenameDirectory(Directory obj)
 		{
 			BtnRenameDirectory?.Invoke(obj);
 		}
 
-		private void KeyboardTreeDirectories_DeleteDirectory(Directory obj)
+		private void btnDeleteDirectory(Directory obj)
 		{
 			BtnDeleteDirectory?.Invoke(obj);
 		}
 
-		private void KeyboardTreeDirectories_CreateDirectory(Directory obj)
+		private void btnCreateDirectory(Directory obj)
 		{
 			BtnCreateDirectory?.Invoke(obj);
 		}
 
-		private void KeyboardGridPurchases_EditPurchase(Purchase obj)
+		private void btnEditPurchase(Purchase obj)
 		{
 			EditPurchase?.Invoke(obj);
 		}
 
-		private void KeyboardGridPurchases_DeletePurchase(Purchase obj)
+		private void btnDeletePurchase(Purchase obj)
 		{
 			DeletePurchase?.Invoke(obj);
 		}
 
-		private void KeyboardGridPurchases_CreatePurchase()
+		private void btnCreatePurchase()
 		{
-			DateTime dt = ucDateView1.CurrentDate;
-			CreatePurchase?.Invoke(null, dt);
+			CreatePurchase?.Invoke(null, ucDateView1.CurrentDate);
 		}
 
-		private void DragDropGridToTree_MoveDirectory(Directory arg1, Directory arg2)
+		private void DragDrop_MoveDirectory(Directory arg1, Directory arg2)
 		{
 			MoveDirectory(arg1, arg2);
 		}
 
-		private void TreeViewDirectories_MovePurchase(Purchase arg1, Directory arg2)
+		private void DragDrop_MovePurchase(Purchase arg1, Directory arg2)
 		{
 			MovePurchase(arg1, arg2);
 		}
 
 		private void btnAddPurchasedProduct_Click(object sender, EventArgs e)
 		{
-			DateTime dt = ucDateView1.CurrentDate;
-			CreatePurchase?.Invoke(null, dt);
+			CreatePurchase?.Invoke(null, ucDateView1.CurrentDate);
 		}
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -146,7 +141,7 @@ namespace Costs.Forms.Main
 
 		public void SetPurchases(IEnumerable<Purchase> ppList)
 		{
-			purchasesGrid.SetItems(ppList);
+			purchasesGridHandler.SetItems(ppList);
 		}
 
 		public void SetDirectories(IEnumerable<Directory> dirList)
@@ -319,8 +314,7 @@ namespace Costs.Forms.Main
 
 		private void btnDocumentsView_Click(object sender, EventArgs e)
 		{
-			ViewDocumentForm f = new ViewDocumentForm();
-			f.ShowDialog();
+			BtnCreatePayDocs?.Invoke();
 		}
 	}
 }

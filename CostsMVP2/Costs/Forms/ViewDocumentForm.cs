@@ -34,7 +34,7 @@ namespace Costs.Forms
 
 		DirectoriesTreeViewHandler directoriesTreeViewHandler;
 		PurchasesGridHandler purchasesGridHandler;
-		DragDropGridToTree dragDropGridToTree;
+		DirectoryDragDrop dragDropGridToTree;
 
 		CurrentCategoryObserver сurrentCategoryObserver;
 
@@ -46,7 +46,9 @@ namespace Costs.Forms
 
 			directoriesTreeViewHandler = new DirectoriesTreeViewHandler(treeViewDirectories);
 			purchasesGridHandler = new PurchasesGridHandler(dgvPurchases);
-			dragDropGridToTree = new DragDropGridToTree(dgvPurchases, treeViewDirectories);
+			dragDropGridToTree = new DirectoryDragDrop(treeViewDirectories);
+
+
 
 			/*
 			 * >>>
@@ -86,13 +88,17 @@ namespace Costs.Forms
 		public event Action<Purchase> EditPurchase;
 		public event Action<Purchase> DeletePurchase;
 		public event Action<Purchase, Directory> MovePurchase;
+
 		public event Action<Category> ProductTypesRequired;
 		public event Action CategoriesRequired;
 		public event Action<string> BtnCreateCategory;
+
 		public event Action<string, Category> BtnCreateProductType;
 		public event Action<Category> BtnDeleteCategory;
+
 		public event Action<ProductType> BtnDeleteProductType;
 		public event Action<DateTime, Directory> ValuesChanged;
+
 		public event Action<Directory, Directory> MoveDirectory;
 		public event Action<Directory> BtnCreateDirectory;
 		public event Action<Directory> BtnRenameDirectory;
@@ -103,14 +109,14 @@ namespace Costs.Forms
 			throw new NotImplementedException();
 		}
 
-		public void SetDirectories(List<Directory> dirList)
+		public void SetDirectories(IEnumerable<Directory> dirList)
 		{
-			throw new NotImplementedException();
+			directoriesTreeViewHandler.SetItems(dirList);
 		}
 
 		public void SetDoc(PaymentDoc doc)
 		{
-			throw new NotImplementedException();
+			paymentDoc = doc;
 		}
 
 		public void SetProductTypes(IEnumerable<ProductType> items)
@@ -140,7 +146,22 @@ namespace Costs.Forms
 
 		public bool ShowForm()
 		{
+
 			return this.ShowDialog() == DialogResult.OK;
+		}
+
+		private void chbShowWholeDoc_CheckedChanged(object sender, EventArgs e)
+		{
+			if (chbShowWholeDoc.Checked) treeViewDirectories.Enabled = false;
+			else treeViewDirectories.Enabled = true;
+		}
+
+		public PaymentDoc GetResult()
+		{
+			paymentDoc.DateTime = dateTimeControl.Value;
+			paymentDoc.Shop = txtShopName.Text;
+
+			return paymentDoc;
 		}
 	}
 }

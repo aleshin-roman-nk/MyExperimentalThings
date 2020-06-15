@@ -1,4 +1,5 @@
-﻿using Costs.DB;
+﻿using Costs.BL.Domain.Entities;
+using Costs.DB;
 using Costs.DlgService;
 using Costs.Domain.Entities;
 using Costs.Entities;
@@ -72,8 +73,16 @@ namespace Costs.Forms
 			view.BtnDeleteCategory += View_BtnDeleteCategory;
 			view.BtnDeleteProductType += View_BtnDeleteProductType;
 
+			view.BtnCreatePayDocs += View_BtnCreatePayDocs;
+
 			view.SetDirectories(model.DirectoryModel.GetDirectories());
 			view.SetCategories(model.ProductTypeModel.Categories);
+		}
+
+		private void View_BtnCreatePayDocs()
+		{
+			ViewDocumentPresenter presenter = new ViewDocumentPresenter(new ViewDocumentForm());
+			var res = presenter.Run(new PaymentDoc());
 		}
 
 		private void View_BtnDeleteProductType(ProductType obj)
@@ -112,7 +121,7 @@ namespace Costs.Forms
 			view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
-		private void View_ValuesChanged(Presenters.Views.EventArgs.PurchaseFilterValuesChangedEventArg obj)
+		private void View_ValuesChanged(Presenters.Views.EventArgs.PurchaseFilterChangedEventArg obj)
 		{
 			reloadData(obj.Directory, obj.Date, obj.OneDay);
 		}

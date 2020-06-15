@@ -18,28 +18,25 @@ namespace Costs.Forms.Main.InternalViews.DragDrops
 	 * 
 	 * А Так как мне нужно двигаться дальше, приступать к освоению ASP и другие более серьъезные вещи,
 	 *		Перетаскивание пока отложить. А перемещения сделать через диалоговые окна
-	 * 
-	 * 
 	 */
 
-	public class DragDropGridToTree
+	public class DirectoryDragDrop
 	{
-		DataGridView dataGridView;
 		TreeView treeView;
 
 		public event Action<Purchase, Directory> MovePurchase;
 		public event Action<Directory, Directory> MoveDirectory;
 
-		public DragDropGridToTree(DataGridView grid, TreeView tree)
+		public DirectoryDragDrop(TreeView tree)
 		{
-			dataGridView = grid;
 			treeView = tree;
+			treeView.AllowDrop = true;
 			wire();
 		}
 
 		void wire()
 		{
-			dataGridView.MouseMove += dataGridView_MouseMove;
+			
 			treeView.DragDrop +=  treeView_DragDrop;
 			treeView.DragOver +=  treeView_DragOver;
 			treeView.DragEnter += treeView_DragEnter;
@@ -47,26 +44,6 @@ namespace Costs.Forms.Main.InternalViews.DragDrops
 		}
 
 		#region Source handlers
-		private void dataGridView_MouseMove(object sender, MouseEventArgs e)
-		{
-			// Из за этого алгоритма возникла путанница. Так как я начинал тащить из другого контрола, проходя над этим, автоматически запускается драг здесь
-			if (e.Button == MouseButtons.Left)
-			{
-				var row = getRowAtPoint(dataGridView, new Point(e.X, e.Y));
-				if (row != null)
-					dataGridView.DoDragDrop(row.DataBoundItem, DragDropEffects.Move);
-			}
-		}
-
-		private DataGridViewRow getRowAtPoint(DataGridView grid, Point point)
-		{
-			var o = dataGridView.HitTest(point.X, point.Y);
-
-			if (o.RowIndex >= 0)
-				return grid.Rows[o.RowIndex];
-			else
-				return null;
-		}
 
 		private void treeView_MouseMove(object sender, MouseEventArgs e)
 		{
@@ -104,13 +81,13 @@ namespace Costs.Forms.Main.InternalViews.DragDrops
 			// 2. Проверяем соответствие типа
 			if (e.Data.GetData(typeof(Purchase)) is Purchase o)
 			{
-				MovePurchase(o, toDir);
+				MovePurchase?.Invoke(o, toDir);
 				//customizeTreeViewNode(toNode, CustomizeTreeViewMode.Default);
 			}
 			else if(e.Data.GetData(typeof(Directory)) is Directory dir)
 			{
 				if (dir.ID != toDir.ID)
-				MoveDirectory(dir, toDir);
+				MoveDirectory?.Invoke(dir, toDir);
 			}
 
 			customizeTreeViewNode(toNode, CustomizeTreeViewMode.Default);

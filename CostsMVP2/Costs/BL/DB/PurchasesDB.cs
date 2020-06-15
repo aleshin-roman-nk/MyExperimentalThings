@@ -13,7 +13,7 @@ namespace Costs.DB
 		{
 			var dirCollection = DirectoryDB.Read(directory);
 
-			var purchases = new List<Purchase>();
+			var result = new List<Purchase>();
 			
 			DateTime dt0;
 			DateTime dt1;
@@ -33,10 +33,10 @@ namespace Costs.DB
 			using (AppData db = new AppData())
 			{
 				foreach (var dir in dirCollection)
-					purchases.AddRange(db.Purchases.Include("Directory").Where(x => x.DirectoryID == dir.ID && (x.Date >= dt0) && (x.Date <= dt1)).ToList());
+					result.AddRange(db.Purchases.Include("Directory").Where(x => x.DirectoryID == dir.ID && (x.Date >= dt0) && (x.Date <= dt1)).ToList());
 			}
 
-			return purchases;
+			return result;
 		}
 		public static void Write(Purchase ent)
 		{

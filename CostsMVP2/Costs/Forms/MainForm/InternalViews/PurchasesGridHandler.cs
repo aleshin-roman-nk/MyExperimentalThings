@@ -41,7 +41,29 @@ namespace Costs.Forms
 
 			kbdHandler.SetControl(gridView);
 
+			gridView.MouseMove += dataGridView_MouseMove;
+
 			setupKeys();
+		}
+		private void dataGridView_MouseMove(object sender, MouseEventArgs e)
+		{
+			// Из за этого алгоритма возникла путанница. Так как я начинал тащить из другого контрола, проходя над этим, автоматически запускается драг здесь
+			if (e.Button == MouseButtons.Left)
+			{
+				var row = getRowAtPoint(gridView, new Point(e.X, e.Y));
+				if (row != null)
+					gridView.DoDragDrop(row.DataBoundItem, DragDropEffects.Move);
+			}
+		}
+
+		private DataGridViewRow getRowAtPoint(DataGridView grid, Point point)
+		{
+			var o = gridView.HitTest(point.X, point.Y);
+
+			if (o.RowIndex >= 0)
+				return grid.Rows[o.RowIndex];
+			else
+				return null;
 		}
 
 		public void SetItems(IEnumerable<Purchase> list)
