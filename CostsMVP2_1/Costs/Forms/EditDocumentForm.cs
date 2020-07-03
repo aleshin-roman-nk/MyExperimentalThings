@@ -106,7 +106,7 @@ namespace Costs.Forms
 		ViewResult IEditDocument.ShowForm()
 		{
 			var ok = this.ShowDialog() == DialogResult.OK;
-			var res = new ViewResult(ok ? Answer.Ok : Answer.Cancel);
+			var res = new ViewResult(ok ? ResponseCode.Ok : ResponseCode.Cancel);
 			return res;
 		}
 	}

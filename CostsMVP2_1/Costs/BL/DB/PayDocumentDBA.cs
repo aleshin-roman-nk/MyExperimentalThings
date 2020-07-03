@@ -27,11 +27,11 @@ namespace Costs.BL.DB
 				foreach (var item in doc.Purchases)
 				{
 					db.Entry(item).State = item.Id == 0 ? System.Data.Entity.EntityState.Added : System.Data.Entity.EntityState.Modified;
+					db.Entry(item.Directory).State = System.Data.Entity.EntityState.Unchanged;
 				}
 
-				db.SaveChanges();
-
 				db.Entry(doc).State = doc.Id == 0 ? System.Data.Entity.EntityState.Added : System.Data.Entity.EntityState.Modified;
+
 				db.SaveChanges();
 			}
 		}

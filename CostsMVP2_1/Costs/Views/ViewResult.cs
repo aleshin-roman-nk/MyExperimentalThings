@@ -9,9 +9,9 @@ namespace Costs.Views
 	public class ViewResult<T>
 	{
 		public T Result { get; }
-		public Answer Answer { get; }
+		public ResponseCode Answer { get; }
 
-		public ViewResult( T obj, Answer sign )
+		public ViewResult( T obj, ResponseCode sign )
 		{
 			Result = obj;
 			Answer = sign;
@@ -20,13 +20,13 @@ namespace Costs.Views
 
 	public class ViewResult
 	{
-		public Answer Answer { get; }
+		public ResponseCode Answer { get; }
 
-		public ViewResult(Answer sign)
+		public ViewResult(ResponseCode sign)
 		{
 			Answer = sign;
 		}
 	}
 
-	public enum Answer { Ok, Cancel}
+	public enum ResponseCode { Ok, Cancel}
 }

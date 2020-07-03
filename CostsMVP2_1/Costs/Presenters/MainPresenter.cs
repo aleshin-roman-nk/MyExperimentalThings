@@ -57,7 +57,6 @@ namespace Costs.Forms
 			model.DirectoriesModel.Load();
 
 			// * part presenter: Directory TreeView
-			//view.PurchaseDroppedCmd += View_PurchaseDroppedCmd;
 			view.DirectoriesView.CreateDirectoryCmd += View_CreateDirectory;
 			view.DirectoriesView.DirectoryDroppedCmd += View_DirectoryDroppedCmd;
 			view.DirectoriesView.RenameDirectoryCmd += View_RenameDirectory;
@@ -69,23 +68,18 @@ namespace Costs.Forms
 			view.DirectoriesView.CurrentDirChanged += (e) =>
 				reloadPurchases(e, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 
-			//view.UpdateCategories += View_UpdateCategories;
-			//view.UpdateProductTypes += View_UpdateProductTypes;
-			//view.CreateCategoryCmd += View_BtnCreateCategory;
-			//view.CreateProductTypeCmd += View_CreateProductTypeCmd;
-			//view.DeleteCategoryCmd += View_BtnDeleteCategory;
-			//view.DeleteProductTypeCmd += View_BtnDeleteProductType;
-
 			view.CreateDocumentCmd += View_CreateDocumentCmd;
 
 			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
-			//view.SetCategories(model.ProductTypeModel.Categories);
 		}
 
 		private void View_CreateDocumentCmd()
 		{
 			EditDocumentPresenter presenter = new EditDocumentPresenter(new EditDocumentForm(), _dlgView);
+			
 			presenter.Run(new PaymentDoc());
+
+			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}
 
 		private void View_RenameDirectory(Directory obj)

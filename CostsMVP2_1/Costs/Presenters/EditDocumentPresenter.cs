@@ -1,5 +1,6 @@
 ﻿using Costs.BL.Domain.Entities;
 using Costs.BL.Models;
+using Costs.DlgService;
 using Costs.Domain.Entities;
 using Costs.Entities;
 using Costs.Forms;
@@ -13,13 +14,15 @@ using System.Threading.Tasks;
 
 namespace Costs.Presenters
 {
+	/// <summary>
+	/// Работа с сущностью PaymentDoc.
+	/// Запись в БД не производится
+	/// </summary>
 	public class EditDocumentPresenter
 	{
 		IEditDocument view;
 		IDialogMessages _dlgView;
 		ViewDocumentModel model;
-
-		PaymentDoc document = null;
 
 		public EditDocumentPresenter(IEditDocument v, IDialogMessages dialog)
 		{
@@ -63,7 +66,7 @@ namespace Costs.Presenters
 				//product.PaymentDocId = document.Id;
 				//model.PurchaseModel.SavePurchase(product);
 				model.PayDocumentModel.AddPosition(product);
-				view.PurchasesView.SetPurchases(document.Purchases);
+				view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 				//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 			}
 		}
@@ -107,33 +110,43 @@ namespace Costs.Presenters
 			view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 		}
 
+		/*
+		 * >>> 03-07-2020 19:40
+		 * Мне нужно решить, на каком этапе фиксировать в БД изменения сущности.
+		 *	Хотя возможно можно и здесь записать результат.
+		 * 
+		 */
+
 		public void Run(PaymentDoc doc)
 		{
-			document = doc;
-
 			/*
 			 * >>> 03-07-2020 12:21
-			 * Сюда передавать объект в памяти. Никаких обращений к БД
+			 * Сюда передавать объект в памяти. Никаких записей в БД
 			 *		Все добавления в памяти. Только при завершении работы с документом, по закрытию зеленой кнопкой произвести необходимые записи в БД
 			 *			
 			 * 
 			 * 
 			 */
 
-			model.PayDocumentModel.SetEntity(document);
+			model.PayDocumentModel = new PayDocumentModel(doc);
 
 			view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 
-			view.PurchasesView.SetPurchases(document.Purchases);
+			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
 			//view.SetDirectories(model.DirectoryModel.GetDirectories());
 
-			//if (!view.ShowForm()) return null;
-			if (view.ShowForm().Answer == Answer.Ok)
+			var res = view.ShowForm();
+
+			DebugMessage.ShowObject(model.PayDocumentModel.Document);
+
+			if(res.Answer == ResponseCode.Ok)
 			{
 				model.PayDocumentModel.Save();
+				DebugMessage.ShowObject(model.PayDocumentModel.Document);
 			}
+
 		}
 
 		void reloadData()

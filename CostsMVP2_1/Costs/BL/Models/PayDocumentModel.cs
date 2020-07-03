@@ -35,22 +35,22 @@ namespace Costs.BL.Models
 	 */
 	public class PayDocumentModel
 	{
-		PaymentDoc document;
+		public PaymentDoc Document { get; }
 
-		public void SetEntity(PaymentDoc doc)
+		public PayDocumentModel(PaymentDoc doc)
 		{
-			document = doc;
+			Document = doc;
 		}
 		public void AddPosition(Purchase p)
 		{
-			document.Purchases.Add(p);
+			Document.Purchases.Add(p);
 			// Документ должен быть сохранен в БД и иметь Id
 			// Или потом все сохранить целой сущностью
 			//p.PaymentDocId = document.Id;
 		}
-		public void CreatePayDoc(string shop, DateTime dateTime)
+		public static PaymentDoc CreatePayDoc(string shop, DateTime dateTime)
 		{
-			document = new PaymentDoc
+			return new PaymentDoc
 			{
 				DateTime = dateTime,
 				Shop = shop
@@ -58,7 +58,7 @@ namespace Costs.BL.Models
 		}
 		public void Save()
 		{
-			PayDocumentDBA.Save(document);
+			PayDocumentDBA.Save(Document);
 		}
 		/// <summary>
 		/// Returns purchases by the pointed dir that is owned by the doc
