@@ -1,0 +1,15 @@
+﻿[
+  {
+    "Started": "2020-06-17T16:15:52.7442414+07:00",
+    "Ended": "2020-06-17T17:21:31.3413636+07:00",
+    "Title": "Работа над проектом Costs2",
+    "Notes": "Рефакторинг.\nПеренос функций и кода доступа к БД в класс соответствующего слоя.",
+    "SessionState": 0,
+    "IsClosed": true,
+    "Pauses": [],
+    "LastPause": null,
+    "TotalPausesInMinutes": 0,
+    "TotalTimeInMinutes": 65,
+    "VisibleTitle": "17.06.2020 16:15 - 65"
+  }
+]
