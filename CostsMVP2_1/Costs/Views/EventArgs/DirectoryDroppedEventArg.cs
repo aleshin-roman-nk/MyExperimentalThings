@@ -11,11 +11,11 @@ namespace Costs.Views.EventArgs
 	{
 		public DirectoryDroppedEventArg(Directory what, Directory desc )
 		{
-			What = what;
+			Dropped = what;
 			Desc = desc;
 		}
 
-		public Directory What { get; }
+		public Directory Dropped { get; }
 		public Directory Desc { get; }
 	}
 }

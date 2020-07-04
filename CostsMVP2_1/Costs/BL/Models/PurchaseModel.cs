@@ -18,9 +18,5 @@ namespace Costs.BL.Models
 		{
 			PurchasesDBA.Delete(p);
 		}
-		public Purchase Create(DateTime dt)
-		{
-			return new Purchase { Date = dt, Count = 1.0M, Price = 0.0M };
-		}
 	}
 }

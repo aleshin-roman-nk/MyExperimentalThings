@@ -11,11 +11,11 @@ namespace Costs.Views.EventArgs
 	{
 		public PurchaseDroppedEventArg(Purchase what, Directory desc)
 		{
-			What = what;
+			Dropped = what;
 			Desc = desc;
 		}
 
-		public Purchase What { get; }
+		public Purchase Dropped { get; }
 		public Directory Desc { get; }
 	}
 }

@@ -45,7 +45,8 @@ namespace Costs.Presenters
 
 		private void PurchasesView_ProductTypeDropped(ProductType e)
 		{
-			Purchase product = model.PurchaseModel.Create(view.CurrentDateTime);
+			Purchase product = EntityFactory.CreatePurchase(view.CurrentDateTime);
+
 
 			if (e != null) product.Name = e.Name;
 			product.DirectoryID = view.DirectoriesView.Current.ID;
@@ -114,6 +115,8 @@ namespace Costs.Presenters
 		 * >>> 03-07-2020 19:40
 		 * Мне нужно решить, на каком этапе фиксировать в БД изменения сущности.
 		 *	Хотя возможно можно и здесь записать результат.
+		 * 
+		 * 
 		 * 
 		 */
 

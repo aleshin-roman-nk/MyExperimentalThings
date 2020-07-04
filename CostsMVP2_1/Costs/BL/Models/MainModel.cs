@@ -8,7 +8,6 @@ namespace Costs.Models
 		public ProductTypeModel ProductTypeModel { get; } = new ProductTypeModel();
 		public DirectoriesModel DirectoriesModel { get; } = new DirectoriesModel();
 		public PurchaseModel PurchaseModel { get; } = new PurchaseModel();
-		public DirectoryModel DirectoryModel { get; } = new DirectoryModel();
 		public MainModel()
 		{
 

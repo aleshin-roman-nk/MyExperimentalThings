@@ -1,4 +1,5 @@
 ﻿using Costs.BL.Domain.Entities;
+using Costs.BL.Models;
 using Costs.DB;
 using Costs.DlgService;
 using Costs.Domain.Entities;
@@ -88,7 +89,8 @@ namespace Costs.Forms
 
 			if (!string.IsNullOrEmpty(name))
 			{
-				model.DirectoryModel.Entry(obj).Rename(name);
+				//model.DirectoryModel.Entry(obj).Rename(name);
+				obj.Rename(name);
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 		}
@@ -100,7 +102,8 @@ namespace Costs.Forms
 
 			try
 			{
-				model.DirectoryModel.Entry(obj).Delete();
+				//model.DirectoryModel.Entry(obj).Delete();
+				obj.Delete();
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 			catch (Exception ex)
@@ -115,7 +118,8 @@ namespace Costs.Forms
 
 			if (!string.IsNullOrEmpty(name))
 			{
-				model.DirectoryModel.Entry(d).CreateChild(name);
+				//model.DirectoryModel.Entry(d).CreateChild(name);
+				d.CreateChild(name);
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 		}
@@ -123,7 +127,7 @@ namespace Costs.Forms
 		private void View_DirectoryDroppedCmd(DirectoryDroppedEventArg e)
 		{
 
-			if (model.DirectoriesModel.IsParent(e.What, e.Desc))
+			if (model.DirectoriesModel.IsParent(e.Dropped, e.Desc))
 			{
 				_dlgView.ShowError("Нельзя переносить родителей в детей");
 				return;
@@ -131,7 +135,8 @@ namespace Costs.Forms
 
 			try
 			{
-				model.DirectoryModel.Entry(e.Desc).Attach(e.What);
+				//model.DirectoryModel.Entry(e.Desc).Attach(e.What);
+				e.Desc.Attach(e.Dropped);
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 			catch (Exception ex)
@@ -194,14 +199,14 @@ namespace Costs.Forms
 		}
 		private void View_PurchaseDroppedCmd(PurchaseDroppedEventArg e)
 		{
-			model.DirectoryModel.Entry(e.Desc).Attach(e.What);
+			e.Desc.Attach(e.Dropped);
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}
 
 		// Create a new purchase.
 		private void View_CreatePurchase(CreatePurchaseEventArg e)
 		{
-			Purchase product = model.PurchaseModel.Create(e.Date);
+			Purchase product = EntityFactory.CreatePurchase(e.Date);
 
 			if(e.ProductType != null) product.Name = e.ProductType.Name;
 			//product.DirectoryID = view.CurrentDirectory.ID;

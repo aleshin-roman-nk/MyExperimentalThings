@@ -17,7 +17,5 @@ namespace Costs.BL.Models
 			tools.__set(dir);
 			return tools;
 		}
-
-
 	}
 }

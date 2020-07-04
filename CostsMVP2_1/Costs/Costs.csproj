@@ -101,11 +101,11 @@
     <Compile Include="BL\DB\PayDocumentDBA.cs" />
     <Compile Include="BL\Entities\PaymentDoc.cs" />
     <Compile Include="BL\Models\CategoriesModel.cs" />
-    <Compile Include="BL\Models\DirectoryModelTools.cs" />
+    <Compile Include="BL\Models\DirectoryModelExtention.cs" />
+    <Compile Include="BL\Models\EntityFactory.cs" />
     <Compile Include="BL\Models\PayDocumentModel.cs" />
     <Compile Include="BL\Models\ProductTypeModel.cs" />
     <Compile Include="BL\Models\PurchaseModel.cs" />
-    <Compile Include="BL\Models\DirectoryModel.cs" />
     <Compile Include="BL\Models\ViewDocumentModel.cs" />
     <Compile Include="DebugServices\DebugMessage.cs" />
     <Compile Include="BL\Entities\Category.cs" />

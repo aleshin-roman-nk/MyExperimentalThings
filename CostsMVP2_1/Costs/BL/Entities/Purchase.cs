@@ -7,6 +7,9 @@ namespace Costs.Entities
 		public int Id { get; set; }
 		public int DirectoryID { get; set; }
 		public int? PaymentDocId { get; set; }
+		// >>> 04-07-2020 14:55
+		// I do not want a Purchase entity to have a direct reference to a Directory entity.
+		//	Возникает путаница с сохранением сущности Purchase
 		public Directory Directory { get; set; }
 		public string Name { get; set; }
 		public string Info { get; set; }
@@ -19,8 +22,7 @@ namespace Costs.Entities
 		{
 			get
 			{
-				if (Directory == null) return "-";
-				return Directory.Name;
+				return Directory == null ? "-" : Directory.Name;
 			}
 		}
 		public Purchase Clone()
