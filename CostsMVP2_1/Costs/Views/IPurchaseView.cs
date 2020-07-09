@@ -1,5 +1,6 @@
 ﻿using Costs.Entities;
 using Costs.Presenters.Views.EventArgs;
+using Costs.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Costs.Presenters.Views
 	{
 		void SetDirectoryName(string dirName);
 		void SetPurchase(Purchase purchase);
-		Purchase GetPurchase();
+		ViewResult<Purchase> GetResult();
 	}
 }

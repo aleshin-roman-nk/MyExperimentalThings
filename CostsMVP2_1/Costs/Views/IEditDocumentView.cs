@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Costs.Views
 {
-	public interface IEditDocument
+	public interface IEditDocumentView
 	{
 		// Позволяет как угодно отображать дерево. Различные внутренние модули типа TreeViewDirectoryKeys предоставляют логику вывода
 		DateTime CurrentDateTime { get; }

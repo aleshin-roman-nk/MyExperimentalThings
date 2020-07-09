@@ -9,7 +9,7 @@ namespace Costs.Views
 	public interface IDialogMessages
 	{
 		void ShowError(string msg);
-		bool UserAnswerYes(string msg);
+		bool UserAnsweredYes(string msg);
 		string InputText(string init_text, string title = null);
 	}
 }

@@ -20,7 +20,7 @@ namespace Costs.DB
 			{
 				//foreach (var dir in dirCollection)
 				foreach (var dir in dirs)
-					result.AddRange(db.Purchases.Include("Directory").Where(x => x.DirectoryID == dir.ID && (x.Date >= dt1) && (x.Date <= dt2)).ToList());
+					result.AddRange(db.Purchases.Where(x => x.DirectoryID == dir.ID && (x.Date >= dt1) && (x.Date <= dt2)).ToList());
 			}
 
 			return result;

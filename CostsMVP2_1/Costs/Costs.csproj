@@ -105,8 +105,8 @@
     <Compile Include="BL\Models\EntityFactory.cs" />
     <Compile Include="BL\Models\PayDocumentModel.cs" />
     <Compile Include="BL\Models\ProductTypeModel.cs" />
-    <Compile Include="BL\Models\PurchaseModel.cs" />
-    <Compile Include="BL\Models\ViewDocumentModel.cs" />
+    <Compile Include="BL\Models\PurchaseModelExtention.cs" />
+    <Compile Include="BL\Models\EditDocumentModel.cs" />
     <Compile Include="DebugServices\DebugMessage.cs" />
     <Compile Include="BL\Entities\Category.cs" />
     <Compile Include="BL\Models\DirectoriesModel.cs" />
@@ -203,7 +203,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\IPurchaseView.cs" />
-    <Compile Include="Views\IEditDocument.cs" />
+    <Compile Include="Views\IEditDocumentView.cs" />
     <Compile Include="Views\Parts\ICategoriesViewPart.cs" />
     <Compile Include="Views\Parts\IDateSelector.cs" />
     <Compile Include="Views\Parts\IDirectoriesViewPart.cs" />

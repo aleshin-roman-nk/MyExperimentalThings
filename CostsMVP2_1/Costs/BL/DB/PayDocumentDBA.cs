@@ -28,7 +28,7 @@ namespace Costs.BL.DB
 				{
 					// It is ok to write complex code which writes a complex entity to db.
 					db.Entry(item).State = item.Id == 0 ? System.Data.Entity.EntityState.Added : System.Data.Entity.EntityState.Modified;
-					db.Entry(item.Directory).State = System.Data.Entity.EntityState.Unchanged;
+					//db.Entry(item.Directory).State = System.Data.Entity.EntityState.Unchanged;
 				}
 
 				db.Entry(doc).State = doc.Id == 0 ? System.Data.Entity.EntityState.Added : System.Data.Entity.EntityState.Modified;

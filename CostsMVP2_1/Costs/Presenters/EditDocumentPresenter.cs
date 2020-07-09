@@ -5,7 +5,9 @@ using Costs.Domain.Entities;
 using Costs.Entities;
 using Costs.Forms;
 using Costs.Models;
+using Costs.Presenters.Views;
 using Costs.Views;
+using Costs.Views.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +22,15 @@ namespace Costs.Presenters
 	/// </summary>
 	public class EditDocumentPresenter
 	{
-		IEditDocument view;
+		IEditDocumentView view;
 		IDialogMessages _dlgView;
-		ViewDocumentModel model;
+		EditDocumentModel model;
 
-		public EditDocumentPresenter(IEditDocument v, IDialogMessages dialog)
+		public EditDocumentPresenter(IEditDocumentView v, IDialogMessages dialog)
 		{
 			view = v;
 			_dlgView = dialog;
-			model = new ViewDocumentModel();
+			model = new EditDocumentModel();
 
 			view.CategoriesView.UpdateCategories += () => 
 				view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
@@ -40,41 +42,73 @@ namespace Costs.Presenters
 			view.CategoriesView.DeleteCategoryCmd += CategoriesView_DeleteCategoryCmd;
 			view.CategoriesView.DeleteProductTypeCmd += CategoriesView_DeleteProductTypeCmd;
 
+			view.DirectoriesView.CreateDirectoryCmd += DirectoriesView_CreateDirectoryCmd;
+			view.DirectoriesView.PurchaseDroppedCmd += DirectoriesView_PurchaseDroppedCmd;
+
 			view.PurchasesView.ProductTypeDropped += PurchasesView_ProductTypeDropped;
+			view.PurchasesView.DeletePurchaseCmd += PurchasesView_DeletePurchaseCmd;
+		}
+
+		private void PurchasesView_DeletePurchaseCmd(Purchase obj)
+		{
+			if (obj == null) return;
+
+			if (!_dlgView.UserAnsweredYes($"Удалить позицию {obj.Name}?")) return;
+
+			model.PayDocumentModel.DeletePosition(obj);
+			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+		}
+
+		private void DirectoriesView_CreateDirectoryCmd(Directory obj)
+		{
+			string name = _dlgView.InputText("", $"Родительская директория :{obj.Name}\r\nВведите имя новой директории");
+
+			if (!string.IsNullOrEmpty(name))
+			{
+				obj.CreateChild(name).Save();
+				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
+			}
+		}
+
+		private void DirectoriesView_PurchaseDroppedCmd(PurchaseDroppedEventArg obj)
+		{
+			// необязательно записывать в БД и перезагружать все сущности
+			//	можно дублировать операцию - изменить в памяти и отправить фиксацию в бд без перезагрузки картины из бд
+
+			obj.Desc.Attach(obj.Dropped);
+			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+
+
+			//obj.Dropped.Save();Сохраняет только при выходе в методе Run
 		}
 
 		private void PurchasesView_ProductTypeDropped(ProductType e)
 		{
 			Purchase product = EntityFactory.CreatePurchase(view.CurrentDateTime);
 
-
 			if (e != null) product.Name = e.Name;
 			product.DirectoryID = view.DirectoriesView.Current.ID;
-			product.Directory = view.DirectoriesView.Current;
-			/*
-			 * >>> 03-07-2020 12:16
-			 * Вообще все Save выполняются по нажатию кнопки сохранить.
-			 * 
-			 * При редактировании существующего документа перед закрытием произвести его загрузку и синхронизацию позиций,
-			 *	то что хранится в БД и то, что осталось после редактирования
-			 * 
-			 */
-			var res = new EditPurchasePresenter(FormsFactory.CreatePurchaseView()).Run(product).Result();
+			product.DirName = view.DirectoriesView.Current.Name;
 
-			if (res != null)
+			IPurchaseView purchaseView = FormsFactory.CreatePurchaseView();
+			purchaseView.SetPurchase(product);
+			purchaseView.SetDirectoryName(product.DirName);
+
+			var res = purchaseView.GetResult();
+
+			if (res.Answer == ResponseCode.Ok)
 			{
-				product.Accept(res);
-				//product.PaymentDocId = document.Id;
-				//model.PurchaseModel.SavePurchase(product);
+				product.Accept(res.Result);
+
 				model.PayDocumentModel.AddPosition(product);
 				view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
-				//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+				view.PurchasesView.SetPurchasesAmount(model.PayDocumentModel.Document.Amount);
 			}
 		}
 
 		private void CategoriesView_DeleteProductTypeCmd(ProductType obj)
 		{
-			if (_dlgView.UserAnswerYes($"Тип продукта '{obj.Name}' будет удален. Подтвердите."))
+			if (_dlgView.UserAnsweredYes($"Тип продукта '{obj.Name}' будет удален. Подтвердите."))
 			{
 				model.ProductTypeModel.DeleteProductType(obj);
 				view.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(view.CategoriesView.CurrentCategory));
@@ -83,7 +117,7 @@ namespace Costs.Presenters
 
 		private void CategoriesView_DeleteCategoryCmd(Category obj)
 		{
-			if (_dlgView.UserAnswerYes($"Категория {obj.Name} будет удалена со всеми вложенными элементами. Подтвердите."))
+			if (_dlgView.UserAnsweredYes($"Категория {obj.Name} будет удалена со всеми вложенными элементами. Подтвердите."))
 			{
 				model.CategoriesModel.Delete(obj);
 				view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
@@ -92,7 +126,7 @@ namespace Costs.Presenters
 
 		private void CategoriesView_CreateProductTypeCmd(Category obj)
 		{
-			var res = _dlgView.InputText("", "Создание нового типа продукта\n Введите имя типа");
+			var res = _dlgView.InputText("", "Создание нового типа продукта\r\nВведите имя типа");
 			if (string.IsNullOrWhiteSpace(res)) return;
 
 			ProductType pt = new ProductType { Name = res, CategoryId = obj.Id };
@@ -102,7 +136,7 @@ namespace Costs.Presenters
 
 		private void CategoriesView_CreateCategoryCmd()
 		{
-			var res = _dlgView.InputText("", "Создание новой категории\n Введите имя категории");
+			var res = _dlgView.InputText("", "Создание новой категории\r\nВведите имя категории");
 
 			if (string.IsNullOrWhiteSpace(res)) return;
 
@@ -120,6 +154,7 @@ namespace Costs.Presenters
 		 * 
 		 */
 
+		// Entry point
 		public void Run(PaymentDoc doc)
 		{
 			/*
@@ -138,16 +173,11 @@ namespace Costs.Presenters
 
 			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
-			//view.SetDirectories(model.DirectoryModel.GetDirectories());
-
 			var res = view.ShowForm();
-
-			DebugMessage.ShowObject(model.PayDocumentModel.Document);
 
 			if(res.Answer == ResponseCode.Ok)
 			{
 				model.PayDocumentModel.Save();
-				DebugMessage.ShowObject(model.PayDocumentModel.Document);
 			}
 
 		}

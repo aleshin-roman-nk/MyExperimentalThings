@@ -37,6 +37,8 @@ namespace Costs.BL.Models
 	{
 		public PaymentDoc Document { get; }
 
+		List<Purchase> deletingPurchases { get; } = new List<Purchase>();
+
 		public PayDocumentModel(PaymentDoc doc)
 		{
 			Document = doc;
@@ -59,6 +61,12 @@ namespace Costs.BL.Models
 		public void Save()
 		{
 			PayDocumentDBA.Save(Document);
+
+			foreach (var item in deletingPurchases)
+			{
+				if (item.Id > 0)
+					PurchasesDBA.Delete(item);
+			}
 		}
 		/// <summary>
 		/// Returns purchases by the pointed dir that is owned by the doc
@@ -82,6 +90,10 @@ namespace Costs.BL.Models
 			//1. Delete from the doc
 			//	doc.Purchases.Remove(...);
 			//2. Delete from DB
+
+			Document.Purchases.Remove(p);
+			deletingPurchases.Add(p);
+			//Мож сделать список удаленных позиций.
 		}
 	}
 }

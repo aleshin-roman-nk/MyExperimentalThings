@@ -50,7 +50,7 @@ namespace Costs.Presenters
 		}
 		public Purchase Result()
 		{
-			return view.GetPurchase();
+			return view.GetResult().Result;
 		}
 	}
 }

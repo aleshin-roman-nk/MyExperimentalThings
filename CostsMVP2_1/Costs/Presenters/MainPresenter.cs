@@ -81,28 +81,28 @@ namespace Costs.Forms
 			presenter.Run(new PaymentDoc());
 
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
+			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 		}
 
 		private void View_RenameDirectory(Directory obj)
 		{
-			string name = _dlgView.InputText(obj.Name, $"Введите новое имя директории \n{obj.Name}");
+			string name = _dlgView.InputText(obj.Name, $"Введите новое имя директории\r\n{obj.Name}");
 
 			if (!string.IsNullOrEmpty(name))
 			{
-				//model.DirectoryModel.Entry(obj).Rename(name);
 				obj.Rename(name);
+				obj.Save();
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 		}
 
 		private void View_DeleteDirectory(Directory obj)
 		{
-			if (!_dlgView.UserAnswerYes($"Подтвердите удаление [{obj.Name}]"))
+			if (!_dlgView.UserAnsweredYes($"Подтвердите удаление [{obj.Name}]"))
 				return;
 
 			try
 			{
-				//model.DirectoryModel.Entry(obj).Delete();
 				obj.Delete();
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
@@ -114,12 +114,11 @@ namespace Costs.Forms
 
 		private void View_CreateDirectory(Directory d)
 		{
-			string name = _dlgView.InputText("", $"Родительская директория :{d.Name}\nВведите имя новой директории");
+			string name = _dlgView.InputText("", $"Родительская директория :{d.Name}\r\nВведите имя новой директории");
 
 			if (!string.IsNullOrEmpty(name))
 			{
-				//model.DirectoryModel.Entry(d).CreateChild(name);
-				d.CreateChild(name);
+				d.CreateChild(name).Save();
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 		}
@@ -137,6 +136,7 @@ namespace Costs.Forms
 			{
 				//model.DirectoryModel.Entry(e.Desc).Attach(e.What);
 				e.Desc.Attach(e.Dropped);
+				e.Dropped.Save();
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 			catch (Exception ex)
@@ -151,9 +151,9 @@ namespace Costs.Forms
 
 		private void View_DeletePurchase(Purchase obj)
 		{
-			if (_dlgView.UserAnswerYes($"Удалить покупку {obj.Name} ?"))
+			if (_dlgView.UserAnsweredYes($"Удалить покупку {obj.Name} ?"))
 			{
-				model.PurchaseModel.DeletePurchase(obj);
+				obj.Delete();
 				/*
 				 * >>>
 				 * 01-07-2020 15:18
@@ -192,14 +192,14 @@ namespace Costs.Forms
 			if (res != null)
 			{
 				obj.Accept(res);
-
-				model.PurchaseModel.SavePurchase(obj);
+				obj.Save();
 				//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 			}
 		}
 		private void View_PurchaseDroppedCmd(PurchaseDroppedEventArg e)
 		{
 			e.Desc.Attach(e.Dropped);
+			e.Dropped.Save();
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}
 
@@ -217,7 +217,7 @@ namespace Costs.Forms
 			{
 				product.Accept(res);
 
-				model.PurchaseModel.SavePurchase(product);
+				product.Save();
 				//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
 			}
 		}

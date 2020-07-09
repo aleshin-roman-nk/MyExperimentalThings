@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Costs.Forms.DlgService;
 using Costs.Presenters.Views.EventArgs;
 using Costs.DlgService;
+using Costs.Views;
 // Прописывать в начале класса в комментарии четко определенную задачу, которую нужно решить
 
 
@@ -38,31 +39,7 @@ namespace Costs.Forms
 
 		private void btnShowChoosingSampleProduct_Click(object sender, EventArgs e)
 		{
-			//List<ProductType> spList = new List<ProductType>();
-			//RequestSampleProductList?.Invoke(null, spList);
 
-			//using (ChooseItemForm<ProductType> f = new ChooseItemForm<ProductType>())
-			//{
-			//	f.FilterTextChanged += (txt) => {
-			//		// 1. Запрос на фильтрацию списка
-			//		RequestSampleProductList?.Invoke(txt, spList);
-			//		// 2. Обновление списка в форме
-			//		f.SetList(spList, "Name");
-			//	};
-
-			//	f.SetList(spList, "Name");
-			//	f.Current = spList.FirstOrDefault(x => x.ID == purchase.ProductTypeID);
-			//	f.Location = PointToScreen((sender as Button).Location);
-			//	f.StartPosition = FormStartPosition.Manual;
-
-			//	DialogResult result = f.ShowDialog();
-
-			//	if(result == DialogResult.OK)
-			//	{
-			//		setSampleProductToTextBox(f.Current);
-			//		setSampleProductToPurchase();
-			//	}
-			//}
 		}
 
 		#region IPurchaseView
@@ -108,11 +85,11 @@ namespace Costs.Forms
 			_set(purchase);
 		}
 
-		public Purchase GetPurchase()
+		public ViewResult<Purchase> GetResult()
 		{
 			ShowDialog();
-			if (DialogResult == DialogResult.Cancel) return null;
-			return	_get();
+			if (DialogResult == DialogResult.Cancel) return new ViewResult<Purchase>(null, ResponseCode.Cancel);
+			return new ViewResult<Purchase>( _get(), ResponseCode.Ok);
 		}
 
 		private void EditPurchaseForm_FormClosing(object sender, FormClosingEventArgs e)

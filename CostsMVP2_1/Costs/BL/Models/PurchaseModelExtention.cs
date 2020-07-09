@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Costs.BL.Models
 {
-	public class PurchaseModel
+	public static class PurchaseModelExtention
 	{
-		public void SavePurchase(Purchase p)
+		public static void Save(this Purchase p)
 		{
 			PurchasesDBA.Save(p);
 		}
-		public void DeletePurchase(Purchase p)
+		public static void Delete(this Purchase p)
 		{
 			PurchasesDBA.Delete(p);
 		}

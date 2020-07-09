@@ -19,7 +19,7 @@ namespace Costs.Forms
 		{
 			Messages.ShowError(msg, "");
 		}
-		public bool UserAnswerYes(string msg)
+		public bool UserAnsweredYes(string msg)
 		{
 			return Messages.UserAnsweredYes(msg, "");
 		}

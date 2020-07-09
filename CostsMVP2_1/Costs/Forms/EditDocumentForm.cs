@@ -28,7 +28,7 @@ using Costs.Views.Parts;
 
 namespace Costs.Forms
 {
-	public partial class EditDocumentForm : Form, IEditDocument
+	public partial class EditDocumentForm : Form, IEditDocumentView
 	{
 		public EditDocumentForm()
 		{
@@ -103,7 +103,7 @@ namespace Costs.Forms
 			//else treeViewDirectories.Enabled = true;
 		}
 
-		ViewResult IEditDocument.ShowForm()
+		ViewResult IEditDocumentView.ShowForm()
 		{
 			var ok = this.ShowDialog() == DialogResult.OK;
 			var res = new ViewResult(ok ? ResponseCode.Ok : ResponseCode.Cancel);
