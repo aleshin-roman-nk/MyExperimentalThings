@@ -11,15 +11,13 @@ namespace Costs.BL.DB
 {
 	public static class PayDocumentDBA
 	{
-		public static IEnumerable<PaymentDoc> GetPaymentDocs(int year, int month)
+		public static IEnumerable<PaymentDoc> GetPaymentDocs(DateTime from, DateTime to)
 		{
-			throw new NotImplementedException();
+			using (AppData db = new AppData())
+			{
+				return db.PaymentDocs.Include("Purchases").Where(x => x.DateTime >= from || x.DateTime <= to).ToList();
+			}
 		}
-		public static IEnumerable<PaymentDoc> GetPaymentDocs(int year, int month, int day)
-		{
-			throw new NotImplementedException();
-		}
-
 		public static void Save(PaymentDoc doc)
 		{
 			using (AppData db = new AppData())

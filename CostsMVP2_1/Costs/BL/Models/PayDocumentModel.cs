@@ -67,6 +67,8 @@ namespace Costs.BL.Models
 				if (item.Id > 0)
 					PurchasesDBA.Delete(item);
 			}
+
+			deletingPurchases.Clear();
 		}
 		/// <summary>
 		/// Returns purchases by the pointed dir that is owned by the doc

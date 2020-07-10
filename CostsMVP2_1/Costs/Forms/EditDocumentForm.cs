@@ -72,6 +72,8 @@ namespace Costs.Forms
 
 		public DateTime CurrentDateTime => dateTimeControl.Value;
 
+		public string Shop => txtShopName.Text;
+
 		public void SetCategories(IEnumerable<Category> categs)
 		{
 			throw new NotImplementedException();
@@ -103,7 +105,7 @@ namespace Costs.Forms
 			//else treeViewDirectories.Enabled = true;
 		}
 
-		ViewResult IEditDocumentView.ShowForm()
+		ViewResult IEditDocumentView.GetResult()
 		{
 			var ok = this.ShowDialog() == DialogResult.OK;
 			var res = new ViewResult(ok ? ResponseCode.Ok : ResponseCode.Cancel);

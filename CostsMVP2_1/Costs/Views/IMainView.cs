@@ -29,8 +29,9 @@ namespace Costs.Presenters.Views
 		 */
 		IPurchasesViewPart PurchasesView { get; }
 		IDirectoriesViewPart DirectoriesView { get; }
-		IDateSelector DateSelector { get; }
+		IDateSelectorViewPart DateSelector { get; }
 
 		event Action CreateDocumentCmd;
+		event Action ShowDocumentsViewerCmd;
 	}
 }

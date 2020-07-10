@@ -38,14 +38,15 @@ namespace Costs.Forms.Main
 	public partial class MainForm : Form, IMainView
 	{
 		public event Action CreateDocumentCmd;
-		
-		// I would prefer to pass data into the presenter through an event rather than this way (a presenter reads a public property)
+        public event Action ShowDocumentsViewerCmd;
 
-		public IPurchasesViewPart PurchasesView => purchasesUC1;
+        // I would prefer to pass data into the presenter through an event rather than this way (a presenter reads a public property)
+
+        public IPurchasesViewPart PurchasesView => purchasesUC1;
 
 		public IDirectoriesViewPart DirectoriesView => directoriesUC1;
 
-		public IDateSelector DateSelector => ucDateView1;
+		public IDateSelectorViewPart DateSelector => ucDateView1;
 
 		public MainForm()
 		{
@@ -56,5 +57,10 @@ namespace Costs.Forms.Main
 		{
 			CreateDocumentCmd?.Invoke();
 		}
-	}
+
+        private void btnShowDocumentsViewer_Click(object sender, EventArgs e)
+        {
+            ShowDocumentsViewerCmd?.Invoke();
+        }
+    }
 }

@@ -173,13 +173,14 @@ namespace Costs.Presenters
 
 			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
-			var res = view.ShowForm();
+			var res = view.GetResult();
 
 			if(res.Answer == ResponseCode.Ok)
 			{
+				model.PayDocumentModel.Document.DateTime = view.CurrentDateTime;
+				model.PayDocumentModel.Document.Shop = view.Shop;
 				model.PayDocumentModel.Save();
 			}
-
 		}
 
 		void reloadData()

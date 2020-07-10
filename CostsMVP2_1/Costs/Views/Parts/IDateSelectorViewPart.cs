@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Costs.Views.Parts
 {
-	public interface IDateSelector
+	public interface IDateSelectorViewPart
 	{
 		bool OneMonth { get; }
 		DateTime CurrentDate { get; }

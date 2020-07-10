@@ -1,6 +1,6 @@
 ﻿namespace Costs.Forms.PayDocumentsForm
 {
-	partial class PayDocForm
+	partial class DocumentsForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -33,14 +33,19 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.dateTimeControl = new System.Windows.Forms.DateTimePicker();
+			this.cbOfMonth = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// dataGridView1
 			// 
+			this.dataGridView1.AllowUserToAddRows = false;
+			this.dataGridView1.AllowUserToDeleteRows = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Location = new System.Drawing.Point(366, 69);
 			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.RowHeadersVisible = false;
+			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.Size = new System.Drawing.Size(854, 365);
 			this.dataGridView1.TabIndex = 0;
 			// 
@@ -56,6 +61,7 @@
 			this.lbPayDocuments.Name = "lbPayDocuments";
 			this.lbPayDocuments.Size = new System.Drawing.Size(348, 365);
 			this.lbPayDocuments.TabIndex = 1;
+			this.lbPayDocuments.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbPayDocuments_KeyDown);
 			// 
 			// label1
 			// 
@@ -79,7 +85,7 @@
 			// 
 			// dateTimeControl
 			// 
-			this.dateTimeControl.CustomFormat = "MMMM yyyy";
+			this.dateTimeControl.CustomFormat = "dd.MMMM.yyyy";
 			this.dateTimeControl.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimeControl.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateTimeControl.Location = new System.Drawing.Point(12, 12);
@@ -88,17 +94,30 @@
 			this.dateTimeControl.TabIndex = 4;
 			this.dateTimeControl.Value = new System.DateTime(2020, 6, 4, 0, 0, 0, 0);
 			// 
-			// PayDocForm
+			// cbOfMonth
+			// 
+			this.cbOfMonth.AutoSize = true;
+			this.cbOfMonth.Checked = true;
+			this.cbOfMonth.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbOfMonth.Location = new System.Drawing.Point(216, 12);
+			this.cbOfMonth.Name = "cbOfMonth";
+			this.cbOfMonth.Size = new System.Drawing.Size(74, 17);
+			this.cbOfMonth.TabIndex = 5;
+			this.cbOfMonth.Text = "За месяц";
+			this.cbOfMonth.UseVisualStyleBackColor = true;
+			// 
+			// DocumentsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1232, 450);
+			this.Controls.Add(this.cbOfMonth);
 			this.Controls.Add(this.dateTimeControl);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.lbPayDocuments);
 			this.Controls.Add(this.dataGridView1);
-			this.Name = "PayDocForm";
+			this.Name = "DocumentsForm";
 			this.Text = "Обзор платежных документов";
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
@@ -113,5 +132,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.DateTimePicker dateTimeControl;
+		private System.Windows.Forms.CheckBox cbOfMonth;
 	}
 }

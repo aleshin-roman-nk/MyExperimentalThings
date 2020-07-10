@@ -125,7 +125,7 @@
 			this.panel1.Controls.Add(this.splitContainer1);
 			this.panel1.Location = new System.Drawing.Point(12, 85);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1346, 686);
+			this.panel1.Size = new System.Drawing.Size(1346, 652);
 			this.panel1.TabIndex = 2;
 			// 
 			// splitContainer1
@@ -141,7 +141,7 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(1344, 684);
+			this.splitContainer1.Size = new System.Drawing.Size(1344, 650);
 			this.splitContainer1.SplitterDistance = 290;
 			this.splitContainer1.TabIndex = 2;
 			// 
@@ -152,7 +152,7 @@
 			this.directoriesUC1.Location = new System.Drawing.Point(0, 0);
 			this.directoriesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.directoriesUC1.Name = "directoriesUC1";
-			this.directoriesUC1.Size = new System.Drawing.Size(290, 684);
+			this.directoriesUC1.Size = new System.Drawing.Size(290, 650);
 			this.directoriesUC1.TabIndex = 0;
 			// 
 			// splitContainer2
@@ -168,7 +168,7 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.panel3);
-			this.splitContainer2.Size = new System.Drawing.Size(1050, 684);
+			this.splitContainer2.Size = new System.Drawing.Size(1050, 650);
 			this.splitContainer2.SplitterDistance = 451;
 			this.splitContainer2.TabIndex = 0;
 			// 
@@ -179,7 +179,7 @@
 			this.purchasesUC1.Location = new System.Drawing.Point(0, 0);
 			this.purchasesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.purchasesUC1.Name = "purchasesUC1";
-			this.purchasesUC1.Size = new System.Drawing.Size(451, 684);
+			this.purchasesUC1.Size = new System.Drawing.Size(451, 650);
 			this.purchasesUC1.TabIndex = 0;
 			// 
 			// panel3
@@ -188,7 +188,7 @@
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 0);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(595, 684);
+			this.panel3.Size = new System.Drawing.Size(595, 650);
 			this.panel3.TabIndex = 2;
 			// 
 			// categoriesUC1
@@ -198,7 +198,7 @@
 			this.categoriesUC1.Location = new System.Drawing.Point(0, 0);
 			this.categoriesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.categoriesUC1.Name = "categoriesUC1";
-			this.categoriesUC1.Size = new System.Drawing.Size(595, 684);
+			this.categoriesUC1.Size = new System.Drawing.Size(595, 650);
 			this.categoriesUC1.TabIndex = 0;
 			// 
 			// btnSaveAndClose
@@ -245,7 +245,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1370, 783);
+			this.ClientSize = new System.Drawing.Size(1370, 749);
 			this.Controls.Add(this.chbShowWholeDoc);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnSaveAndClose);

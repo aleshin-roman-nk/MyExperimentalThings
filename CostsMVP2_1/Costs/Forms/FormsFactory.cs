@@ -1,4 +1,6 @@
-﻿using Costs.Presenters.Views;
+﻿using Costs.Forms.PayDocumentsForm;
+using Costs.Presenters.Views;
+using Costs.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,11 @@ namespace Costs.Forms
 		public static IPurchaseView CreatePurchaseView()
 		{
 			return new EditPurchaseForm();
+		}
+
+		public static IDocumentsForm CreateDocumentsForm()
+		{
+			return new DocumentsForm();
 		}
 	}
 }

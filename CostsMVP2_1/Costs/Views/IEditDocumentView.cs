@@ -15,9 +15,8 @@ namespace Costs.Views
 	{
 		// Позволяет как угодно отображать дерево. Различные внутренние модули типа TreeViewDirectoryKeys предоставляют логику вывода
 		DateTime CurrentDateTime { get; }
-
-		ViewResult ShowForm();
-
+		ViewResult GetResult();
+		string Shop { get; }
 		IPurchasesViewPart PurchasesView { get; }
 		IDirectoriesViewPart DirectoriesView { get; }
 		ICategoriesViewPart CategoriesView { get; }

@@ -104,6 +104,7 @@
     <Compile Include="BL\Models\DirectoryModelExtention.cs" />
     <Compile Include="BL\Models\EntityFactory.cs" />
     <Compile Include="BL\Models\PayDocumentModel.cs" />
+    <Compile Include="BL\Models\PayDocumentsModel.cs" />
     <Compile Include="BL\Models\ProductTypeModel.cs" />
     <Compile Include="BL\Models\PurchaseModelExtention.cs" />
     <Compile Include="BL\Models\EditDocumentModel.cs" />
@@ -143,6 +144,8 @@
     <Compile Include="Forms\Common\DirectoryDragDrop.cs" />
     <Compile Include="Forms\Common\PurchasesGridHandler.cs" />
     <Compile Include="Forms\FormsFactory.cs" />
+    <Compile Include="Presenters\Parts\DocumentsViewPresenterPart.cs" />
+    <Compile Include="Views\IDocumentsForm.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,7 +208,7 @@
     <Compile Include="Views\IPurchaseView.cs" />
     <Compile Include="Views\IEditDocumentView.cs" />
     <Compile Include="Views\Parts\ICategoriesViewPart.cs" />
-    <Compile Include="Views\Parts\IDateSelector.cs" />
+    <Compile Include="Views\Parts\IDateSelectorViewPart.cs" />
     <Compile Include="Views\Parts\IDirectoriesViewPart.cs" />
     <Compile Include="Views\Parts\IPurchasesViewPart.cs" />
     <Compile Include="Views\ViewResult.cs" />

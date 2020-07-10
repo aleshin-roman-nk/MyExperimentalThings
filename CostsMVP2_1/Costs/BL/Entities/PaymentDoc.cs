@@ -37,6 +37,13 @@ namespace Costs.BL.Domain.Entities
 		public List<Purchase> Purchases { get; set; } = new List<Purchase>();
 		public decimal Amount { get { return Purchases.Sum(x => x.Amount); } }
 
+		public string Title { get 
+			{
+				var s = Shop == null ? "unknown" : Shop;
+				return $"{DateTime.ToString("dd-MM-yyyy HH:mm:ss")} [{s}]";
+			} 
+		}
+
 		public PaymentDoc Clone()
 		{
 			var res = new PaymentDoc

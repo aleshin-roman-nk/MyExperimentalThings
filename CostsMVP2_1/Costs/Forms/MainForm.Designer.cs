@@ -35,6 +35,7 @@
 			this.directoriesUC1 = new Costs.Forms.UC.DirectoriesUC();
 			this.purchasesUC1 = new Costs.Forms.UC.PurchasesUC();
 			this.ucDateView1 = new Costs.Forms.Main.InternalViews.DateViewUC();
+			this.btnShowDocumentsViewer = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -46,7 +47,8 @@
 			// 
 			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnCreateDoc});
+            this.btnCreateDoc,
+            this.btnShowDocumentsViewer});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(906, 39);
@@ -95,7 +97,7 @@
 			// 
 			this.purchasesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.purchasesUC1.Location = new System.Drawing.Point(0, 0);
-			this.purchasesUC1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.purchasesUC1.Margin = new System.Windows.Forms.Padding(2);
 			this.purchasesUC1.Name = "purchasesUC1";
 			this.purchasesUC1.Size = new System.Drawing.Size(512, 614);
 			this.purchasesUC1.TabIndex = 19;
@@ -106,6 +108,17 @@
 			this.ucDateView1.Name = "ucDateView1";
 			this.ucDateView1.Size = new System.Drawing.Size(355, 43);
 			this.ucDateView1.TabIndex = 16;
+			// 
+			// btnShowDocumentsViewer
+			// 
+			this.btnShowDocumentsViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnShowDocumentsViewer.Image = ((System.Drawing.Image)(resources.GetObject("btnShowDocumentsViewer.Image")));
+			this.btnShowDocumentsViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnShowDocumentsViewer.Name = "btnShowDocumentsViewer";
+			this.btnShowDocumentsViewer.Size = new System.Drawing.Size(36, 36);
+			this.btnShowDocumentsViewer.Text = "toolStripButton1";
+			this.btnShowDocumentsViewer.ToolTipText = "Просмотр документов";
+			this.btnShowDocumentsViewer.Click += new System.EventHandler(this.btnShowDocumentsViewer_Click);
 			// 
 			// MainForm
 			// 
@@ -146,6 +159,7 @@
 		private UC.PurchasesUC purchasesUC1;
 		private UC.DirectoriesUC directoriesUC1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.ToolStripButton btnShowDocumentsViewer;
 	}
 }
 

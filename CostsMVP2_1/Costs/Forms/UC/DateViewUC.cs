@@ -12,7 +12,7 @@ using Costs.Views.Parts;
 
 namespace Costs.Forms.Main.InternalViews
 {
-	public partial class DateViewUC : UserControl, IDateSelector
+	public partial class DateViewUC : UserControl, IDateSelectorViewPart
 	{
 		public DateTime CurrentDate { get => dtDate.Value; }
 

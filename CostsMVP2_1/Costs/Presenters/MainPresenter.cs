@@ -6,6 +6,7 @@ using Costs.Domain.Entities;
 using Costs.Entities;
 using Costs.Models;
 using Costs.Presenters;
+using Costs.Presenters.Parts;
 using Costs.Presenters.Views;
 using Costs.Presenters.Views.EventArgs;
 using Costs.Views;
@@ -70,8 +71,15 @@ namespace Costs.Forms
 				reloadPurchases(e, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 
 			view.CreateDocumentCmd += View_CreateDocumentCmd;
+			view.ShowDocumentsViewerCmd += View_ShowDocumentsViewerCmd;
 
 			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
+		}
+
+		private void View_ShowDocumentsViewerCmd()
+		{
+			DocumentsViewPresenterPart _pres = new DocumentsViewPresenterPart(FormsFactory.CreateDocumentsForm());
+			_pres.Run();
 		}
 
 		private void View_CreateDocumentCmd()
