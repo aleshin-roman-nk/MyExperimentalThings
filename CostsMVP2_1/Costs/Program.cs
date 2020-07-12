@@ -24,7 +24,6 @@ namespace Costs
 			var mainPresenter = new MainPresenter(mainView, dlgview);
 			
 			Application.Run(mainView);
-			
 		}
 	}
 }

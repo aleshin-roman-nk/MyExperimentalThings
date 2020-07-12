@@ -78,13 +78,14 @@ namespace Costs.Forms
 
 		private void View_ShowDocumentsViewerCmd()
 		{
-			DocumentsViewPresenterPart _pres = new DocumentsViewPresenterPart(FormsFactory.CreateDocumentsForm());
+			DocumentsViewPresenterPart _pres = new DocumentsViewPresenterPart(FormsFactory.CreateDocumentsView());
 			_pres.Run();
 		}
 
 		private void View_CreateDocumentCmd()
 		{
-			EditDocumentPresenter presenter = new EditDocumentPresenter(new EditDocumentForm(), _dlgView);
+			
+			EditDocumentPresenter presenter = new EditDocumentPresenter(FormsFactory.CreateEditDocumentView(), _dlgView);
 			
 			presenter.Run(new PaymentDoc());
 

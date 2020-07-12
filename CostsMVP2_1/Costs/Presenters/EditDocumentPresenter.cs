@@ -22,31 +22,36 @@ namespace Costs.Presenters
 	/// </summary>
 	public class EditDocumentPresenter
 	{
-		IEditDocumentView view;
-		IDialogMessages _dlgView;
+		IFormsFactory _factory;
 		EditDocumentModel model;
 
-		public EditDocumentPresenter(IEditDocumentView v, IDialogMessages dialog)
+		IEditDocumentView _editDocumentView;
+		IDialogMessages _dlgView;
+
+		public EditDocumentPresenter(IFormsFactory f)
 		{
-			view = v;
-			_dlgView = dialog;
+			_factory = f;
+
 			model = new EditDocumentModel();
 
-			view.CategoriesView.UpdateCategories += () => 
-				view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
-			view.CategoriesView.UpdateProductTypes += (e) => 
-				view.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(e));
+			_editDocumentView = _factory.CreateEditDocumentView();
+			_dlgView = _factory.CreateDialogMessages();
 
-			view.CategoriesView.CreateCategoryCmd += CategoriesView_CreateCategoryCmd;
-			view.CategoriesView.CreateProductTypeCmd += CategoriesView_CreateProductTypeCmd;
-			view.CategoriesView.DeleteCategoryCmd += CategoriesView_DeleteCategoryCmd;
-			view.CategoriesView.DeleteProductTypeCmd += CategoriesView_DeleteProductTypeCmd;
+			_editDocumentView.CategoriesView.UpdateCategories += () =>
+				_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
+			_editDocumentView.CategoriesView.UpdateProductTypes += (e) =>
+				_editDocumentView.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(e));
 
-			view.DirectoriesView.CreateDirectoryCmd += DirectoriesView_CreateDirectoryCmd;
-			view.DirectoriesView.PurchaseDroppedCmd += DirectoriesView_PurchaseDroppedCmd;
+			_editDocumentView.CategoriesView.CreateCategoryCmd += CategoriesView_CreateCategoryCmd;
+			_editDocumentView.CategoriesView.CreateProductTypeCmd += CategoriesView_CreateProductTypeCmd;
+			_editDocumentView.CategoriesView.DeleteCategoryCmd += CategoriesView_DeleteCategoryCmd;
+			_editDocumentView.CategoriesView.DeleteProductTypeCmd += CategoriesView_DeleteProductTypeCmd;
 
-			view.PurchasesView.ProductTypeDropped += PurchasesView_ProductTypeDropped;
-			view.PurchasesView.DeletePurchaseCmd += PurchasesView_DeletePurchaseCmd;
+			_editDocumentView.DirectoriesView.CreateDirectoryCmd += DirectoriesView_CreateDirectoryCmd;
+			_editDocumentView.DirectoriesView.PurchaseDroppedCmd += DirectoriesView_PurchaseDroppedCmd;
+
+			_editDocumentView.PurchasesView.ProductTypeDropped += PurchasesView_ProductTypeDropped;
+			_editDocumentView.PurchasesView.DeletePurchaseCmd += PurchasesView_DeletePurchaseCmd;
 		}
 
 		private void PurchasesView_DeletePurchaseCmd(Purchase obj)
@@ -56,7 +61,7 @@ namespace Costs.Presenters
 			if (!_dlgView.UserAnsweredYes($"Удалить позицию {obj.Name}?")) return;
 
 			model.PayDocumentModel.DeletePosition(obj);
-			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 		}
 
 		private void DirectoriesView_CreateDirectoryCmd(Directory obj)
@@ -66,7 +71,7 @@ namespace Costs.Presenters
 			if (!string.IsNullOrEmpty(name))
 			{
 				obj.CreateChild(name).Save();
-				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
+				_editDocumentView.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 		}
 
@@ -76,7 +81,7 @@ namespace Costs.Presenters
 			//	можно дублировать операцию - изменить в памяти и отправить фиксацию в бд без перезагрузки картины из бд
 
 			obj.Desc.Attach(obj.Dropped);
-			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
 
 			//obj.Dropped.Save();Сохраняет только при выходе в методе Run
@@ -84,13 +89,13 @@ namespace Costs.Presenters
 
 		private void PurchasesView_ProductTypeDropped(ProductType e)
 		{
-			Purchase product = EntityFactory.CreatePurchase(view.CurrentDateTime);
+			Purchase product = EntityFactory.CreatePurchase(_editDocumentView.CurrentDateTime);
 
 			if (e != null) product.Name = e.Name;
-			product.DirectoryID = view.DirectoriesView.Current.ID;
-			product.DirName = view.DirectoriesView.Current.Name;
+			product.DirectoryID = _editDocumentView.DirectoriesView.Current.ID;
+			product.DirName = _editDocumentView.DirectoriesView.Current.Name;
 
-			IPurchaseView purchaseView = FormsFactory.CreatePurchaseView();
+			IPurchaseView purchaseView = _factory.CreatePurchaseView();
 			purchaseView.SetPurchase(product);
 			purchaseView.SetDirectoryName(product.DirName);
 
@@ -101,8 +106,8 @@ namespace Costs.Presenters
 				product.Accept(res.Result);
 
 				model.PayDocumentModel.AddPosition(product);
-				view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
-				view.PurchasesView.SetPurchasesAmount(model.PayDocumentModel.Document.Amount);
+				_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+				_editDocumentView.PurchasesView.SetPurchasesAmount(model.PayDocumentModel.Document.Amount);
 			}
 		}
 
@@ -111,7 +116,7 @@ namespace Costs.Presenters
 			if (_dlgView.UserAnsweredYes($"Тип продукта '{obj.Name}' будет удален. Подтвердите."))
 			{
 				model.ProductTypeModel.DeleteProductType(obj);
-				view.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(view.CategoriesView.CurrentCategory));
+				_editDocumentView.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(_editDocumentView.CategoriesView.CurrentCategory));
 			}
 		}
 
@@ -120,7 +125,7 @@ namespace Costs.Presenters
 			if (_dlgView.UserAnsweredYes($"Категория {obj.Name} будет удалена со всеми вложенными элементами. Подтвердите."))
 			{
 				model.CategoriesModel.Delete(obj);
-				view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
+				_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 			}
 		}
 
@@ -131,7 +136,7 @@ namespace Costs.Presenters
 
 			ProductType pt = new ProductType { Name = res, CategoryId = obj.Id };
 			model.ProductTypeModel.SaveProductType(pt);
-			view.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(obj));
+			_editDocumentView.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(obj));
 		}
 
 		private void CategoriesView_CreateCategoryCmd()
@@ -142,7 +147,7 @@ namespace Costs.Presenters
 
 			Category cat = new Category { Name = res };
 			model.CategoriesModel.Save(cat);
-			view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
+			_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 		}
 
 		/*
@@ -168,17 +173,17 @@ namespace Costs.Presenters
 
 			model.PayDocumentModel = new PayDocumentModel(doc);
 
-			view.CategoriesView.SetCategories(model.CategoriesModel.Categories);
-			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
+			_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
+			_editDocumentView.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 
-			view.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
-			var res = view.GetResult();
+			var res = _editDocumentView.GetResult();
 
 			if(res.Answer == ResponseCode.Ok)
 			{
-				model.PayDocumentModel.Document.DateTime = view.CurrentDateTime;
-				model.PayDocumentModel.Document.Shop = view.Shop;
+				model.PayDocumentModel.Document.DateTime = _editDocumentView.CurrentDateTime;
+				model.PayDocumentModel.Document.Shop = _editDocumentView.Shop;
 				model.PayDocumentModel.Save();
 			}
 		}

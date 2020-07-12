@@ -1,4 +1,5 @@
 ﻿using Costs.BL.Models;
+using Costs.Forms;
 using Costs.Views;
 using System;
 using System.Collections.Generic;
@@ -10,28 +11,32 @@ namespace Costs.Presenters.Parts
 {
 	public class DocumentsViewPresenterPart
 	{
-		IDocumentsForm _view;
+		IFormsFactory _factory;
+		IDocumentsForm _documentsView;
 		PayDocumentsModel _documentsMode;
 
-		public DocumentsViewPresenterPart(IDocumentsForm v)
+		// >>> 10-07-2020 21:17
+		// We can pass IFormsFactory
+		public DocumentsViewPresenterPart(IFormsFactory f)
 		{
-			_view = v;
+			_factory = f;
 			_documentsMode = new PayDocumentsModel();
-
-			_view.EditDocumentCmd += _view_EditDocumentCmd;
 		}
 
 		private void _view_EditDocumentCmd(object sender, BL.Domain.Entities.PaymentDoc e)
 		{
-			EditDocumentPresenter pres = new EditDocumentPresenter();
-			_view.SetDocuments(_documentsMode.GetDocumentsOfMonth(d.Year, d.Month));
+			//EditDocumentPresenter pres = new EditDocumentPresenter();
+			//_view.SetDocuments(_documentsMode.GetDocumentsOfMonth(d.Year, d.Month));
 		}
 
 		public void Run()
 		{
+			_documentsView = _factory.CreateDocumentsView();
+			_documentsView.EditDocumentCmd += _view_EditDocumentCmd;
+
 			var d = DateTime.Now;
-			_view.SetDocuments(_documentsMode.GetDocumentsOfMonth(d.Year, d.Month));
-			_view.Go();
+			_documentsView.SetDocuments(_documentsMode.GetDocumentsOfMonth(d.Year, d.Month));
+			_documentsView.Go();
 		}
 	}
 }

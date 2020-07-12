@@ -9,16 +9,24 @@ using System.Threading.Tasks;
 
 namespace Costs.Forms
 {
-	public static class FormsFactory
+	public class FormsFactory : IFormsFactory
 	{
-		public static IPurchaseView CreatePurchaseView()
+		public IPurchaseView CreatePurchaseView()
 		{
 			return new EditPurchaseForm();
 		}
-
-		public static IDocumentsForm CreateDocumentsForm()
+		public IDocumentsForm CreateDocumentsView()
 		{
 			return new DocumentsForm();
+		}
+		public IEditDocumentView CreateEditDocumentView()
+		{
+			return new EditDocumentForm();
+		}
+
+		public IDialogMessages CreateDialogMessages()
+		{
+			return new DialogMessages();
 		}
 	}
 }
