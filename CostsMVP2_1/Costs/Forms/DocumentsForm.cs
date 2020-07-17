@@ -24,7 +24,7 @@ using System.Windows.Forms;
 
 namespace Costs.Forms.PayDocumentsForm
 {
-	public partial class DocumentsForm : Form, IDocumentsForm
+	public partial class DocumentsForm : Form, IDocumentsView
     {
         BindingSource bsDocuments;
         BindingSource bsDocItems;
@@ -36,9 +36,12 @@ namespace Costs.Forms.PayDocumentsForm
             bsDocuments = new BindingSource();
             bsDocItems = new BindingSource();
 
+            dataGridView1.AutoGenerateColumns = false;
         }
 
-        public event EventHandler<PeriodChangedEventArg> PeriodChanged;
+		public DateTime Date { get => dateTimeControl.Value; set => dateTimeControl.Value = value; }
+
+		public event EventHandler<PeriodChangedEventArg> PeriodChanged;
         public event EventHandler<PaymentDoc> EditDocumentCmd;
 
         public void Go()
@@ -56,15 +59,35 @@ namespace Costs.Forms.PayDocumentsForm
             lbPayDocuments.DisplayMember = "Title";
 
             dataGridView1.DataSource = bsDocItems;
+
+            bsDocuments.ResetBindings(false);
+            bsDocItems.ResetBindings(false);
         }
 
 		private void lbPayDocuments_KeyDown(object sender, KeyEventArgs e)
 		{
+            if (e.KeyCode != Keys.Enter) return;
+
             var current = lbPayDocuments.SelectedItem as PaymentDoc;
 
             if (current == null) return;
 
             EditDocumentCmd?.Invoke(this, current);
+        }
+
+		private void dateTimeControl_ValueChanged(object sender, EventArgs e)
+		{
+            OnPeriodChanged();
+        }
+
+		private void cbOfMonth_CheckedChanged(object sender, EventArgs e)
+		{
+            OnPeriodChanged();
+        }
+
+        private void OnPeriodChanged()
+		{
+            PeriodChanged?.Invoke(null, new PeriodChangedEventArg(dateTimeControl.Value, cbOfMonth.Checked));
         }
 	}
 }

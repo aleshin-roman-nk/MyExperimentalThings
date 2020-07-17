@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 namespace Costs.Views
 {
-	public interface IDocumentsForm
+	public interface IDocumentsView
 	{
 		event EventHandler<PeriodChangedEventArg> PeriodChanged;
 		event EventHandler<PaymentDoc> EditDocumentCmd;
 		void SetDocuments(IEnumerable<PaymentDoc> docs);
 		void Go();
+
+		DateTime Date { get; set; }
 	}
 }

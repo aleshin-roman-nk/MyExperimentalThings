@@ -39,7 +39,7 @@ namespace Costs.BL.Domain.Entities
 
 		public string Title { get 
 			{
-				var s = Shop == null ? "unknown" : Shop;
+				var s = string.IsNullOrEmpty(Shop) ? "Неизвестно" : Shop;
 				return $"{DateTime.ToString("dd-MM-yyyy HH:mm:ss")} [{s}]";
 			} 
 		}

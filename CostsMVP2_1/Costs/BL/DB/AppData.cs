@@ -1,4 +1,5 @@
 ﻿using Costs.BL.Domain.Entities;
+using Costs.BL.Entities;
 using Costs.Domain.Entities;
 using System.Data.Entity;
 
@@ -16,5 +17,6 @@ namespace Costs.Entities
 		public DbSet<Purchase> Purchases { get; set; }
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<PaymentDoc> PaymentDocs { get; set; }
+		public DbSet<Shop> Shops { get; set; }
 	}
 }

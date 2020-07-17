@@ -1,4 +1,5 @@
-﻿using Costs.Forms.PayDocumentsForm;
+﻿using Costs.Forms.Main;
+using Costs.Forms.PayDocumentsForm;
 using Costs.Presenters.Views;
 using Costs.Views;
 using System;
@@ -11,11 +12,28 @@ namespace Costs.Forms
 {
 	public class FormsFactory : IFormsFactory
 	{
+		private static IFormsFactory _instance = null;
+
+		private FormsFactory()
+		{
+
+		}
+
+		public static IFormsFactory Instance
+		{
+			get
+			{
+				if (_instance == null) _instance = new FormsFactory();
+
+				return _instance;
+			}
+		}
+
 		public IPurchaseView CreatePurchaseView()
 		{
 			return new EditPurchaseForm();
 		}
-		public IDocumentsForm CreateDocumentsView()
+		public IDocumentsView CreateDocumentsView()
 		{
 			return new DocumentsForm();
 		}
@@ -27,6 +45,16 @@ namespace Costs.Forms
 		public IDialogMessages CreateDialogMessages()
 		{
 			return new DialogMessages();
+		}
+
+		public IMainView CreateMainView()
+		{
+			return new MainForm();
+		}
+
+		public IShopView CreateShopsView()
+		{
+			return new ShopForm();
 		}
 	}
 }

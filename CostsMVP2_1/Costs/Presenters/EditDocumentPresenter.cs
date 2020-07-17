@@ -1,4 +1,5 @@
 ﻿using Costs.BL.Domain.Entities;
+using Costs.BL.Entities;
 using Costs.BL.Models;
 using Costs.DlgService;
 using Costs.Domain.Entities;
@@ -52,6 +53,38 @@ namespace Costs.Presenters
 
 			_editDocumentView.PurchasesView.ProductTypeDropped += PurchasesView_ProductTypeDropped;
 			_editDocumentView.PurchasesView.DeletePurchaseCmd += PurchasesView_DeletePurchaseCmd;
+			_editDocumentView.ShopNameRequested += _editDocumentView_ShopNameRequested;
+		}
+
+		private void _editDocumentView_ShopNameRequested(object sender, EventArgs e)
+		{
+			var f = _factory.CreateShopsView();
+			ShopsModel shopsModel = new ShopsModel();
+
+			f.AddShop += (s, ev) =>
+			{
+				var sss = _factory.CreateDialogMessages().InputText("", "Введите название нового магазина");
+				if (sss == null) return;
+				shopsModel.Save(new Shop { Name = sss });
+				f.SetShops(shopsModel.Get());
+			};
+
+			f.DeleteShop += (s, ev) =>
+			{
+				if (ev == null) return;
+				if(_factory.CreateDialogMessages().UserAnsweredYes($"Подтвердите удаление магазина {ev.Name}."))
+				{
+					shopsModel.Delete(ev);
+					f.SetShops(shopsModel.Get());
+				}
+			};
+
+			f.SetShops(shopsModel.Get());
+
+			var res = f.GetResult();
+
+			if(res.Answer == ResponseCode.Ok)
+				_editDocumentView.Shop = res.Result;
 		}
 
 		private void PurchasesView_DeletePurchaseCmd(Purchase obj)
@@ -150,15 +183,6 @@ namespace Costs.Presenters
 			_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 		}
 
-		/*
-		 * >>> 03-07-2020 19:40
-		 * Мне нужно решить, на каком этапе фиксировать в БД изменения сущности.
-		 *	Хотя возможно можно и здесь записать результат.
-		 * 
-		 * 
-		 * 
-		 */
-
 		// Entry point
 		public void Run(PaymentDoc doc)
 		{
@@ -166,9 +190,6 @@ namespace Costs.Presenters
 			 * >>> 03-07-2020 12:21
 			 * Сюда передавать объект в памяти. Никаких записей в БД
 			 *		Все добавления в памяти. Только при завершении работы с документом, по закрытию зеленой кнопкой произвести необходимые записи в БД
-			 *			
-			 * 
-			 * 
 			 */
 
 			model.PayDocumentModel = new PayDocumentModel(doc);
@@ -177,6 +198,8 @@ namespace Costs.Presenters
 			_editDocumentView.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 
 			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
+			_editDocumentView.Shop = model.PayDocumentModel.Document.Shop;
 
 			var res = _editDocumentView.GetResult();
 

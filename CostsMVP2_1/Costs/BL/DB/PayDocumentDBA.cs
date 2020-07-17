@@ -15,7 +15,7 @@ namespace Costs.BL.DB
 		{
 			using (AppData db = new AppData())
 			{
-				return db.PaymentDocs.Include("Purchases").Where(x => x.DateTime >= from || x.DateTime <= to).ToList();
+				return db.PaymentDocs.Include("Purchases").Where(x => x.DateTime >= from && x.DateTime <= to).ToList();
 			}
 		}
 		public static void Save(PaymentDoc doc)
@@ -24,6 +24,7 @@ namespace Costs.BL.DB
 			{
 				foreach (var item in doc.Purchases)
 				{
+					item.PaymentDocId = doc.Id;
 					// It is ok to write complex code which writes a complex entity to db.
 					db.Entry(item).State = item.Id == 0 ? System.Data.Entity.EntityState.Added : System.Data.Entity.EntityState.Modified;
 					//db.Entry(item.Directory).State = System.Data.Entity.EntityState.Unchanged;

@@ -80,6 +80,7 @@
 			this.btnGetShopName.TabIndex = 4;
 			this.btnGetShopName.Text = "...";
 			this.btnGetShopName.UseVisualStyleBackColor = true;
+			this.btnGetShopName.Click += new System.EventHandler(this.btnGetShopName_Click);
 			// 
 			// dateTimeControl
 			// 

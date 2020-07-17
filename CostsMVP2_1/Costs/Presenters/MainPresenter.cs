@@ -50,11 +50,14 @@ namespace Costs.Forms
 		IDialogMessages _dlgView;
 		MainModel model;
 
-		public MainPresenter(IMainView mainView, IDialogMessages dialogview)
+		IFormsFactory _factory;
+
+		public MainPresenter(IFormsFactory factory, IMainView mainView)
 		{
 			view = mainView;
 			model = new MainModel();
-			_dlgView = dialogview;
+			_dlgView = factory.CreateDialogMessages();
+			_factory = factory;
 
 			model.DirectoriesModel.Load();
 
@@ -78,14 +81,14 @@ namespace Costs.Forms
 
 		private void View_ShowDocumentsViewerCmd()
 		{
-			DocumentsViewPresenterPart _pres = new DocumentsViewPresenterPart(FormsFactory.CreateDocumentsView());
+			DocumentsViewerPresenterPart _pres = new DocumentsViewerPresenterPart(_factory);
 			_pres.Run();
+			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}
 
 		private void View_CreateDocumentCmd()
 		{
-			
-			EditDocumentPresenter presenter = new EditDocumentPresenter(FormsFactory.CreateEditDocumentView(), _dlgView);
+			EditDocumentPresenter presenter = new EditDocumentPresenter(_factory);
 			
 			presenter.Run(new PaymentDoc());
 

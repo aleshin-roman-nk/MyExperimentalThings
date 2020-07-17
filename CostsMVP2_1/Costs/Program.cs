@@ -19,9 +19,9 @@ namespace Costs
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			var mainView = new MainForm();
-			var dlgview = new DialogMessages();
-			var mainPresenter = new MainPresenter(mainView, dlgview);
+			var mainView = new MainForm(); // Можно два метода view.Go() и view.ClearAndGo(), второй - очистка полей и запуск. Это если иметь один инстанс и не создавать при каждом обращении окно
+			var formsFactory = FormsFactory.Instance;
+			var mainPresenter = new MainPresenter(formsFactory, mainView);
 			
 			Application.Run(mainView);
 		}

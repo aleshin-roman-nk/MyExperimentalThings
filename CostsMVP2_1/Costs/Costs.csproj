@@ -99,7 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\DB\PayDocumentDBA.cs" />
+    <Compile Include="BL\DB\ShopsDBA.cs" />
     <Compile Include="BL\Entities\PaymentDoc.cs" />
+    <Compile Include="BL\Entities\Shop.cs" />
     <Compile Include="BL\Models\CategoriesModel.cs" />
     <Compile Include="BL\Models\DirectoryModelExtention.cs" />
     <Compile Include="BL\Models\EntityFactory.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="BL\Models\ProductTypeModel.cs" />
     <Compile Include="BL\Models\PurchaseModelExtention.cs" />
     <Compile Include="BL\Models\EditDocumentModel.cs" />
+    <Compile Include="BL\Models\ShopsModel.cs" />
     <Compile Include="DebugServices\DebugMessage.cs" />
     <Compile Include="BL\Entities\Category.cs" />
     <Compile Include="BL\Models\DirectoriesModel.cs" />
@@ -145,8 +148,14 @@
     <Compile Include="Forms\Common\PurchasesGridHandler.cs" />
     <Compile Include="Forms\FormsFactory.cs" />
     <Compile Include="Forms\IFormsFactory.cs" />
-    <Compile Include="Presenters\Parts\DocumentsViewPresenterPart.cs" />
-    <Compile Include="Views\IDocumentsForm.cs" />
+    <Compile Include="Forms\ShopForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShopForm.Designer.cs">
+      <DependentUpon>ShopForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\Parts\DocumentsViewerPresenterPart.cs" />
+    <Compile Include="Views\IDocumentsView.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +211,7 @@
     <Compile Include="Views\EventArgs\PurchaseDroppedEventArg.cs" />
     <Compile Include="Views\EventArgs\PurchaseFilterEventArg.cs" />
     <Compile Include="Views\IDialogMessages.cs" />
+    <Compile Include="Views\IShopView.cs" />
     <Compile Include="Views\IViewDialogs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -227,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditPurchaseForm.resx">
       <DependentUpon>EditPurchaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShopForm.resx">
+      <DependentUpon>ShopForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UC\CategoriesUC.resx">
       <DependentUpon>CategoriesUC.cs</DependentUpon>

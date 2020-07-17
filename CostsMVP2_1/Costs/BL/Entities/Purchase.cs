@@ -43,7 +43,6 @@ namespace Costs.Entities
 		}
 		public void Accept(Purchase src)
 		{
-
 			Count = src.Count;
 			Date = src.Date;
 			Price = src.Price;

@@ -14,11 +14,13 @@ namespace Costs.Views
 	public interface IEditDocumentView
 	{
 		// Позволяет как угодно отображать дерево. Различные внутренние модули типа TreeViewDirectoryKeys предоставляют логику вывода
-		DateTime CurrentDateTime { get; }
+		DateTime CurrentDateTime { get; set; }
 		ViewResult GetResult();
-		string Shop { get; }
+		string Shop { get; set; }
 		IPurchasesViewPart PurchasesView { get; }
 		IDirectoriesViewPart DirectoriesView { get; }
 		ICategoriesViewPart CategoriesView { get; }
+
+		event EventHandler ShopNameRequested;
 	}
 }

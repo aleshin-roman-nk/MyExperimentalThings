@@ -70,9 +70,11 @@ namespace Costs.Forms
 
 		public ICategoriesViewPart CategoriesView => categoriesUC1;
 
-		public DateTime CurrentDateTime => dateTimeControl.Value;
+		public DateTime CurrentDateTime { get => dateTimeControl.Value; set => dateTimeControl.Value = value; }
 
-		public string Shop => txtShopName.Text;
+		public string Shop { get => txtShopName.Text; set => txtShopName.Text = value; }
+
+		public event EventHandler ShopNameRequested;
 
 		public void SetCategories(IEnumerable<Category> categs)
 		{
@@ -110,6 +112,11 @@ namespace Costs.Forms
 			var ok = this.ShowDialog() == DialogResult.OK;
 			var res = new ViewResult(ok ? ResponseCode.Ok : ResponseCode.Cancel);
 			return res;
+		}
+
+		private void btnGetShopName_Click(object sender, EventArgs e)
+		{
+			ShopNameRequested?.Invoke(null, EventArgs.Empty);
 		}
 	}
 }

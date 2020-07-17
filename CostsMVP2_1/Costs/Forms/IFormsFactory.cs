@@ -5,9 +5,11 @@ namespace Costs.Forms
 {
 	public interface IFormsFactory
 	{
-		IDocumentsForm CreateDocumentsView();
+		IDocumentsView CreateDocumentsView();
 		IEditDocumentView CreateEditDocumentView();
 		IPurchaseView CreatePurchaseView();
 		IDialogMessages CreateDialogMessages();
+		IMainView CreateMainView();
+		IShopView CreateShopsView();
 	}
 }
