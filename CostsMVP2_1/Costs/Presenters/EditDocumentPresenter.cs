@@ -63,9 +63,10 @@ namespace Costs.Presenters
 
 			f.AddShop += (s, ev) =>
 			{
-				var sss = _factory.CreateDialogMessages().InputText("", "Введите название нового магазина");
-				if (sss == null) return;
-				shopsModel.Save(new Shop { Name = sss });
+				//var sss = _factory.CreateDialogMessages().InputText("", "Введите название нового магазина");
+				//if (sss == null) return;
+				if (string.IsNullOrWhiteSpace(ev)) return;
+				shopsModel.Save(new Shop { Name = ev });
 				f.SetShops(shopsModel.Get());
 			};
 
@@ -94,7 +95,15 @@ namespace Costs.Presenters
 			if (!_dlgView.UserAnsweredYes($"Удалить позицию {obj.Name}?")) return;
 
 			model.PayDocumentModel.DeletePosition(obj);
-			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			updatePurchases(model.PayDocumentModel.Document);
+		}
+
+		private void updatePurchases(PaymentDoc doc)
+		{
+			_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
+			_editDocumentView.Shop = doc.Shop;
+			_editDocumentView.PurchasesView.SetPurchases(doc.Purchases);
+			_editDocumentView.PurchasesView.SetPurchasesAmount(doc.Amount);
 		}
 
 		private void DirectoriesView_CreateDirectoryCmd(Directory obj)
@@ -114,7 +123,8 @@ namespace Costs.Presenters
 			//	можно дублировать операцию - изменить в памяти и отправить фиксацию в бд без перезагрузки картины из бд
 
 			obj.Desc.Attach(obj.Dropped);
-			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			updatePurchases(model.PayDocumentModel.Document);
+			//_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
 
 			//obj.Dropped.Save();Сохраняет только при выходе в методе Run
@@ -139,8 +149,7 @@ namespace Costs.Presenters
 				product.Accept(res.Result);
 
 				model.PayDocumentModel.AddPosition(product);
-				_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
-				_editDocumentView.PurchasesView.SetPurchasesAmount(model.PayDocumentModel.Document.Amount);
+				updatePurchases(model.PayDocumentModel.Document);
 			}
 		}
 
@@ -162,6 +171,12 @@ namespace Costs.Presenters
 			}
 		}
 
+		// >>> 18-07-2020 14:13 
+		// !!! !!! !!!
+		// Это можно отдать презентеру этого контрола
+		// Так много раз приходится дублировать код (категории, типы продуктов)
+		// Ввобще прорисовать схему взаимодействия всех модулей (презентеров, вьюшек, моделей.)
+		// Одна стрелка означает кто к кому обращается.
 		private void CategoriesView_CreateProductTypeCmd(Category obj)
 		{
 			var res = _dlgView.InputText("", "Создание нового типа продукта\r\nВведите имя типа");
@@ -197,23 +212,21 @@ namespace Costs.Presenters
 			_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 			_editDocumentView.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 
-			_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
-			_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
-			_editDocumentView.Shop = model.PayDocumentModel.Document.Shop;
+			//_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
+			//_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
+			//_editDocumentView.Shop = model.PayDocumentModel.Document.Shop;
+
+			updatePurchases(model.PayDocumentModel.Document);
 
 			var res = _editDocumentView.GetResult();
 
 			if(res.Answer == ResponseCode.Ok)
 			{
+				// !!! Не нравится мне такое неавное применение. Где я должен видеть о том, как применяются измененные покупки?
 				model.PayDocumentModel.Document.DateTime = _editDocumentView.CurrentDateTime;
 				model.PayDocumentModel.Document.Shop = _editDocumentView.Shop;
 				model.PayDocumentModel.Save();
 			}
-		}
-
-		void reloadData()
-		{
-
 		}
 	}
 }

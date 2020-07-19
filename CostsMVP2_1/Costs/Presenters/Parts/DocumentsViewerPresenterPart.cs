@@ -24,8 +24,14 @@ namespace Costs.Presenters.Parts
 			_documentsMode = new PayDocumentsModel();
 
 			_documentsView = _factory.CreateDocumentsView();
-			_documentsView.EditDocumentCmd += _view_EditDocumentCmd;
+			_documentsView.EditDocumentRequired += _view_EditDocumentRequired;
 			_documentsView.PeriodChanged += _documentsView_PeriodChanged;
+			_documentsView.CurrentChanged += _documentsView_CurrentChanged;
+		}
+
+		private void _documentsView_CurrentChanged(object sender, PaymentDoc e)
+		{
+			_documentsView.SetAmount(e.Amount);
 		}
 
 		private void _documentsView_PeriodChanged(object sender, Costs.Views.EventArgs.PeriodChangedEventArg e)
@@ -33,7 +39,7 @@ namespace Costs.Presenters.Parts
 			_documentsView.SetDocuments(getDocuments(e.Date, e.OneMonth));
 		}
 
-		private void _view_EditDocumentCmd(object sender, PaymentDoc e)
+		private void _view_EditDocumentRequired(object sender, PaymentDoc e)
 		{
 			EditDocumentPresenter pres = new EditDocumentPresenter(_factory);
 			pres.Run(e);

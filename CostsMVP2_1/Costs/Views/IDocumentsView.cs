@@ -8,8 +8,10 @@ namespace Costs.Views
 	public interface IDocumentsView
 	{
 		event EventHandler<PeriodChangedEventArg> PeriodChanged;
-		event EventHandler<PaymentDoc> EditDocumentCmd;
+		event EventHandler<PaymentDoc> EditDocumentRequired;
+		event EventHandler<PaymentDoc> CurrentChanged;
 		void SetDocuments(IEnumerable<PaymentDoc> docs);
+		void SetAmount(decimal am);
 		void Go();
 
 		DateTime Date { get; set; }

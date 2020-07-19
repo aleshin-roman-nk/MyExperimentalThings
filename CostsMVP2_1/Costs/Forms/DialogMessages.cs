@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Costs.Forms
 {
+	// Это сервисные диалоги, можно отделить от обычных view
 	public class DialogMessages : IDialogMessages
 	{
 		public string InputText(string init_text, string title = null)

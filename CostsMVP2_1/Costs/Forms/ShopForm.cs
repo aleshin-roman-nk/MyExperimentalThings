@@ -56,6 +56,7 @@ namespace Costs.Forms
 			if (string.IsNullOrWhiteSpace(textBox1.Text)) return;
 
 			AddShop?.Invoke(null, textBox1.Text);
+			textBox1.Clear();
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)

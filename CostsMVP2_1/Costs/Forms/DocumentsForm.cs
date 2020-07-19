@@ -36,15 +36,24 @@ namespace Costs.Forms.PayDocumentsForm
             bsDocuments = new BindingSource();
             bsDocItems = new BindingSource();
 
+			bsDocuments.CurrentItemChanged += BsDocuments_CurrentItemChanged;
+
             dataGridView1.AutoGenerateColumns = false;
+        }
+
+		private void BsDocuments_CurrentItemChanged(object sender, EventArgs e)
+		{
+            var cur = bsDocuments.Current as PaymentDoc;
+            CurrentChanged?.Invoke(null, cur);
         }
 
 		public DateTime Date { get => dateTimeControl.Value; set => dateTimeControl.Value = value; }
 
 		public event EventHandler<PeriodChangedEventArg> PeriodChanged;
-        public event EventHandler<PaymentDoc> EditDocumentCmd;
+		public event EventHandler<PaymentDoc> EditDocumentRequired;
+		public event EventHandler<PaymentDoc> CurrentChanged;
 
-        public void Go()
+		public void Go()
         {
             this.ShowDialog();
         }
@@ -72,7 +81,7 @@ namespace Costs.Forms.PayDocumentsForm
 
             if (current == null) return;
 
-            EditDocumentCmd?.Invoke(this, current);
+            EditDocumentRequired?.Invoke(this, current);
         }
 
 		private void dateTimeControl_ValueChanged(object sender, EventArgs e)
@@ -89,5 +98,10 @@ namespace Costs.Forms.PayDocumentsForm
 		{
             PeriodChanged?.Invoke(null, new PeriodChangedEventArg(dateTimeControl.Value, cbOfMonth.Checked));
         }
+
+		public void SetAmount(decimal am)
+		{
+            txtAmount.Text = $"{am:C}";
+		}
 	}
 }
