@@ -1,4 +1,5 @@
 ﻿using MyBibleStudy.BL;
+using MyBibleStudy.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,12 +14,14 @@ namespace MyBibleStudy
 	{
 		IMainView view;
 		WeeksModel model;
+		WeekModel _weekModel;
 
 		public MainPresenter(IMainView v)
 		{
 			view = v;
 			model = new WeeksModel();
-			model.CheckThisWeek(DateTime.Today);
+			_weekModel = new WeekModel();
+			//model.CheckThisWeek(DateTime.Today);
 
 			view.SaveSessions += View_SaveSessions;
 			view.StartSession += View_StartSession;
@@ -57,20 +60,21 @@ namespace MyBibleStudy
 
 		private void View_WeekChanged(string obj)
 		{
-			if(model.Week == null)
-			{
-				model.Load(obj);
-			}
-			else
-			{
-				model.Save();
-				model.Load(obj);
-			}
-			
-			view.SetSessions(model.Week.WorkSessionsOrdered);
-			view.SetTotal(model.Week.TotalTimeTitle);
+			_weekModel.Load(obj);
+			//if(model.Week == null)
+			//{
+			//	model.Load(obj);
+			//}
+			//else
+			//{
+			//	model.Save();
+			//	model.Load(obj);
+			//}
 
-			view.SetSessionState(model.GetLastSessionState());
+			//view.SetSessions(model.Week.WorkSessionsOrdered);
+			//view.SetTotal(model.Week.TotalTimeTitle);
+
+			//view.SetSessionState(model.GetLastSessionState());
 		}
 
 		private void View_CloseForm()

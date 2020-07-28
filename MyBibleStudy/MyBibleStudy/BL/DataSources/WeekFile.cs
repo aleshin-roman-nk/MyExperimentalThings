@@ -43,11 +43,9 @@ namespace MyBibleStudy.BL.DataSources
 
 				return week_names.OrderByDescending((x) =>
 				{
-
 					var s = x.Remove(0, "Week_".Length);
 					var datestr = s.Replace("_", ".");
 					return DateTime.Parse(datestr);
-
 				}).ToArray();
 			}
 		}
@@ -57,10 +55,15 @@ namespace MyBibleStudy.BL.DataSources
 
 	public static class FileManager
 	{
+		// >>> 21-07-2020 10:57
+		// Какой то бардак. Должна быть одна сущность - Год, месяц, неделя, день, сессия, задача.
+		//			Хочу назначать задачи, и по задаче отчет (сессия, подробности, затраченное время)
+		//			Функция составления планов. Задача может иметь количество выделенных часов, если большая (например прослушать 500 часов.)
+		//				Отдельный проект, по сбору коллекции слов и выражений.
 		public static void CreateWeekWork(DateTime dt)
 		{
-			var dirName = ThisWeekName;
-			string fname = WorkFileName(dt);
+			var dirName = ThisWeekName;// ??? Создаем неделю, взяв текущее время
+			string fname = WorkFileName(dt);// но при этом создаем файл работы по заданному извне времени.
 
 			string fullName = $"{dirName}\\{fname}";
 

@@ -95,10 +95,16 @@ namespace Costs.Presenters
 			if (!_dlgView.UserAnsweredYes($"Удалить позицию {obj.Name}?")) return;
 
 			model.PayDocumentModel.DeletePosition(obj);
-			updatePurchases(model.PayDocumentModel.Document);
+			updatePurchases(model.PayDocumentModel.Document.Purchases, model.PayDocumentModel.Document.Amount);
 		}
 
-		private void updatePurchases(PaymentDoc doc)
+		private void updatePurchases(IEnumerable<Purchase> purchases, decimal amount)
+		{
+			_editDocumentView.PurchasesView.SetPurchases(purchases);
+			_editDocumentView.PurchasesView.SetPurchasesAmount(amount);
+		}
+
+		private void updateDocument(PaymentDoc doc)
 		{
 			_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
 			_editDocumentView.Shop = doc.Shop;
@@ -123,7 +129,7 @@ namespace Costs.Presenters
 			//	можно дублировать операцию - изменить в памяти и отправить фиксацию в бд без перезагрузки картины из бд
 
 			obj.Desc.Attach(obj.Dropped);
-			updatePurchases(model.PayDocumentModel.Document);
+			updatePurchases(model.PayDocumentModel.Document.Purchases, model.PayDocumentModel.Document.Amount);
 			//_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
 
@@ -149,7 +155,7 @@ namespace Costs.Presenters
 				product.Accept(res.Result);
 
 				model.PayDocumentModel.AddPosition(product);
-				updatePurchases(model.PayDocumentModel.Document);
+				updatePurchases(model.PayDocumentModel.Document.Purchases, model.PayDocumentModel.Document.Amount);
 			}
 		}
 
@@ -216,7 +222,7 @@ namespace Costs.Presenters
 			//_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
 			//_editDocumentView.Shop = model.PayDocumentModel.Document.Shop;
 
-			updatePurchases(model.PayDocumentModel.Document);
+			updateDocument(model.PayDocumentModel.Document);
 
 			var res = _editDocumentView.GetResult();
 
