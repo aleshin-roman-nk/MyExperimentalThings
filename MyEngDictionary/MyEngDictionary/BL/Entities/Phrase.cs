@@ -5,6 +5,15 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * >>> 29.07.2020 16:01
+ * 
+ * Сделать карточки слов.
+ * Отношение многие ко многим joining table
+ * 
+ * 
+ */
+
 namespace MyEngDictionary.BL.Entities
 {
 	public class Phrase

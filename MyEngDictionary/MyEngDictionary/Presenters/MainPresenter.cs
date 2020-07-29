@@ -18,6 +18,10 @@ using System.Threading.Tasks;
  * 
  * https://codereview.stackexchange.com/questions/51823/using-models-and-entities-in-mvp-pattern
  * 
+ * >>> 29-07-2020 12:52
+ * 
+ * 
+ * 
  */
 
 namespace MyEngDictionary.Presenters

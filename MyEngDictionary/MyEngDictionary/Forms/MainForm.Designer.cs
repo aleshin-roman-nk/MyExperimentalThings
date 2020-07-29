@@ -31,14 +31,14 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.listPhrases = new System.Windows.Forms.ListView();
-			this.btnSave = new System.Windows.Forms.Button();
-			this.panelDashboard = new System.Windows.Forms.Panel();
 			this.panelTranslate = new System.Windows.Forms.Panel();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.panelDashboard = new System.Windows.Forms.Panel();
+			this.btnSave = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -60,7 +60,7 @@
 			this.panel1.Controls.Add(this.splitContainer1);
 			this.panel1.Location = new System.Drawing.Point(12, 41);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1071, 571);
+			this.panel1.Size = new System.Drawing.Size(887, 380);
 			this.panel1.TabIndex = 0;
 			// 
 			// splitContainer1
@@ -77,8 +77,8 @@
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panelTranslate);
 			this.splitContainer1.Panel2.Controls.Add(this.panelDashboard);
-			this.splitContainer1.Size = new System.Drawing.Size(1069, 569);
-			this.splitContainer1.SplitterDistance = 355;
+			this.splitContainer1.Size = new System.Drawing.Size(885, 378);
+			this.splitContainer1.SplitterDistance = 293;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// listPhrases
@@ -87,28 +87,9 @@
 			this.listPhrases.HideSelection = false;
 			this.listPhrases.Location = new System.Drawing.Point(0, 0);
 			this.listPhrases.Name = "listPhrases";
-			this.listPhrases.Size = new System.Drawing.Size(355, 569);
+			this.listPhrases.Size = new System.Drawing.Size(293, 378);
 			this.listPhrases.TabIndex = 0;
 			this.listPhrases.UseCompatibleStateImageBehavior = false;
-			// 
-			// btnSave
-			// 
-			this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnSave.Location = new System.Drawing.Point(969, 12);
-			this.btnSave.Name = "btnSave";
-			this.btnSave.Size = new System.Drawing.Size(113, 23);
-			this.btnSave.TabIndex = 1;
-			this.btnSave.Text = "Save";
-			this.btnSave.UseVisualStyleBackColor = true;
-			// 
-			// panelDashboard
-			// 
-			this.panelDashboard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelDashboard.Location = new System.Drawing.Point(0, 0);
-			this.panelDashboard.Name = "panelDashboard";
-			this.panelDashboard.Size = new System.Drawing.Size(710, 92);
-			this.panelDashboard.TabIndex = 0;
 			// 
 			// panelTranslate
 			// 
@@ -117,7 +98,7 @@
 			this.panelTranslate.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelTranslate.Location = new System.Drawing.Point(0, 92);
 			this.panelTranslate.Name = "panelTranslate";
-			this.panelTranslate.Size = new System.Drawing.Size(710, 477);
+			this.panelTranslate.Size = new System.Drawing.Size(588, 286);
 			this.panelTranslate.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -136,9 +117,18 @@
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.richTextBox2);
 			this.splitContainer2.Panel2.Controls.Add(this.label2);
-			this.splitContainer2.Size = new System.Drawing.Size(708, 475);
-			this.splitContainer2.SplitterDistance = 310;
+			this.splitContainer2.Size = new System.Drawing.Size(586, 284);
+			this.splitContainer2.SplitterDistance = 256;
 			this.splitContainer2.TabIndex = 0;
+			// 
+			// richTextBox1
+			// 
+			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.richTextBox1.Location = new System.Drawing.Point(0, 23);
+			this.richTextBox1.Name = "richTextBox1";
+			this.richTextBox1.Size = new System.Drawing.Size(254, 259);
+			this.richTextBox1.TabIndex = 1;
+			this.richTextBox1.Text = "";
 			// 
 			// label1
 			// 
@@ -151,6 +141,15 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Перевод";
 			// 
+			// richTextBox2
+			// 
+			this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.richTextBox2.Location = new System.Drawing.Point(0, 23);
+			this.richTextBox2.Name = "richTextBox2";
+			this.richTextBox2.Size = new System.Drawing.Size(324, 259);
+			this.richTextBox2.TabIndex = 1;
+			this.richTextBox2.Text = "";
+			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
@@ -162,29 +161,31 @@
 			this.label2.TabIndex = 0;
 			this.label2.Text = "Описание";
 			// 
-			// richTextBox1
+			// panelDashboard
 			// 
-			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.richTextBox1.Location = new System.Drawing.Point(0, 23);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(308, 450);
-			this.richTextBox1.TabIndex = 1;
-			this.richTextBox1.Text = "";
+			this.panelDashboard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panelDashboard.Location = new System.Drawing.Point(0, 0);
+			this.panelDashboard.Name = "panelDashboard";
+			this.panelDashboard.Size = new System.Drawing.Size(588, 92);
+			this.panelDashboard.TabIndex = 0;
 			// 
-			// richTextBox2
+			// btnSave
 			// 
-			this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.richTextBox2.Location = new System.Drawing.Point(0, 23);
-			this.richTextBox2.Name = "richTextBox2";
-			this.richTextBox2.Size = new System.Drawing.Size(392, 450);
-			this.richTextBox2.TabIndex = 1;
-			this.richTextBox2.Text = "";
+			this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnSave.Location = new System.Drawing.Point(785, 12);
+			this.btnSave.Name = "btnSave";
+			this.btnSave.Size = new System.Drawing.Size(113, 23);
+			this.btnSave.TabIndex = 1;
+			this.btnSave.Text = "Save";
+			this.btnSave.UseVisualStyleBackColor = true;
+			this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1095, 624);
+			this.ClientSize = new System.Drawing.Size(911, 433);
 			this.Controls.Add(this.btnSave);
 			this.Controls.Add(this.panel1);
 			this.Name = "Form1";

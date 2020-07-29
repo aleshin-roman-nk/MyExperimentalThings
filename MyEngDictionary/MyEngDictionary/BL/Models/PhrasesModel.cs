@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace MyEngDictionary.BL.Models
 {
-	public class PhrasesModel
+	public class PhrasesModelMock : IPhrasesModel
 	{
 		public IEnumerable<Phrase> GetPhrases()
 		{
-			throw new NotImplementedException();
+			return new List<Phrase>
+			{
+				new Phrase{Id = 1,
+					TextEng = "make", TextRus = "делать", }
+			}
 		}
 	}
 }
