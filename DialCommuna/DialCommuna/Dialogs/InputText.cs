@@ -11,7 +11,7 @@ namespace DialCommuna.Dialogs
 {
 	public class InputText
 	{
-		public static ViewResult<string> Show(string q_text, string title, string init = null)
+		public static ViewResult<string> Show(string title, string init = null)
 		{
 			var d = new InputTextForm();
 			d.SetInitText(init, title);

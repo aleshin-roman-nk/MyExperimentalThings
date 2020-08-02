@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MyEngDictionary.BL.Models;
+using MyEngDictionary.Presenters;
+using MyEngDictionary.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +19,13 @@ namespace MyEngDictionary
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+
+			Form1 f = new Form1();
+
+			//MainPresenter p = new MainPresenter(f, new PhrasesModelMock());
+			MainPresenter p = new MainPresenter(f, new PhrasesModel());
+
+			Application.Run(f);
 		}
 	}
 }

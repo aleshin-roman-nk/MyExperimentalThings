@@ -10,7 +10,7 @@ namespace MyEngDictionary.BL.AppDb
 {
 	public class AppData: DbContext
 	{
-		public AppData(string cn = @"Data Source = ..\..\..\db\data.db") : base(cn)
+		public AppData(string cn = @"Data Source = ..\db\englishphrases.db") : base(cn)
 		{
 		}
 		public DbSet<Phrase> Phrases { get; set; }

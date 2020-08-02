@@ -19,10 +19,11 @@ namespace MyEngDictionary.BL.Entities
 	public class Phrase
 	{
 		public int Id { get; set; }
-		public string TextEng { get; set; }
-		public string TextRus { get; set; }
+		public int GroupId { get; set; }
+		public string Original { get; set; }
+		public string Explanation { get; set; }
 		public PhraseType PhraseType { get;set;}
-		public string Examples { get; set; }// Возможно это хранить в отдельном файле, а поле ссылается на файл
 		public bool IsKnown { get; set; }
+		public string Exercises { get; set; }
 	}
 }

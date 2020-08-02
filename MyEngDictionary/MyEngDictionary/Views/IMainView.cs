@@ -12,5 +12,6 @@ namespace MyEngDictionary.Views
 		void SetPhrases(IEnumerable<Phrase> phrases);
 		event EventHandler CreatePhrase;
 		event EventHandler<Phrase> PhraseChanged;
+		void SetWordCount(int cnt);
 	}
 }

@@ -21,7 +21,7 @@ namespace TestPoligon
 		private void button1_Click(object sender, EventArgs e)
 		{
 			var res = DialCommuna.Dialogs.InputText.
-				Show("Введите число", "Тестирование", "введите новый текст");
+				Show("Тестирование", "введите новый текст");
 
 			if (res.Answer == ViewAnswer.Ok)
 				MessageBox.Show($"Вы ввели {res.Data}");
