@@ -1,4 +1,4 @@
-﻿using MyBibleStudy.BL;
+﻿using Vedeg.BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ using System.Windows.Forms;
  * 
  */
 
-namespace MyBibleStudy
+namespace Vedeg
 {
 	public partial class Form1 : Form, IMainView
 	{

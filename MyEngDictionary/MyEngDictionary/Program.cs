@@ -1,4 +1,5 @@
 ﻿using MyEngDictionary.BL.Models;
+using MyEngDictionary.Forms;
 using MyEngDictionary.Presenters;
 using MyEngDictionary.Views;
 using System;
@@ -20,10 +21,16 @@ namespace MyEngDictionary
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			Form1 f = new Form1();
+			PhrasePackForm f = new PhrasePackForm();
+			//PhrasePacksForm f = new PhrasePacksForm();
+			PhrasePackPresenter phrasePackPresenter = new PhrasePackPresenter(f);
+			PhrasePackManagerPresenter phrasePackManagerPresenter = new PhrasePackManagerPresenter(new PhrasePackManagerForm());
 
-			//MainPresenter p = new MainPresenter(f, new PhrasesModelMock());
-			MainPresenter p = new MainPresenter(f, new PhrasesModel());
+			PresenterHub hub = new PresenterHub();
+
+			hub.AddPresenter(phrasePackPresenter)
+				.AddPresenter(phrasePackManagerPresenter);
+
 
 			Application.Run(f);
 		}

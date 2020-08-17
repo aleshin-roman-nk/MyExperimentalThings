@@ -31,11 +31,11 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.btnCreateDoc = new System.Windows.Forms.ToolStripButton();
+			this.btnShowDocumentsViewer = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.directoriesUC1 = new Costs.Forms.UC.DirectoriesUC();
 			this.purchasesUC1 = new Costs.Forms.UC.PurchasesUC();
 			this.ucDateView1 = new Costs.Forms.Main.InternalViews.DateViewUC();
-			this.btnShowDocumentsViewer = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -64,6 +64,17 @@
 			this.btnCreateDoc.Size = new System.Drawing.Size(36, 36);
 			this.btnCreateDoc.Text = "Добавить расход";
 			this.btnCreateDoc.Click += new System.EventHandler(this.btnAddShopItem_Click);
+			// 
+			// btnShowDocumentsViewer
+			// 
+			this.btnShowDocumentsViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnShowDocumentsViewer.Image = ((System.Drawing.Image)(resources.GetObject("btnShowDocumentsViewer.Image")));
+			this.btnShowDocumentsViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnShowDocumentsViewer.Name = "btnShowDocumentsViewer";
+			this.btnShowDocumentsViewer.Size = new System.Drawing.Size(36, 36);
+			this.btnShowDocumentsViewer.Text = "toolStripButton1";
+			this.btnShowDocumentsViewer.ToolTipText = "Просмотр документов";
+			this.btnShowDocumentsViewer.Click += new System.EventHandler(this.btnShowDocumentsViewer_Click);
 			// 
 			// splitContainer1
 			// 
@@ -109,17 +120,6 @@
 			this.ucDateView1.Size = new System.Drawing.Size(355, 43);
 			this.ucDateView1.TabIndex = 16;
 			// 
-			// btnShowDocumentsViewer
-			// 
-			this.btnShowDocumentsViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowDocumentsViewer.Image = ((System.Drawing.Image)(resources.GetObject("btnShowDocumentsViewer.Image")));
-			this.btnShowDocumentsViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnShowDocumentsViewer.Name = "btnShowDocumentsViewer";
-			this.btnShowDocumentsViewer.Size = new System.Drawing.Size(36, 36);
-			this.btnShowDocumentsViewer.Text = "toolStripButton1";
-			this.btnShowDocumentsViewer.ToolTipText = "Просмотр документов";
-			this.btnShowDocumentsViewer.Click += new System.EventHandler(this.btnShowDocumentsViewer_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -132,7 +132,7 @@
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Form1";
+			this.Text = "Регистратор покупок";
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.splitContainer1.Panel1.ResumeLayout(false);

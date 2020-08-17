@@ -94,6 +94,8 @@ namespace Costs.Forms
 
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
+
+			DebugMessage.ShowMessage("Документ отработан");
 		}
 
 		private void View_RenameDirectory(Directory obj)
@@ -210,29 +212,29 @@ namespace Costs.Forms
 		}
 		private void View_PurchaseDroppedCmd(PurchaseDroppedEventArg e)
 		{
-			e.Desc.Attach(e.Dropped);
+			e.Desc.Attach(e.Dropped, model.DirectoriesModel);
 			e.Dropped.Save();
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}
 
 		// Create a new purchase.
-		private void View_CreatePurchase(CreatePurchaseEventArg e)
-		{
-			Purchase product = EntityFactory.CreatePurchase(e.Date);
+		//private void View_CreatePurchase(CreatePurchaseEventArg e)
+		//{
+		//	Purchase product = EntityFactory.CreatePurchase(e.Date);
 
-			if(e.ProductType != null) product.Name = e.ProductType.Name;
-			//product.DirectoryID = view.CurrentDirectory.ID;
+		//	if(e.ProductType != null) product.Name = e.ProductType.Name;
+		//	//product.DirectoryID = view.CurrentDirectory.ID;
 
-			var res = new EditPurchasePresenter(new EditPurchaseForm()).Run(product).Result();
+		//	var res = new EditPurchasePresenter(new EditPurchaseForm()).Run(product).Result();
 
-			if (res != null)
-			{
-				product.Accept(res);
+		//	if (res != null)
+		//	{
+		//		product.Accept(res);
 
-				product.Save();
-				//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
-			}
-		}
+		//		product.Save();
+		//		//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
+		//	}
+		//}
 		private void reloadPurchases(Directory dir, DateTime dt, bool IsMonth)
 		{
 			model.PurchasesModel.Load(model.DirectoriesModel.ReadAllChildren(dir), dt, IsMonth ? Period.Month : Period.Day);

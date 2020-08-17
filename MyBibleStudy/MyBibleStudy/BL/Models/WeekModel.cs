@@ -1,4 +1,4 @@
-﻿using MyBibleStudy.BL.DataSources;
+﻿using Vedeg.BL.DataSources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBibleStudy.BL.Models
+namespace Vedeg.BL.Models
 {
 	public class WeekModel
 	{

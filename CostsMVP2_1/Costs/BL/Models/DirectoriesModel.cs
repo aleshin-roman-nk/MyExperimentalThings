@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace Costs.Models
 {
+
+	/*
+	 * >>> 14-08-2020 08:25
+	 * Или модель коллекции (DirecrotyCollectionModel) возвращает коллекцию моделей (IEnumerable<DirectoryModel>)
+	 *	При таком решении проблема - прямой доступ к полям сущности
+	 */
 	public class DirectoriesModel
 	{
 		public IEnumerable<Directory> Directories { get; private set; } = null;
@@ -15,6 +21,37 @@ namespace Costs.Models
 		public void Load()
 		{
 			Directories = DirectoryDBA.ReadAll();
+		}
+
+		public string GetDirFullName(int dirid)
+		{
+			List<Directory> dirs = new List<Directory>();
+
+			int parentid = 0;
+
+			Directory curr = GetDirectory(dirid);
+
+			do
+			{
+				dirs.Add(curr);
+				parentid = curr.ParentID;
+				curr = GetDirectory(parentid);
+			}
+			while (parentid > 0);
+
+			dirs.Reverse();
+
+			StringBuilder res = new StringBuilder();
+
+			foreach (var item in dirs)
+			{
+				res.Append($"{item.Name} \\ ");
+			}
+
+			string ress = res.ToString();
+			ress = ress.TrimEnd(' ', '\\');
+
+			return ress;
 		}
 
 		public IEnumerable<Directory> ReadAllChildren(Directory root)

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DrRomic.bl;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,54 +11,57 @@ namespace DrRomic.UI
 	public interface IMyCalendar
 	{
 		event Action<DateTime> DateChoosed;
-		DateTime Date { get; }
+		DateTime CurrentDate { get; }
 	}
 
 	public partial class MyCalendar : UserControl, IMyCalendar
 	{
-		public DateTime Date { get; private set; } = DateTime.Today;
+		public DateTime CurrentDate { get; private set; } = DateTime.Today;
 		public event Action<DateTime> DateChoosed;
+
+		private CurrentPeriod _currentmonth = new CurrentPeriod();
 
 		public MyCalendar()
 		{
 			InitializeComponent();
 			gridCalendar.SelectionChanged += GridCalendar_SelectionChanged;
-			UpdateUIMonth(Date);
+
+			_currentmonth.set(CurrentDate);
+			UpdateUIMonth(_currentmonth);
 			foreach (DataGridViewColumn item in gridCalendar.Columns)
 				item.SortMode = DataGridViewColumnSortMode.NotSortable;
-			highlightDate(Date);
+			highlightDate(CurrentDate);
 		}
 
 		private void GridCalendar_SelectionChanged(object sender, EventArgs e)
 		{
 			if (gridCalendar.SelectedCells.Count == 0) return;
 			if (gridCalendar.SelectedCells[0] == null) return;
-			if (gridCalendar.SelectedCells[0].Value == null)
+			if (gridCalendar.SelectedCells[0].Tag == null)
 			{
-				btnSetCurrentMonth.Text = Date.ToString("MMMM.yyyy");
+				//btnSetCurrentMonth.Text = CurrentDate.ToString("MMMM.yyyy");
 				return;
 			}
 
-			int day = int.Parse(gridCalendar.SelectedCells[0].Value.ToString());
+			CurrentDate = (DateTime)gridCalendar.SelectedCells[0].Tag;
 
-			Date = new DateTime(Date.Year, Date.Month, day);
+			//btnSetCurrentMonth.Text = CurrentDate.ToString("dd.MMMM.yyyy");
 
-			btnSetCurrentMonth.Text = Date.ToString("dd.MMMM.yyyy");
-
-			DateChoosed?.Invoke(Date);
+			DateChoosed?.Invoke(CurrentDate);
 		}
 
 		private void btnDown_Click(object sender, EventArgs e)
 		{
-			Date = Date.AddMonths(-1);
-			UpdateUIMonth(Date);
+			_currentmonth.prevMonth();
+			UpdateUIMonth(_currentmonth);
 		}
 
 		private void btnSetCurrentMonth_Click(object sender, EventArgs e)
 		{
-			Date = DateTime.Today;
-			UpdateUIMonth(Date);
-			highlightDate(Date);
+			CurrentDate = DateTime.Today;
+			_currentmonth.set(CurrentDate);
+			UpdateUIMonth(_currentmonth);
+			highlightDate(CurrentDate);
 		}
 
 		void highlightDate(DateTime dt)
@@ -77,69 +82,66 @@ namespace DrRomic.UI
 
 		private void btnUp_Click(object sender, EventArgs e)
 		{
-			Date = Date.AddMonths(1);
-			UpdateUIMonth(Date);
+			_currentmonth.nextMonth();
+			UpdateUIMonth(_currentmonth);
 		}
 
-		private void UpdateUIMonth(DateTime dt)
+		private void UpdateUIMonth(CurrentPeriod dt)
 		{
 			fillCalendar(dt);
-			btnSetCurrentMonth.Text = dt.ToString("dd.MMMM.yyyy");
-			DateChoosed?.Invoke(dt);
+			var firstday = dt.getFirstDay();
+			btnSetCurrentMonth.Text = dt.Title;
+			DateChoosed?.Invoke(dt.getFirstDay());
 		}
 
-		private void fillCalendar(DateTime dt)
+		private void fillCalendar(CurrentPeriod dt)
 		{
 			gridCalendar.Rows.Clear();
 
-			var month = GetDates(dt.Year, dt.Month);
+			var days = dt.Days;
+			var lastday = days.Last();
 
-			int weekOfMonth = gridCalendar.Rows.Add();
+			int weekOfMonth = 0;
+			gridCalendar.Rows.Add();
 
-			foreach (var item in month)
+			foreach (var item in days)
 			{
-				int dayOfWeek = int.Parse(item.DayOfWeek.ToString("d"));
+				int dayOfWeek = (int)item.DayOfWeek;
 				if (dayOfWeek == 0) dayOfWeek = 6;
 				else
-					dayOfWeek = dayOfWeek - 1;
-
-				string txt = $"{item.Day}";
+					dayOfWeek--;
 
 				if (dayOfWeek == 6)
 				{
-					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = txt;
+					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = $"{item.Day}";
 					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Tag = item;
-					weekOfMonth = gridCalendar.Rows.Add();
+					if (item != lastday)
+					{
+						gridCalendar.Rows.Add();
+						weekOfMonth++;
+					}
 				}
 				else
 				{
-					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = txt;
+					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Value = $"{item.Day}";
 					gridCalendar.Rows[weekOfMonth].Cells[dayOfWeek].Tag = item;
 				}
 			}
 		}
 
-		private List<DateTime> GetDates(int year, int month)
-		{
-			return Enumerable.Range(1, DateTime.DaysInMonth(year, month))
-							 // Days: 1, 2 ... 31 etc.
-							 .Select(day => new DateTime(year, month, day))
-							 // Map each day to a date
-							 .ToList(); // Load dates into a list
-		}
-
 		private void gridCalendar_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
-			//try
-			//{
-			//	var o = gridCalendar.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
-
-			//	DateTime dt = (DateTime)o;
-			//	if ((dt.Day % 2) == 0) e.CellStyle.BackColor = Color.Yellow;
-			//}
-			//catch (Exception)
-			//{
-			//}
+			try
+			{
+				var o = gridCalendar.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+				if (o == null) return;
+				DateTime dt = (DateTime)o;
+				//if ((dt.Day % 2) == 0) e.CellStyle.BackColor = Color.Yellow;
+				if(dt.Month != _currentmonth.Month) e.CellStyle.BackColor = Color.LightGray;
+			}
+			catch (Exception)
+			{
+			}
 		}
 		/*
  * Хочу вести ежедневный план. Отработать 2 часа по англ, записать в статистику.

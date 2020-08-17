@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyBibleStudy.Properties
+namespace Vedeg.Properties
 {
 
 

@@ -62,19 +62,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\DataSources\WeekFile.cs" />
-    <Compile Include="BL\DataSources\WordsBankFile.cs" />
+    <Compile Include="BL\DBA\ISessionsDBA.cs" />
+    <Compile Include="BL\DBA\IVedegTask.cs" />
+    <Compile Include="BL\DBA\IWeekDBA.cs" />
     <Compile Include="BL\Models\WeekModel.cs" />
-    <Compile Include="BL\SessionPause.cs" />
-    <Compile Include="BL\TagTopic.cs" />
-    <Compile Include="BL\Week.cs" />
-    <Compile Include="BL\WordPack.cs" />
-    <Compile Include="BL\Models\WordsBankModel.cs" />
-    <Compile Include="BL\WordsBankItem.cs" />
-    <Compile Include="BL\WorkSession.cs" />
+    <Compile Include="BL\Entities\SessionPause.cs" />
+    <Compile Include="BL\Entities\Week.cs" />
+    <Compile Include="BL\Entities\WorkSession.cs" />
     <Compile Include="BL\Models\WeeksModel.cs" />
     <Compile Include="CONFIG\Conf.cs" />
     <Compile Include="CONFIG\ConfEntity.cs" />
-    <Compile Include="Forms\RepetitionForm\DataSavedInfo.cs" />
     <Compile Include="MyDebug.cs" />
     <Compile Include="Forms\MainForm\Form1.cs">
       <SubType>Form</SubType>
@@ -87,14 +84,7 @@
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\RepetitionForm\RepetitionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RepetitionForm\RepetitionForm.Designer.cs">
-      <DependentUpon>RepetitionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="TA.cs" />
-    <Compile Include="Presenters\WordBankPresenter.cs" />
     <EmbeddedResource Include="Forms\MainForm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,9 +98,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\RepetitionForm\RepetitionForm.resx">
-      <DependentUpon>RepetitionForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

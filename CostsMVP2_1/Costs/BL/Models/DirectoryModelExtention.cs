@@ -1,5 +1,6 @@
 ﻿using Costs.DB;
 using Costs.Entities;
+using Costs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,10 @@ namespace Costs.BL.Models
 			dir.ParentID = _thisDir.ID;
 			//DirectoryDBA.Save(dir);
 		}
-		public static void Attach(this Directory _thisDir, Purchase p)
+		public static void Attach(this Directory _thisDir, Purchase p, DirectoriesModel dirs)
 		{
 			p.DirectoryID = _thisDir.ID;
-			p.DirName = _thisDir.Name;
+			p.DirName = dirs.GetDirFullName(_thisDir.ID); ;
 			//p.Directory = _thisDir;
 
 			//PurchasesDBA.Save(p);// Возможно не стоит в этих методах делать непрозрачные действия. Сохранять отдельным методом.

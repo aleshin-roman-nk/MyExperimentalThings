@@ -60,9 +60,7 @@ namespace Costs.Forms
 		{
 			purchase.Count = tbCount.Value;
 			purchase.Price = tbPrice.Value;
-			purchase.Date = tbDate.Value;
-			purchase.Seller = txtSeller.Text;
-			purchase.Name = txtPurchaseName.Text;
+			purchase.Info = txtInfo.Text;
 
 			return purchase;
 		}
@@ -72,9 +70,8 @@ namespace Costs.Forms
 			purchase = src;
 
 			tbCount.Text	= purchase.Count.ToString();
-			tbDate.Value	= purchase.Date;
 			tbPrice.Text	= purchase.Price.ToString();
-			txtSeller.Text	= purchase.Seller;
+			txtInfo.Text = purchase.Info;
 			txtPurchaseName.Text = purchase.Name;
 		}
 
@@ -134,11 +131,11 @@ namespace Costs.Forms
 		{
 			if(e.KeyCode == Keys.Enter)
 			{
-				DialogResult = DialogResult.OK;
+				txtInfo.Focus();
 			}
 		}
 
-		private void txtSeller_KeyDown(object sender, KeyEventArgs e)
+		private void txtInfo_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 				DialogResult = DialogResult.OK;

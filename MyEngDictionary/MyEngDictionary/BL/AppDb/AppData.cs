@@ -14,5 +14,6 @@ namespace MyEngDictionary.BL.AppDb
 		{
 		}
 		public DbSet<Phrase> Phrases { get; set; }
+		public DbSet<PhrasePack> PhrasePacks { get; set; }
 	}
 }

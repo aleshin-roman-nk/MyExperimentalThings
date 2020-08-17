@@ -1,5 +1,5 @@
-﻿using MyBibleStudy.BL;
-using MyBibleStudy.BL.Models;
+﻿using Vedeg.BL;
+using Vedeg.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MyBibleStudy
+namespace Vedeg
 {
 	public class MainPresenter
 	{

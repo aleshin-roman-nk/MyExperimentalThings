@@ -60,6 +60,12 @@ namespace Costs.BL.Models
 		}
 		public void Save()
 		{
+			foreach (var item in Document.Purchases)
+			{
+				item.Date = Document.DateTime;
+				item.Seller = Document.Shop;
+			}
+
 			PayDocumentDBA.Save(Document);
 
 			foreach (var item in deletingPurchases)

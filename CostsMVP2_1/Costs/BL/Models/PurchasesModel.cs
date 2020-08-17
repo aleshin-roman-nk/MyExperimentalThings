@@ -15,7 +15,7 @@ namespace Costs.Models
 	public class PurchasesModel
 	{
 		List<Purchase> purchases = new List<Purchase>();
-		public IEnumerable<Purchase> Purchases { get => purchases; }
+		public IEnumerable<Purchase> Purchases { get => purchases.OrderBy(x => x.Id); }
 		public decimal Amount { get => purchases.Sum(x => x.Amount); }
 		public void Load(IEnumerable<Directory> directories, DateTime dt, Period period)
 		{

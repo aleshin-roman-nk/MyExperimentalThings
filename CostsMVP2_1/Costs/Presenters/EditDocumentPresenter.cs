@@ -128,7 +128,7 @@ namespace Costs.Presenters
 			// необязательно записывать в БД и перезагружать все сущности
 			//	можно дублировать операцию - изменить в памяти и отправить фиксацию в бд без перезагрузки картины из бд
 
-			obj.Desc.Attach(obj.Dropped);
+			obj.Desc.Attach(obj.Dropped, model.DirectoriesModel);
 			updatePurchases(model.PayDocumentModel.Document.Purchases, model.PayDocumentModel.Document.Amount);
 			//_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
 
@@ -136,13 +136,20 @@ namespace Costs.Presenters
 			//obj.Dropped.Save();Сохраняет только при выходе в методе Run
 		}
 
+		/// <summary>
+		/// Добавление позиции в документ без записи в БД
+		/// </summary>
+		/// <param name="e"></param>
 		private void PurchasesView_ProductTypeDropped(ProductType e)
 		{
-			Purchase product = EntityFactory.CreatePurchase(_editDocumentView.CurrentDateTime);
+			Purchase product = EntityFactory.CreatePurchase();
 
 			if (e != null) product.Name = e.Name;
-			product.DirectoryID = _editDocumentView.DirectoriesView.Current.ID;
-			product.DirName = _editDocumentView.DirectoriesView.Current.Name;
+
+			_editDocumentView.DirectoriesView.Current.Attach(product, model.DirectoriesModel);
+
+			//product.DirectoryID = _editDocumentView.DirectoriesView.Current.ID;
+			//product.DirName = model.DirectoriesModel.GetDirFullName(_editDocumentView.DirectoriesView.Current.ID);
 
 			IPurchaseView purchaseView = _factory.CreatePurchaseView();
 			purchaseView.SetPurchase(product);

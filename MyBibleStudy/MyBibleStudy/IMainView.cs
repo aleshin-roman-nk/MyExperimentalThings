@@ -1,11 +1,11 @@
-﻿using MyBibleStudy.BL;
+﻿using Vedeg.BL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBibleStudy
+namespace Vedeg
 {
 	public interface IMainView
 	{

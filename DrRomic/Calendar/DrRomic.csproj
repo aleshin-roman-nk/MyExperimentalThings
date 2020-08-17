@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bl\CurrentPeriod.cs" />
     <Compile Include="MyCalendar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -56,5 +57,6 @@
       <DependentUpon>MyCalendar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

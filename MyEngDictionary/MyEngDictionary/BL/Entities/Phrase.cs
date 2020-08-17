@@ -19,11 +19,12 @@ namespace MyEngDictionary.BL.Entities
 	public class Phrase
 	{
 		public int Id { get; set; }
-		public int GroupId { get; set; }
-		public string Original { get; set; }
+		public int? PhrasePackId { get; set; }
+		public string TextEng { get; set; }
 		public string Explanation { get; set; }
 		public PhraseType PhraseType { get;set;}
 		public bool IsKnown { get; set; }
 		public string Exercises { get; set; }
+		public DateTime? LastChange { get; set; }
 	}
 }

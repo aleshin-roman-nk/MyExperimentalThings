@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBibleStudy.CONFIG
+namespace Vedeg.CONFIG
 {
 	public class ConfEntity
 	{

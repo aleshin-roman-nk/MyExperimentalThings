@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dialogs\InputText.cs" />
+    <Compile Include="Dialogs\UserAnswerYes.cs" />
     <Compile Include="FormResult\ViewResult.cs" />
     <Compile Include="Forms\InputTextForm.cs">
       <SubType>Form</SubType>

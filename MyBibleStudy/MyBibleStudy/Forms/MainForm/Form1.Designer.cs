@@ -1,4 +1,4 @@
-﻿namespace MyBibleStudy
+﻿namespace Vedeg
 {
 	partial class Form1
 	{
@@ -210,7 +210,7 @@
 			// btnPause
 			// 
 			this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(78)))), ((int)(((byte)(102)))));
-			this.btnPause.BackgroundImage = global::MyBibleStudy.Properties.Resources.icons8_pause_64;
+			this.btnPause.BackgroundImage = global::Vedeg.Properties.Resources.icons8_pause_64;
 			this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnPause.FlatAppearance.BorderSize = 0;
 			this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -226,7 +226,7 @@
 			// btnLoad
 			// 
 			this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(78)))), ((int)(((byte)(102)))));
-			this.btnLoad.BackgroundImage = global::MyBibleStudy.Properties.Resources.icons8_open_in_browser_64;
+			this.btnLoad.BackgroundImage = global::Vedeg.Properties.Resources.icons8_open_in_browser_64;
 			this.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnLoad.FlatAppearance.BorderSize = 0;
 			this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -242,7 +242,7 @@
 			// btnSave
 			// 
 			this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(78)))), ((int)(((byte)(102)))));
-			this.btnSave.BackgroundImage = global::MyBibleStudy.Properties.Resources.icons8_save_64;
+			this.btnSave.BackgroundImage = global::Vedeg.Properties.Resources.icons8_save_64;
 			this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnSave.FlatAppearance.BorderSize = 0;
 			this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -258,7 +258,7 @@
 			// btnEnd
 			// 
 			this.btnEnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(78)))), ((int)(((byte)(102)))));
-			this.btnEnd.BackgroundImage = global::MyBibleStudy.Properties.Resources.icons8_stop_64;
+			this.btnEnd.BackgroundImage = global::Vedeg.Properties.Resources.icons8_stop_64;
 			this.btnEnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnEnd.FlatAppearance.BorderSize = 0;
 			this.btnEnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -274,7 +274,7 @@
 			// btnStart
 			// 
 			this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(78)))), ((int)(((byte)(102)))));
-			this.btnStart.BackgroundImage = global::MyBibleStudy.Properties.Resources.icons8_play_64;
+			this.btnStart.BackgroundImage = global::Vedeg.Properties.Resources.icons8_play_64;
 			this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnStart.FlatAppearance.BorderSize = 0;
 			this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
