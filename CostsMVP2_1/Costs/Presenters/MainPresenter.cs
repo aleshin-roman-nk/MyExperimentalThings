@@ -94,8 +94,6 @@ namespace Costs.Forms
 
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 			view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
-
-			DebugMessage.ShowMessage("Документ отработан");
 		}
 
 		private void View_RenameDirectory(Directory obj)

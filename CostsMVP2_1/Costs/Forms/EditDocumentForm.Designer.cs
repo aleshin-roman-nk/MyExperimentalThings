@@ -36,14 +36,14 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.directoriesUC1 = new Costs.Forms.UC.DirectoriesUC();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.purchasesUC1 = new Costs.Forms.UC.PurchasesUC();
 			this.panel3 = new System.Windows.Forms.Panel();
+			this.categoriesUC1 = new Costs.Forms.UC.CategoriesUC();
 			this.btnSaveAndClose = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.chbShowWholeDoc = new System.Windows.Forms.CheckBox();
-			this.directoriesUC1 = new Costs.Forms.UC.DirectoriesUC();
-			this.purchasesUC1 = new Costs.Forms.UC.PurchasesUC();
-			this.categoriesUC1 = new Costs.Forms.UC.CategoriesUC();
 			this.groupBox1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -84,7 +84,7 @@
 			// 
 			// dateTimeControl
 			// 
-			this.dateTimeControl.CustomFormat = "dd-MM-yyyy HH:mm:ss";
+			this.dateTimeControl.CustomFormat = "dd-MM-yyyy HH:mm";
 			this.dateTimeControl.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateTimeControl.Location = new System.Drawing.Point(587, 28);
 			this.dateTimeControl.Name = "dateTimeControl";
@@ -147,6 +147,16 @@
 			this.splitContainer1.SplitterDistance = 290;
 			this.splitContainer1.TabIndex = 2;
 			// 
+			// directoriesUC1
+			// 
+			this.directoriesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.directoriesUC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.directoriesUC1.Location = new System.Drawing.Point(0, 0);
+			this.directoriesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.directoriesUC1.Name = "directoriesUC1";
+			this.directoriesUC1.Size = new System.Drawing.Size(290, 650);
+			this.directoriesUC1.TabIndex = 0;
+			// 
 			// splitContainer2
 			// 
 			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -164,6 +174,16 @@
 			this.splitContainer2.SplitterDistance = 451;
 			this.splitContainer2.TabIndex = 0;
 			// 
+			// purchasesUC1
+			// 
+			this.purchasesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.purchasesUC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.purchasesUC1.Location = new System.Drawing.Point(0, 0);
+			this.purchasesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.purchasesUC1.Name = "purchasesUC1";
+			this.purchasesUC1.Size = new System.Drawing.Size(451, 650);
+			this.purchasesUC1.TabIndex = 0;
+			// 
 			// panel3
 			// 
 			this.panel3.Controls.Add(this.categoriesUC1);
@@ -172,6 +192,16 @@
 			this.panel3.Name = "panel3";
 			this.panel3.Size = new System.Drawing.Size(595, 650);
 			this.panel3.TabIndex = 2;
+			// 
+			// categoriesUC1
+			// 
+			this.categoriesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.categoriesUC1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.categoriesUC1.Location = new System.Drawing.Point(0, 0);
+			this.categoriesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.categoriesUC1.Name = "categoriesUC1";
+			this.categoriesUC1.Size = new System.Drawing.Size(595, 650);
+			this.categoriesUC1.TabIndex = 0;
 			// 
 			// btnSaveAndClose
 			// 
@@ -212,36 +242,6 @@
 			this.chbShowWholeDoc.Text = "Показать документ";
 			this.chbShowWholeDoc.UseVisualStyleBackColor = true;
 			this.chbShowWholeDoc.CheckedChanged += new System.EventHandler(this.chbShowWholeDoc_CheckedChanged);
-			// 
-			// directoriesUC1
-			// 
-			this.directoriesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.directoriesUC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.directoriesUC1.Location = new System.Drawing.Point(0, 0);
-			this.directoriesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.directoriesUC1.Name = "directoriesUC1";
-			this.directoriesUC1.Size = new System.Drawing.Size(290, 650);
-			this.directoriesUC1.TabIndex = 0;
-			// 
-			// purchasesUC1
-			// 
-			this.purchasesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.purchasesUC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.purchasesUC1.Location = new System.Drawing.Point(0, 0);
-			this.purchasesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.purchasesUC1.Name = "purchasesUC1";
-			this.purchasesUC1.Size = new System.Drawing.Size(451, 650);
-			this.purchasesUC1.TabIndex = 0;
-			// 
-			// categoriesUC1
-			// 
-			this.categoriesUC1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.categoriesUC1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.categoriesUC1.Location = new System.Drawing.Point(0, 0);
-			this.categoriesUC1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.categoriesUC1.Name = "categoriesUC1";
-			this.categoriesUC1.Size = new System.Drawing.Size(595, 650);
-			this.categoriesUC1.TabIndex = 0;
 			// 
 			// EditDocumentForm
 			// 

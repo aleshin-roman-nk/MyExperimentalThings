@@ -17,6 +17,6 @@ namespace MyEngDictionary.Views
 
 		event EventHandler ChangeCurrentPack;
 		event EventHandler<CRUDRequest<Phrase>> PhraseCRUDRequset;
-		event EventHandler<ViewResult> Closing;
+		event EventHandler<ViewResult> ClosingView;
 	}
 }

@@ -16,6 +16,7 @@ namespace MyEngDictionary
 	public partial class PhrasePackForm : Form, IPhrasePackView
 	{
 		bool HasUnsaved = false;
+		_view_mode _mode;
 
 		public PhrasePackForm()
 		{
@@ -27,10 +28,12 @@ namespace MyEngDictionary
 
 		public event EventHandler ChangeCurrentPack;
 		public event EventHandler<CRUDRequest<Phrase>> PhraseCRUDRequset;
-		public event EventHandler<ViewResult> Closing;
+		public event EventHandler<ViewResult> ClosingView;
 
 		private void _set_unsaved()
 		{
+			if (_mode == _view_mode.view || _mode ==_view_mode.no_phrases) return;
+
 			HasUnsaved = true;
 			btnSave.Enabled = true;
 		}
@@ -44,11 +47,13 @@ namespace MyEngDictionary
 		private Phrase CurrentPhrase { get; set; }
 		private int current_id { get; set; }
 
-		private enum _view_mode { view, edit }
+		private enum _view_mode { view, edit, no_phrases }
 
 		private void _set_view_mode(_view_mode mode)
 		{
-			if(mode == _view_mode.view)
+			_mode = mode;
+
+			if (mode == _view_mode.view)
 			{
 				btnStartEdit.Enabled = true;
 				btnCancel.Enabled = false;
@@ -59,6 +64,7 @@ namespace MyEngDictionary
 				checkIknowIt.Enabled = false;
 				listPhrases.Enabled = true;
 				txtPhrase.ReadOnly = true;
+				txtPhrasePackName.Enabled = true;
 
 				listPhrases.Select();
 			}
@@ -73,25 +79,37 @@ namespace MyEngDictionary
 				checkIknowIt.Enabled = true;
 				listPhrases.Enabled = false;
 				txtPhrase.ReadOnly = false;
+				txtPhrasePackName.Enabled = false;
+			}
+			else if (mode == _view_mode.no_phrases)
+			{
+				btnStartEdit.Enabled = false;
+				btnCancel.Enabled = false;
+				txtExplanation.ReadOnly = true;
+				txtExercises.ReadOnly = true;
+				rbIdiom.Enabled = false;
+				rbWord.Enabled = false;
+				checkIknowIt.Enabled = false;
+				listPhrases.Enabled = true;
+				txtPhrase.ReadOnly = true;
+				txtPhrasePackName.Enabled = true;
 			}
 		}
 
-		//public void SetPhrases(IEnumerable<Phrase> phrases)
-		//{
-		//	listPhrases.Clear();
-		//	HasUnsaved = false;
-
-		//	foreach (var item in phrases)
-		//	{
-		//		var o = listPhrases.Items.Add(item.TextEng);
-		//		o.Tag = item;
-		//	}
-
-		//	set_focus_on_phrase(current_id);
-		//}
+		private void clear_phrase_view()
+		{
+				txtExplanation.Clear();
+				txtCurrPhrase.Text = null;
+				txtExercises.Clear();
+				txtPhrase.Clear();
+				rbWord.Checked = true;
+				checkIknowIt.Checked = false;
+		}
 
 		private void put_phrase(Phrase p)
 		{
+			if(p == null) return;
+
 			txtExplanation.Text = p.Explanation;
 			txtCurrPhrase.Text = p.TextEng;
 			txtExercises.Text = p.Exercises;
@@ -104,7 +122,11 @@ namespace MyEngDictionary
 
 		private void set_focus_on_phrase(int id)
 		{
-			if (listPhrases.Items.Count == 0) return;
+			if (listPhrases.Items.Count == 0)
+			{
+				clear_phrase_view();
+				return;
+			}
 
 			var i = listPhrases.Items.Cast<ListViewItem>().FirstOrDefault(x => (x.Tag as Phrase).Id == id);
 
@@ -129,8 +151,6 @@ namespace MyEngDictionary
 			CurrentPhrase = i;
 
 			put_phrase(i);
-
-			_set_saved();
 		}
 
 		private void accept_phrase(Phrase p)
@@ -228,7 +248,7 @@ namespace MyEngDictionary
 			if (!HasUnsaved) { e.Cancel = false; return; }
 
 			ViewResult res = new ViewResult { Answer = ViewAnswer.Cancel};
-			Closing?.Invoke(null, res);
+			ClosingView?.Invoke(null, res);
 			
 			e.Cancel = res.Answer == ViewAnswer.Cancel;
 		}
@@ -238,7 +258,7 @@ namespace MyEngDictionary
 			txtPhrasePackName.Text = pack.Name;
 
 			listPhrases.Clear();
-			HasUnsaved = false;
+			_set_saved();
 
 			foreach (var item in pack.Phrases.OrderBy(x=>x.TextEng))
 			{
@@ -246,7 +266,16 @@ namespace MyEngDictionary
 				o.Tag = item;
 			}
 
-			set_focus_on_phrase(current_id);
+			if(pack.Phrases.Count > 0)
+			{
+				set_focus_on_phrase(current_id);
+				_set_view_mode(_view_mode.view);
+			}
+			else
+			{
+				_set_view_mode(_view_mode.no_phrases);
+				clear_phrase_view();
+			}
 		}
 	}
 }

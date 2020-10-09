@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhrasePackForm));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -117,6 +118,7 @@
 			// 
 			this.txtCurrPhrase.AutoSize = true;
 			this.txtCurrPhrase.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtCurrPhrase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtCurrPhrase.Location = new System.Drawing.Point(3, 5);
 			this.txtCurrPhrase.Name = "txtCurrPhrase";
 			this.txtCurrPhrase.Size = new System.Drawing.Size(40, 23);
@@ -125,6 +127,8 @@
 			// 
 			// btnAddPhrase
 			// 
+			this.btnAddPhrase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnAddPhrase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.btnAddPhrase.Location = new System.Drawing.Point(321, 8);
 			this.btnAddPhrase.Name = "btnAddPhrase";
 			this.btnAddPhrase.Size = new System.Drawing.Size(45, 23);
@@ -138,7 +142,9 @@
 			this.listPhrases.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.listPhrases.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
 			this.listPhrases.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.listPhrases.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.listPhrases.HideSelection = false;
 			this.listPhrases.Location = new System.Drawing.Point(0, 38);
 			this.listPhrases.MultiSelect = false;
@@ -182,8 +188,10 @@
 			// 
 			// txtExplanation
 			// 
+			this.txtExplanation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
 			this.txtExplanation.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.txtExplanation.Font = new System.Drawing.Font("Tahoma", 12F);
+			this.txtExplanation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtExplanation.Location = new System.Drawing.Point(0, 23);
 			this.txtExplanation.Name = "txtExplanation";
 			this.txtExplanation.Size = new System.Drawing.Size(323, 431);
@@ -196,6 +204,7 @@
 			this.label1.AutoSize = true;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(211, 23);
@@ -204,8 +213,10 @@
 			// 
 			// txtExercises
 			// 
+			this.txtExercises.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
 			this.txtExercises.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.txtExercises.Font = new System.Drawing.Font("Tahoma", 12F);
+			this.txtExercises.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtExercises.Location = new System.Drawing.Point(0, 32);
 			this.txtExercises.Name = "txtExercises";
 			this.txtExercises.Size = new System.Drawing.Size(415, 422);
@@ -233,6 +244,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.label2.Location = new System.Drawing.Point(3, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(120, 23);
@@ -243,6 +255,7 @@
 			// 
 			this.txtExercisesCount.AutoSize = true;
 			this.txtExercisesCount.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtExercisesCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtExercisesCount.Location = new System.Drawing.Point(132, 0);
 			this.txtExercisesCount.Name = "txtExercisesCount";
 			this.txtExercisesCount.Size = new System.Drawing.Size(20, 23);
@@ -267,7 +280,9 @@
 			// 
 			// txtPhrase
 			// 
+			this.txtPhrase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
 			this.txtPhrase.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtPhrase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtPhrase.Location = new System.Drawing.Point(3, 32);
 			this.txtPhrase.Name = "txtPhrase";
 			this.txtPhrase.Size = new System.Drawing.Size(351, 27);
@@ -277,6 +292,7 @@
 			// checkIknowIt
 			// 
 			this.checkIknowIt.AutoSize = true;
+			this.checkIknowIt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.checkIknowIt.Location = new System.Drawing.Point(543, 7);
 			this.checkIknowIt.Name = "checkIknowIt";
 			this.checkIknowIt.Size = new System.Drawing.Size(156, 17);
@@ -288,6 +304,7 @@
 			// rbIdiom
 			// 
 			this.rbIdiom.AutoSize = true;
+			this.rbIdiom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.rbIdiom.Location = new System.Drawing.Point(451, 6);
 			this.rbIdiom.Name = "rbIdiom";
 			this.rbIdiom.Size = new System.Drawing.Size(65, 17);
@@ -300,6 +317,7 @@
 			// rbWord
 			// 
 			this.rbWord.AutoSize = true;
+			this.rbWord.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.rbWord.Location = new System.Drawing.Point(360, 6);
 			this.rbWord.Name = "rbWord";
 			this.rbWord.Size = new System.Drawing.Size(56, 17);
@@ -311,6 +329,8 @@
 			// 
 			// btnCancel
 			// 
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.btnCancel.Location = new System.Drawing.Point(241, 3);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(113, 23);
@@ -321,6 +341,8 @@
 			// 
 			// btnSave
 			// 
+			this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.btnSave.Location = new System.Drawing.Point(122, 3);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(113, 23);
@@ -331,6 +353,8 @@
 			// 
 			// btnStartEdit
 			// 
+			this.btnStartEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnStartEdit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.btnStartEdit.Location = new System.Drawing.Point(3, 3);
 			this.btnStartEdit.Name = "btnStartEdit";
 			this.btnStartEdit.Size = new System.Drawing.Size(113, 23);
@@ -343,6 +367,7 @@
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.label4.Location = new System.Drawing.Point(12, 9);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(72, 23);
@@ -354,6 +379,8 @@
 			this.txtPhrasePackName.AutoSize = true;
 			this.txtPhrasePackName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.txtPhrasePackName.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtPhrasePackName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
+			this.txtPhrasePackName.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtPhrasePackName.Location = new System.Drawing.Point(90, 9);
 			this.txtPhrasePackName.Name = "txtPhrasePackName";
 			this.txtPhrasePackName.Size = new System.Drawing.Size(106, 25);
@@ -376,12 +403,16 @@
 			// 
 			// toolStripStatusLabel1
 			// 
+			this.toolStripStatusLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+			this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
 			this.toolStripStatusLabel1.Size = new System.Drawing.Size(174, 19);
 			this.toolStripStatusLabel1.Text = "Всего слов в словаре :";
 			// 
 			// txtTotalWordCount
 			// 
+			this.txtTotalWordCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+			this.txtTotalWordCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtTotalWordCount.Name = "txtTotalWordCount";
 			this.txtTotalWordCount.Size = new System.Drawing.Size(27, 19);
 			this.txtTotalWordCount.Text = "20";
@@ -390,11 +421,13 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
 			this.ClientSize = new System.Drawing.Size(1148, 615);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.txtPhrasePackName);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.panel1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(1164, 654);
 			this.Name = "PhrasePackForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -451,8 +484,8 @@
 		private System.Windows.Forms.LinkLabel txtPhrasePackName;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-		private System.Windows.Forms.ToolStripStatusLabel txtTotalWordCount;
 		private System.Windows.Forms.TextBox txtPhrase;
+		private System.Windows.Forms.ToolStripStatusLabel txtTotalWordCount;
 	}
 }
 

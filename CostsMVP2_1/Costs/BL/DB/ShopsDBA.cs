@@ -14,7 +14,7 @@ namespace Costs.BL.DB
 		{
 			using (AppData db = new AppData())
 			{
-				return db.Shops.ToList();
+				return db.Shops.OrderBy(x => x.Name).ToList();
 			}
 		}
 		public static void Delete(Shop s)

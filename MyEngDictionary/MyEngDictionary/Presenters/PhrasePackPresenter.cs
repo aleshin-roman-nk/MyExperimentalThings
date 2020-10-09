@@ -3,7 +3,6 @@ using MyEngDictionary.BL.DBA;
 using MyEngDictionary.BL.Entities;
 using MyEngDictionary.BL.Models;
 using MyEngDictionary.Forms;
-using MyEngDictionary.Utilites;
 using MyEngDictionary.Views;
 using System;
 using System.Collections.Generic;
@@ -70,7 +69,7 @@ namespace MyEngDictionary.Presenters
 
 			_phrasePackView.PhraseCRUDRequset += _phrasePackView_PhraseCRUDRequset;
 			_phrasePackView.ChangeCurrentPack += _phrasePackView_ChangeCurrentPack;
-			_phrasePackView.Closing += _phrasePackView_Closing;
+			_phrasePackView.ClosingView += _phrasePackView_Closing;
 
 			_phrasePackModel.LoadLastPhrasePack();
 
@@ -86,6 +85,14 @@ namespace MyEngDictionary.Presenters
 			{
 				_phrasePackModel.PhrasePack = res.Data as PhrasePack;
 				_phrasePackView.SetPhrasePack(_phrasePackModel.PhrasePack);
+			}
+			else
+			{
+				if (!_phrasePackModel.PhrasePackExists(_phrasePackModel.PhrasePack.Id))
+				{
+					_phrasePackModel.LoadLastPhrasePack();
+					_phrasePackView.SetPhrasePack(_phrasePackModel.PhrasePack);
+				}
 			}
 		}
 

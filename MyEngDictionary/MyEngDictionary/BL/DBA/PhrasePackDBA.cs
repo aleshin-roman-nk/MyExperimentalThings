@@ -39,8 +39,22 @@ namespace MyEngDictionary.BL.DBA
 		{
 			using (AppData db = new AppData())
 			{
+				foreach (var item in pack.Phrases)
+				{
+					item.PhrasePackId = 0;
+					db.Entry(item).State = item.Id == 0 ? EntityState.Added : EntityState.Modified;
+				}
+
 				db.Entry(pack).State = EntityState.Deleted;
 				db.SaveChanges();
+			}
+		}
+
+		public static bool PhrasePackExists(int id)
+		{
+			using (AppData db = new AppData())
+			{
+				return db.PhrasePacks.FirstOrDefault(x => x.Id == id) != null;
 			}
 		}
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MyEngDictionary.Utilites
+namespace MyEngDictionary
 {
 	public class Debugger
 	{
@@ -14,6 +14,11 @@ namespace MyEngDictionary.Utilites
 			string j = Newtonsoft.Json.JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
 
 			MessageBox.Show(j);
+		}
+
+		public static void Msg(string msg)
+		{
+			MessageBox.Show(msg);
 		}
 	}
 }

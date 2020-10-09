@@ -48,20 +48,16 @@ using System.Threading.Tasks;
 
 namespace MyEngDictionary.BL.Models
 {
+
+	/*
+	 * >>> 21-08-2020 00:36
+	 * Одна модель обслуживает один презентер, который обслуживает один view.
+	 * Если модель слишком сложная, разделить ее на вспомогательные логические части.
+	 * 
+	 */
 	public class PhrasePackModel
 	{
-		PhrasePack _phrasePack;
-		public PhrasePack PhrasePack
-		{
-			get
-			{
-				return _phrasePack;
-			}
-			set
-			{// Кстати можно вешать event на смену текущей сущности на тот случай, если view следит за переменными сущности
-				_phrasePack = value;
-			}
-		}
+		public PhrasePack PhrasePack { get; set; }
 
 		public PhrasePackModel()
 		{
@@ -86,15 +82,18 @@ namespace MyEngDictionary.BL.Models
 
 		public void Reload()
 		{
-			int id = _phrasePack.Id;
-
-			_phrasePack = PhrasePackDBA.Get(id);
+			PhrasePack = PhrasePackDBA.Get(PhrasePack.Id);
 		}
 
 		public void LoadLastPhrasePack()
 		{
 			// именно через property чтобы возбуждать event
 			PhrasePack = PhrasePackDBA.GetLastPhrasePack();
+		}
+
+		public bool PhrasePackExists(int id)
+		{
+			return PhrasePackDBA.PhrasePackExists(id);
 		}
 	}
 }

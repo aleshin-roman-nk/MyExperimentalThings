@@ -26,7 +26,6 @@ namespace MyEngDictionary.Presenters
 		{
 			if(e.CRUDCode == CRUDType.Create)
 			{
-
 				var res = DialCommuna.Dialogs.InputText.Show("Введите название новой группы");
 				if(res.Answer == ViewAnswer.Ok)
 				{
@@ -34,6 +33,13 @@ namespace MyEngDictionary.Presenters
 					
 					pack.Name = res.Data;
 					_phrasePackManagerModel.Save(pack);
+					_reloadView();
+				}
+			}else if(e.CRUDCode == CRUDType.Delete)
+			{
+				if(DialCommuna.Dialogs.UserAnswerYes.Show($"Удалить пакет {e.Data.Name}?", "УДАЛЕНИЕ ПАКЕТА"))
+				{
+					_phrasePackManagerModel.Delete(e.Data);
 					_reloadView();
 				}
 			}

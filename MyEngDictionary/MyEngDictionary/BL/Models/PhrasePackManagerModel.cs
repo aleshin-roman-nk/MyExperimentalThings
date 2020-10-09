@@ -63,5 +63,10 @@ namespace MyEngDictionary.BL.Models
 			pack.LastWrite = DateTime.Now;
 			PhrasePackDBA.Save(pack);
 		}
+
+		public void Delete(PhrasePack pack)
+		{
+			PhrasePackDBA.Delete(pack);
+		}
 	}
 }
