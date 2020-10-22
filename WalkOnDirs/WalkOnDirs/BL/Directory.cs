@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoneyAccouting.BL.Entities
+namespace WalkOnDirs.BL
 {
-	public class Category
+	public class Directory
 	{
 		public int Id { get; set; }
+		public int ParentId { get; set; }
 		public string Name { get; set; }
 	}
 }

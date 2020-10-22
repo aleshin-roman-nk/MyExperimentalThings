@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SimpleCosts.Properties
+namespace WalkOnDirs.Properties
 {
 
 

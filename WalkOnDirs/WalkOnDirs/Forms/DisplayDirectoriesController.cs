@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCosts.BL.Presenters
+namespace WalkOnDirs.Forms
 {
-	public class MainPresenter
+	public class DisplayDirectoriesController
 	{
 
 	}

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ABCAB293-C26B-405E-811B-205B6DE35A89}</ProjectGuid>
+    <ProjectGuid>{3571F1F9-C440-4467-AC4A-6FF550CEE1BD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MoneyAccouting</RootNamespace>
-    <AssemblyName>MoneyAccouting</AssemblyName>
+    <RootNamespace>WalkOnDirs</RootNamespace>
+    <AssemblyName>WalkOnDirs</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,23 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\Entities\Category.cs" />
-    <Compile Include="BL\Entities\Product.cs" />
-    <Compile Include="BL\Entities\ProductType.cs" />
-    <Compile Include="BL\Entities\CashDocument.cs" />
-    <Compile Include="BL\Entities\Shop.cs" />
-    <Compile Include="BL\Entities\Tag.cs" />
-    <Compile Include="BL\Models\ProductsModel.cs" />
-    <Compile Include="BL\Models\CashDocumentModel.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="BL\Directory.cs" />
+    <Compile Include="BL\DirectoryCollection.cs" />
+    <Compile Include="Forms\DisplayDirectoriesController.cs" />
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -86,9 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\Db\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
