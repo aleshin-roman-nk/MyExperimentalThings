@@ -136,8 +136,9 @@ namespace MyEngDictionary.Presenters
 			_phrasePackView.SetPhrasePack(_phrasePackModel.PhrasePack);
 		}
 
-		public void Register(IPresenterHub hub)
+		public void Init(IPresenterHub hub)
 		{
+			// Запоминаем ссылу, куда отправлять запрос.
 			_hub = hub;
 		}
 

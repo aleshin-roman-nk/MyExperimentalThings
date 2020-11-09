@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIImagine", "UIImagine.csproj", "{901C8D54-FCC4-431E-826F-1C74D511E912}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLModel", "BLModel\BLModel.csproj", "{F630E868-76EE-49B0-9F06-32CD149D12BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrRomic", "..\Calendar\DrRomic.csproj", "{98B129E2-2E5B-4CF8-B7FC-325266320579}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{901C8D54-FCC4-431E-826F-1C74D511E912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{901C8D54-FCC4-431E-826F-1C74D511E912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{901C8D54-FCC4-431E-826F-1C74D511E912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{901C8D54-FCC4-431E-826F-1C74D511E912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F630E868-76EE-49B0-9F06-32CD149D12BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B129E2-2E5B-4CF8-B7FC-325266320579}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2F671D4-497F-4E53-AA7A-FBCD8D4BE191}
+	EndGlobalSection
+EndGlobal

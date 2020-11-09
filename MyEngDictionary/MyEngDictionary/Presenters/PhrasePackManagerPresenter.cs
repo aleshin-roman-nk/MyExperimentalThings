@@ -45,9 +45,10 @@ namespace MyEngDictionary.Presenters
 			}
 		}
 
-		public void Register(IPresenterHub hub)
+		public void Init(IPresenterHub hub)
 		{
-			hub.Register(EventType.SelectPhrasePack, _run);
+			// Регистрируем обработку команды 
+			hub.RegisterCommand(EventType.SelectPhrasePack, _run);
 		}
 
 		ViewResult<object> _run(object o)

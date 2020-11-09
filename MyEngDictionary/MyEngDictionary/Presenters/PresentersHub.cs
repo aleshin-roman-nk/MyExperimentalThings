@@ -9,20 +9,33 @@ namespace MyEngDictionary.Presenters
 {
 	public interface IPresenterHub
 	{
-		void Register(EventType eventType, Func<object, ViewResult<object>> f);
+		void RegisterCommand(EventType eventType, Func<object, ViewResult<object>> f);
 		ViewResult<object> Publish(EventType eventType, object p);
-		IPresenterHub AddPresenter(IPresenter p);
+		IPresenterHub JoinMe(IPresenter p);
 	}
 
 	public interface IPresenter
 	{
-		void Register(IPresenterHub hub);
+		void Init(IPresenterHub hub);
 	}
+
+	// >>> 08-11-2020 16:45
+	#region Презентеры сервер и клиент. Один презентер может реализовать и клиент и сервер
+	public interface IPresenterClient
+	{
+
+	}
+
+	public interface IPresenterServer
+	{
+
+	}
+	#endregion
 
 	public class PresenterHub : IPresenterHub
 	{
 		Dictionary<EventType, Func<object, ViewResult<object>>> events = new Dictionary<EventType, Func<object, ViewResult<object>>>();
-		public void Register(EventType eventType, Func<object, ViewResult<object>> f)
+		public void RegisterCommand(EventType eventType, Func<object, ViewResult<object>> f)
 		{
 			if (events.ContainsKey(eventType)) return;
 
@@ -36,9 +49,15 @@ namespace MyEngDictionary.Presenters
 			return res;
 		}
 
-		public IPresenterHub AddPresenter(IPresenter p)
+		//--- мы НЕ добавляем презентер, а только
+		// один клиент. все остальные - исполнители
+		// и возможны одновременно и исполнители и клиенты.
+		// как работать с мелкими окошками?
+		// кстати, можно попробовать использовать эту тактику комуникации p-v.
+		//	Но там уже есть альт. - это одно событие запроса. и именно объект запроса - команда с паараметрами.
+		public IPresenterHub JoinMe(IPresenter p)
 		{
-			p.Register(this);
+			p.Init(this);
 
 			return this;
 		}

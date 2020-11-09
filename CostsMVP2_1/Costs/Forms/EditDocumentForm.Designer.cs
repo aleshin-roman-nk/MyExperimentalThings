@@ -202,6 +202,7 @@
 			this.categoriesUC1.Name = "categoriesUC1";
 			this.categoriesUC1.Size = new System.Drawing.Size(595, 650);
 			this.categoriesUC1.TabIndex = 0;
+			this.categoriesUC1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.categoriesUC1_KeyDown);
 			// 
 			// btnSaveAndClose
 			// 

@@ -21,5 +21,6 @@ namespace Costs.Views.Parts
 		event Action<Category> CreateProductTypeCmd;
 		event Action<Category> DeleteCategoryCmd;
 		event Action<ProductType> DeleteProductTypeCmd;
+		event Action<ProductType> AddPointToDoc;
 	}
 }

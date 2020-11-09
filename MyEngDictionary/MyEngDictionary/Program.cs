@@ -28,8 +28,8 @@ namespace MyEngDictionary
 
 			PresenterHub hub = new PresenterHub();
 
-			hub.AddPresenter(phrasePackPresenter)
-				.AddPresenter(phrasePackManagerPresenter);
+			hub.JoinMe(phrasePackPresenter)
+				.JoinMe(phrasePackManagerPresenter);
 
 
 			Application.Run(f);

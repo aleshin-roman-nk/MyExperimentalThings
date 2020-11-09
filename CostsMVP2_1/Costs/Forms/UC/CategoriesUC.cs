@@ -33,6 +33,7 @@ namespace Costs.Forms.UC
 		public event Action<Category> CreateProductTypeCmd;
 		public event Action<Category> DeleteCategoryCmd;
 		public event Action<ProductType> DeleteProductTypeCmd;
+		public event Action<ProductType> AddPointToDoc;
 
 		public void SetCategories(IEnumerable<Category> categs)
 		{
@@ -69,13 +70,29 @@ namespace Costs.Forms.UC
 		{
 			if (lvProductTypes.SelectedItems.Count == 0) return;
 
-			var cat = lvProductTypes.SelectedItems[0].Tag as Category;
-			if (cat == null) return;
+			//var cat = lvProductTypes.SelectedItems[0].Tag as Category;
+			//if (cat == null) return;
 
-			currentCategoryObserver.CurrentCategory = cat;// Кстати, храня во view текущий объект, можно делать что то вроде cat.Clone() если боюсь, что кто то в др месте уничтожит этот экземпляр по ссылке.
-			currentCategoryObserver.IsCategoryLevel = false;
+			//currentCategoryObserver.CurrentCategory = cat;// Кстати, храня во view текущий объект, можно делать что то вроде cat.Clone() если боюсь, что кто то в др месте уничтожит этот экземпляр по ссылке.
+			//currentCategoryObserver.IsCategoryLevel = false;
 
-			UpdateProductTypes?.Invoke(cat);
+			//UpdateProductTypes?.Invoke(cat);
+
+			var _item = lvProductTypes.SelectedItems[0].Tag;
+
+			if(_item is Category)
+			{
+				// enter category
+				currentCategoryObserver.CurrentCategory = _item as Category;
+				currentCategoryObserver.IsCategoryLevel = false;
+				UpdateProductTypes?.Invoke(_item as Category);
+			}
+			else
+			{
+				// rise an event to add a point into the document
+				AddPointToDoc?.Invoke(_item as ProductType);
+			}
+
 		}
 		void exitCategory()
 		{

@@ -47,6 +47,7 @@ namespace Costs.Presenters
 			_editDocumentView.CategoriesView.CreateProductTypeCmd += CategoriesView_CreateProductTypeCmd;
 			_editDocumentView.CategoriesView.DeleteCategoryCmd += CategoriesView_DeleteCategoryCmd;
 			_editDocumentView.CategoriesView.DeleteProductTypeCmd += CategoriesView_DeleteProductTypeCmd;
+			_editDocumentView.CategoriesView.AddPointToDoc += CategoriesView_AddPointToDoc;
 
 			_editDocumentView.DirectoriesView.CreateDirectoryCmd += DirectoriesView_CreateDirectoryCmd;
 			_editDocumentView.DirectoriesView.PurchaseDroppedCmd += DirectoriesView_PurchaseDroppedCmd;
@@ -54,6 +55,11 @@ namespace Costs.Presenters
 			_editDocumentView.PurchasesView.ProductTypeDropped += PurchasesView_ProductTypeDropped;
 			_editDocumentView.PurchasesView.DeletePurchaseCmd += PurchasesView_DeletePurchaseCmd;
 			_editDocumentView.ShopNameRequested += _editDocumentView_ShopNameRequested;
+		}
+
+		private void CategoriesView_AddPointToDoc(ProductType obj)
+		{
+			PurchasesView_ProductTypeDropped(obj);
 		}
 
 		private void _editDocumentView_ShopNameRequested(object sender, EventArgs e)

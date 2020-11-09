@@ -118,5 +118,10 @@ namespace Costs.Forms
 		{
 			ShopNameRequested?.Invoke(null, EventArgs.Empty);
 		}
+
+		private void categoriesUC1_KeyDown(object sender, KeyEventArgs e)
+		{
+
+		}
 	}
 }
