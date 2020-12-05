@@ -282,6 +282,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fixes.txt" />
     <Content Include="Forms\Note.txt" />
     <Content Include="icons8-fund-accounting-32.ico" />
     <Content Include="Notice.txt" />

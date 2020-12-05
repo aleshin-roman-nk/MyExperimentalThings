@@ -25,5 +25,10 @@ namespace Costs.BL.Models
 
 			return PayDocumentDBA.GetPaymentDocs(from, to);
 		}
+
+		public void Delete(PaymentDoc doc)
+		{
+			PayDocumentDBA.Delete(doc);
+		}
 	}
 }

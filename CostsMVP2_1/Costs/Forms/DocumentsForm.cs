@@ -52,6 +52,7 @@ namespace Costs.Forms.PayDocumentsForm
 		public event EventHandler<PeriodChangedEventArg> PeriodChanged;
 		public event EventHandler<PaymentDoc> EditDocumentRequired;
 		public event EventHandler<PaymentDoc> CurrentChanged;
+		public event Action<PaymentDoc> DeletePayDocument;
 
 		public void Go()
         {
@@ -75,13 +76,22 @@ namespace Costs.Forms.PayDocumentsForm
 
 		private void lbPayDocuments_KeyDown(object sender, KeyEventArgs e)
 		{
-            if (e.KeyCode != Keys.Enter) return;
-
             var current = lbPayDocuments.SelectedItem as PaymentDoc;
-
             if (current == null) return;
 
-            EditDocumentRequired?.Invoke(this, current);
+            if (e.KeyCode == Keys.Delete)
+			{
+                DeletePayDocument?.Invoke(current);
+                e.Handled = true;
+                return;
+			}
+
+            if (e.KeyCode == Keys.Enter)
+			{
+				EditDocumentRequired?.Invoke(this, current);
+                e.Handled = true;
+			}
+
         }
 
 		private void dateTimeControl_ValueChanged(object sender, EventArgs e)

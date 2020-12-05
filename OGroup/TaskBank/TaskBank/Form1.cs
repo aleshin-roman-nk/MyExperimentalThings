@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaskBank.BL;
 using TaskBank.BL.DBAccess;
-using Task = TaskBank.BL.Entities.Task;
+using TaskBank.BL.Models;
+using TaskBank.Dlg;
+using TaskBank.Dlg.forms;
+using RmTask = TaskBank.BL.Entities.RmTask;
 
 namespace TaskBank
 {
@@ -18,7 +21,7 @@ namespace TaskBank
 		TaskCollection _taskCollection;
 		BindingSource bs;
 
-		Task currentTask = null;
+		RmTask currentTask = null;
 		bool isTaskChanged = false;
 
 		public Form1()
@@ -28,26 +31,38 @@ namespace TaskBank
 			//_taskCollection = new TaskCollection();
 			bs = new BindingSource();
 			//displayTasks(_taskCollection.Tasks);
-		}
-
-		private void displayTasks(IEnumerable<Task> tcollection)
-		{
-			dataGridView1.Columns.Clear();
 
 			dataGridView1.AutoGenerateColumns = false;
-			DataGridViewTextBoxColumn c = new DataGridViewTextBoxColumn();
-			c.Width = 400;
-			c.HeaderText = "Задачи";
-			c.DataPropertyName = "Text";
-			c.Name = "Text";
-			dataGridView1.Columns.Add(c);
+
+			DataGridViewTextBoxColumn c1 = new DataGridViewTextBoxColumn
+			{
+				Width = 40,
+				HeaderText = "#",
+				DataPropertyName = "Id",
+				Name = "Id"
+			};
+			DataGridViewTextBoxColumn c2 = new DataGridViewTextBoxColumn
+			{
+				Width = 400,
+				HeaderText = "Задачи",
+				DataPropertyName = "Text",
+				Name = "Text"
+			};
+			dataGridView1.Columns.Add(c1);
+			dataGridView1.Columns.Add(c2);
+			dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			dataGridView1.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+			init();
+		}
+
+		private void displayTasks(IEnumerable<RmTask> tcollection)
+		{
 			bs.DataSource = tcollection;
 			dataGridView1.DataSource = bs;
-			dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-			//dataGridView1.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
+			
 			richTextBox1.DataBindings.Clear();
-			richTextBox1.DataBindings.Add("Text", bs, "Text");
+			richTextBox1.DataBindings.Add("Rtf", bs, "Text");
 		}
 
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -57,7 +72,7 @@ namespace TaskBank
 
 		private void richTextBox1_Enter(object sender, EventArgs e)
 		{
-			currentTask = bs.Current as Task;
+			currentTask = bs.Current as RmTask;
 
 			Text = "richTextBox1_Enter";
 		}
@@ -70,12 +85,35 @@ namespace TaskBank
 			Text = "richTextBox1_Leave";
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void init()
 		{
-			TaskCollectionDb dbModel = new TaskCollectionDb();
-			var list = dbModel.GetTasks();
+			TaskDA dbModel = new TaskDA();
+			var list = dbModel.GetAll();
 			_taskCollection = new TaskCollection(list);
 			displayTasks(_taskCollection.Tasks);
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			TaskDA dbModel = new TaskDA();
+
+			IRmTaskForm f = new RmTaskForm();
+
+			var res = f.Show("prompt");
+
+			if (string.IsNullOrEmpty(res))
+				return;
+
+			dbModel.Create(res);
+
+			var list = dbModel.GetAll();
+			_taskCollection = new TaskCollection(list);
+			displayTasks(_taskCollection.Tasks);
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

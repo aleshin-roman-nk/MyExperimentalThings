@@ -1,0 +1,22 @@
+﻿>>> 27-11-2020 20:45
+При добавлении директории в окне документа, возвращаясь в главное окно не отображаются
+покупки этой новой директории.
+Проблема была в алгоритме.
+Особенности DirectoriesModel.
+Данные полностью из базы данных загружались только методом Load.
+Метод GetDirectories напрямую брал из базы данных.
+Соответственно внутренняя коллекция Directories в объекте DirectoriesModel не обновлялась
+Обращение к
+model.PurchasesModel.Load
+(model.DirectoriesModel.ReadAllChildren(dir), dt, IsMonth ? Period.Month : Period.Day);
+а именно model.DirectoriesModel.ReadAllChildren(dir) видит только коллекцию, загруженную
+при старте.
+Следующие изменения устранили неисправность:
+public IEnumerable<Directory> GetDirectories()
+{
+// При вызове в любом случае коллекция перезагружается из бд
+	Directories = DirectoryDBA.ReadAll();
+// И возвращаем актуализированный блок.
+	return Directories;
+	//return DirectoryDBA.ReadAll();
+}

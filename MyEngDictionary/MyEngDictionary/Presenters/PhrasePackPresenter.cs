@@ -136,6 +136,7 @@ namespace MyEngDictionary.Presenters
 			_phrasePackView.SetPhrasePack(_phrasePackModel.PhrasePack);
 		}
 
+		// client (requests another presenter to provide data)
 		public void Init(IPresenterHub hub)
 		{
 			// Запоминаем ссылу, куда отправлять запрос.

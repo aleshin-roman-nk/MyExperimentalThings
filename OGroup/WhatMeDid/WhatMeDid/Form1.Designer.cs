@@ -67,6 +67,7 @@
 			this.richTextBox1.TabIndex = 1;
 			this.richTextBox1.Text = "";
 			this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+			this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			// 
 			// btnTagEnter
 			// 

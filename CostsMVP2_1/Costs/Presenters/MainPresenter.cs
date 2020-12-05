@@ -59,7 +59,7 @@ namespace Costs.Forms
 			_dlgView = factory.CreateDialogMessages();
 			_factory = factory;
 
-			model.DirectoriesModel.Load();
+			//model.DirectoriesModel.Load();
 
 			// * part presenter: Directory TreeView
 			view.DirectoriesView.CreateDirectoryCmd += View_CreateDirectory;
@@ -131,6 +131,7 @@ namespace Costs.Forms
 			if (!string.IsNullOrEmpty(name))
 			{
 				d.CreateChild(name).Save();
+				//model.DirectoriesModel.Load();
 				view.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 			}
 		}
@@ -195,19 +196,6 @@ namespace Costs.Forms
 			}
 		}
 
-		private void View_EditPurchaseCmd(Purchase obj)
-		{
-			if (obj == null) return;
-
-			var res = new EditPurchasePresenter(new EditPurchaseForm()).Run(obj).Result();
-
-			if (res != null)
-			{
-				obj.Accept(res);
-				obj.Save();
-				//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
-			}
-		}
 		private void View_PurchaseDroppedCmd(PurchaseDroppedEventArg e)
 		{
 			e.Desc.Attach(e.Dropped, model.DirectoriesModel);
@@ -215,24 +203,6 @@ namespace Costs.Forms
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}
 
-		// Create a new purchase.
-		//private void View_CreatePurchase(CreatePurchaseEventArg e)
-		//{
-		//	Purchase product = EntityFactory.CreatePurchase(e.Date);
-
-		//	if(e.ProductType != null) product.Name = e.ProductType.Name;
-		//	//product.DirectoryID = view.CurrentDirectory.ID;
-
-		//	var res = new EditPurchasePresenter(new EditPurchaseForm()).Run(product).Result();
-
-		//	if (res != null)
-		//	{
-		//		product.Accept(res);
-
-		//		product.Save();
-		//		//reloadPurchases(view.CurrentDirectory, view.CurrentDate, view.OneDay);
-		//	}
-		//}
 		private void reloadPurchases(Directory dir, DateTime dt, bool IsMonth)
 		{
 			model.PurchasesModel.Load(model.DirectoriesModel.ReadAllChildren(dir), dt, IsMonth ? Period.Month : Period.Day);

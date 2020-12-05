@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,15 @@ namespace WhatMeDid
 		[STAThread]
 		static void Main()
 		{
+			String thisprocessname = Process.GetCurrentProcess().ProcessName;
+
+			if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)
+			{
+				MessageBox.Show("I am already running =)");
+
+				return;
+			}
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 

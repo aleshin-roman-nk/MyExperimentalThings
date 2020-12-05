@@ -34,6 +34,8 @@ namespace Costs.Forms.Common
 		KbdHandler kbdHandler = new KbdHandler();
 		DataGridViewDrop<ProductType> ProductTypeDrop;
 
+		DataGridViewRow draggedRow = null;
+
 		public event Action<Purchase> EditPurchase;
 		public event Action<Purchase> DeletePurchase;
 		public event Action<ProductType> CreatePurchase;
@@ -63,8 +65,14 @@ namespace Costs.Forms.Common
 			kbdHandler.SetControl(gridView);
 
 			gridView.MouseMove += dataGridView_MouseMove;
+			gridView.MouseDown += GridView_MouseDown;
 
 			setupKeys();
+		}
+
+		private void GridView_MouseDown(object sender, MouseEventArgs e)
+		{
+			draggedRow = getRowAtPoint(gridView, new Point(e.X, e.Y));
 		}
 
 		private void dataGridView_MouseMove(object sender, MouseEventArgs e)
@@ -72,9 +80,11 @@ namespace Costs.Forms.Common
 			// Из за этого алгоритма возникла путанница. Так как я начинал тащить из другого контрола, проходя над этим, автоматически запускается драг здесь
 			if (e.Button == MouseButtons.Left)
 			{
-				var row = getRowAtPoint(gridView, new Point(e.X, e.Y));
-				if (row != null)
-					gridView.DoDragDrop(row.DataBoundItem, DragDropEffects.Move);
+				if (draggedRow != null)
+				{
+					gridView.DoDragDrop(draggedRow.DataBoundItem, DragDropEffects.Move);
+					draggedRow = null;
+				}
 			}
 		}
 

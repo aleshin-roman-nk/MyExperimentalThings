@@ -35,5 +35,23 @@ namespace Costs.BL.DB
 				db.SaveChanges();
 			}
 		}
+
+		public static void Delete(PaymentDoc doc)
+		{
+			if (doc.Id == 0) return;
+			int doc_id = doc.Id;
+
+			using (AppData db = new AppData())
+			{
+				var d = db.PaymentDocs.Include("Purchases").FirstOrDefault(x => x.Id == doc_id);
+				if (d == null) return;
+
+				db.Purchases.RemoveRange(d.Purchases);
+
+				db.Entry(d).State = System.Data.Entity.EntityState.Deleted;
+
+				db.SaveChanges();
+			}
+		}
 	}
 }

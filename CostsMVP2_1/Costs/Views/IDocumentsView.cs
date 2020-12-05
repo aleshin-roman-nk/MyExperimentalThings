@@ -10,6 +10,7 @@ namespace Costs.Views
 		event EventHandler<PeriodChangedEventArg> PeriodChanged;
 		event EventHandler<PaymentDoc> EditDocumentRequired;
 		event EventHandler<PaymentDoc> CurrentChanged;
+		event Action<PaymentDoc> DeletePayDocument;
 		void SetDocuments(IEnumerable<PaymentDoc> docs);
 		void SetAmount(decimal am);
 		void Go();

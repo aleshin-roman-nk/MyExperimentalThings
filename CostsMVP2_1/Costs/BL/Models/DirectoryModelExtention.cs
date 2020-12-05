@@ -21,7 +21,7 @@ namespace Costs.BL.Models
 		public static void Attach(this Directory _thisDir, Purchase p, DirectoriesModel dirs)
 		{
 			p.DirectoryID = _thisDir.ID;
-			p.DirName = dirs.GetDirFullName(_thisDir.ID); ;
+			p.DirName = dirs.GetDirFullName(_thisDir.ID);
 			//p.Directory = _thisDir;
 
 			//PurchasesDBA.Save(p);// Возможно не стоит в этих методах делать непрозрачные действия. Сохранять отдельным методом.

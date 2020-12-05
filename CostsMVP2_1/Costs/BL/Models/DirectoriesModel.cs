@@ -18,10 +18,10 @@ namespace Costs.Models
 	{
 		public IEnumerable<Directory> Directories { get; private set; } = null;
 
-		public void Load()
-		{
-			Directories = DirectoryDBA.ReadAll();
-		}
+		//public void Load()
+		//{
+		//	Directories = DirectoryDBA.ReadAll();
+		//}
 
 		public string GetDirFullName(int dirid)
 		{
@@ -99,7 +99,9 @@ namespace Costs.Models
 
 		public IEnumerable<Directory> GetDirectories()
 		{
-			return DirectoryDBA.ReadAll();
+			Directories = DirectoryDBA.ReadAll();
+			return Directories;
+			//return DirectoryDBA.ReadAll();
 		}
 
 		public Directory GetDirectory(int id)

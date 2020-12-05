@@ -13,15 +13,17 @@ namespace DialCommuna.Dialogs
 	{
 		public static ViewResult<string> Show(string title, string init = null)
 		{
-			var d = new InputTextForm();
-			d.SetInitText(init, title);
-
-			if(DialogResult.OK == d.ShowDialog())
+			using (var d = new InputTextForm())
 			{
-				return new ViewResult<string> { Answer = ViewAnswer.Ok, Data = d.InputedText };
-			}
+				d.SetInitText(init, title);
 
-			return new ViewResult<string> { Answer = ViewAnswer.Cancel };
+				if (DialogResult.OK == d.ShowDialog())
+				{
+					return new ViewResult<string> { Answer = ViewAnswer.Ok, Data = d.InputedText };
+				}
+
+				return new ViewResult<string> { Answer = ViewAnswer.Cancel };
+			}
 		}
 	}
 }

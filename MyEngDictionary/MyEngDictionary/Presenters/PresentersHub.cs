@@ -26,7 +26,7 @@ namespace MyEngDictionary.Presenters
 
 	}
 
-	public interface IPresenterServer
+	public interface IPresenterExecutor
 	{
 
 	}

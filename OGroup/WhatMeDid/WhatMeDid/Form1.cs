@@ -212,5 +212,13 @@ namespace WhatMeDid
 			setNotationLevel(NotationLevel.Report);
 			UpdateModeTitle();
 		}
+
+		private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.Control && e.KeyCode == Keys.S)
+			{
+				if (!saved) saveReport();
+			}
+		}
 	}
 }

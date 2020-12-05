@@ -45,6 +45,7 @@ namespace MyEngDictionary.Presenters
 			}
 		}
 
+		// executor (does something to make requested data then returns it)
 		public void Init(IPresenterHub hub)
 		{
 			// Регистрируем обработку команды 

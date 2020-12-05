@@ -68,11 +68,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\DBAccess\DataProvider.cs" />
     <Compile Include="BL\DBAccess\SQLiteConfig.cs" />
-    <Compile Include="BL\DBAccess\TaskCollectionDb.cs" />
-    <Compile Include="BL\DBAccess\DbMake.cs" />
-    <Compile Include="BL\Entities\Task.cs" />
-    <Compile Include="BL\TaskCollection.cs" />
+    <Compile Include="BL\DBAccess\TaskDA.cs" />
+    <Compile Include="BL\DBAccess\MainDb.cs" />
+    <Compile Include="BL\Entities\RmTask.cs" />
+    <Compile Include="BL\Models\TaskCollection.cs" />
+    <Compile Include="Dlg\forms\RmTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlg\forms\RmTaskForm.Designer.cs">
+      <DependentUpon>RmTaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dlg\RmDialogs.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +89,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dlg\forms\RmTaskForm.resx">
+      <DependentUpon>RmTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

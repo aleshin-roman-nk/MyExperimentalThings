@@ -63,5 +63,16 @@ namespace Costs.Forms
 		{
 			DeleteShop?.Invoke(null, CurrentShop);
 		}
+
+		private void listBox1_DoubleClick(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.OK;
+		}
+
+		private void listBox1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.KeyCode == Keys.Enter)
+				DialogResult = DialogResult.OK;
+		}
 	}
 }
