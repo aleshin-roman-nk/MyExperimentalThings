@@ -27,7 +27,7 @@ namespace TaskBank.Dlg.forms
 			bool ok = this.ShowDialog() == DialogResult.OK;
 
 			if (ok)
-				return richTextBox1.Rtf;
+				return richTextBox1.Text;
 			else
 				return String.Empty;
 		}

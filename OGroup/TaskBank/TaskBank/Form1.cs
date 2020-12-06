@@ -62,7 +62,7 @@ namespace TaskBank
 			dataGridView1.DataSource = bs;
 			
 			richTextBox1.DataBindings.Clear();
-			richTextBox1.DataBindings.Add("Rtf", bs, "Text");
+			richTextBox1.DataBindings.Add("Text", bs, "Text");
 		}
 
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
