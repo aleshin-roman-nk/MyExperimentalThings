@@ -14,6 +14,7 @@ namespace WhatMeDid.Presenters
 		event Action<NotationLevel> NotationLevelChanged;
 		event Action<IDayNotation> SaveNotation;
 		//void PutReport(DayReport notation);
+		event Action ReindexTasks;
 		void PutNotation(IDayNotation notation);
 		DateTime CurrentDate { get; }
 		NotationLevel CurrentLevel { get; }

@@ -20,6 +20,7 @@ namespace WhatMeDid
 		public event Action<DateTime> DateChanged;
 		public event Action<NotationLevel> NotationLevelChanged;
 		public event Action<IDayNotation> SaveNotation;
+		public event Action ReindexTasks;
 
 		//DayReport currentReport;
 		IDayNotation currentReport;
@@ -71,8 +72,20 @@ namespace WhatMeDid
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			//richTextBox1.SelectionLength = 0;
+			//richTextBox1.SelectedText = $">>> {DateTime.Now:dd-MM-yyyy HH:mm}";
+			//richTextBox1.Select();
+
+			string b = "";
+
+			if (!string.IsNullOrEmpty(richTextBox1.Text))
+			{
+				b = richTextBox1.Text[richTextBox1.Text.Length - 1] == '\n' ? "\n" : "\n\n";
+			}
+
+			richTextBox1.SelectionStart = richTextBox1.Text.Length;
 			richTextBox1.SelectionLength = 0;
-			richTextBox1.SelectedText = $">>> {DateTime.Now:dd-MM-yyyy HH:mm}";
+			richTextBox1.SelectedText = $"{b}>>> {DateTime.Now:dd-MM-yyyy HH:mm}\n";
 			richTextBox1.Select();
 		}
 
@@ -83,22 +96,24 @@ namespace WhatMeDid
 
 		private void btnBold_Click(object sender, EventArgs e)
 		{
-			Font currentFont = richTextBox1.SelectionFont;
+			//Font currentFont = richTextBox1.SelectionFont;
 
-			richTextBox1.SelectionFont = new Font(
-					currentFont.FontFamily,
-					currentFont.Size,
-					/*FontStyle.Underline | */FontStyle.Bold);
+			//richTextBox1.SelectionFont = new Font(
+			//		currentFont.FontFamily,
+			//		currentFont.Size,
+			//		/*FontStyle.Underline | */FontStyle.Bold);
 		}
 
 		private void btnUnbold_Click(object sender, EventArgs e)
 		{
-			Font currentFont = richTextBox1.SelectionFont;
+			//Font currentFont = richTextBox1.SelectionFont;
 
-			richTextBox1.SelectionFont = new Font(
-					currentFont.FontFamily,
-					currentFont.Size,
-					FontStyle.Regular);
+			//richTextBox1.SelectionFont = new Font(
+			//		currentFont.FontFamily,
+			//		currentFont.Size,
+			//		FontStyle.Regular);
+
+			
 		}
 
 		void SetDayReport(IDayNotation notation)
@@ -122,10 +137,32 @@ namespace WhatMeDid
 			saved = true;
 		}
 
-		private void BtnStop_Click(object sender, EventArgs e)
+		private void BtnPrev_Click(object sender, EventArgs e)
 		{
-			richTextBox1.SelectionLength = 0;
-			richTextBox1.SelectedText = $"<<< {DateTime.Now:dd-MM-yyyy HH:mm}";
+			//richTextBox1.SelectionLength = 0;
+			//richTextBox1.SelectedText = $"<<< {DateTime.Now:dd-MM-yyyy HH:mm}";
+			//richTextBox1.Select();
+
+			if (richTextBox1.SelectionStart <= 3)
+			{
+				richTextBox1.Select();
+				return;
+			}
+
+			int pos = richTextBox1.SelectionStart;
+
+			if (pos > richTextBox1.SelectionStart - 3) pos -= 3;
+
+			if (richTextBox1.Text.Substring(pos, 3).Equals(">>>")) pos--;
+
+			while (!richTextBox1.Text.Substring(pos, 3).Equals(">>>"))
+			{
+				pos--;
+			};
+
+			//richTextBox1.Lines
+
+			richTextBox1.SelectionStart = pos;
 			richTextBox1.Select();
 		}
 
@@ -139,18 +176,49 @@ namespace WhatMeDid
 			if(!saved) saveReport();
 		}
 
-		private void btnTable_Click(object sender, EventArgs e)
+		private void btnNext_Click(object sender, EventArgs e)
 		{
-			try
+			//try
+			//{
+			//	richTextBox1.SelectionLength = 0;
+			//	richTextBox1.SelectedRtf = InsertTableInRichTextBox(3, 3);
+			//	richTextBox1.Select();
+			//}
+			//catch (Exception ex)
+			//{
+			//	MessageBox.Show(ex.Message);
+			//}
+
+			//ReindexTasks?.Invoke();
+
+			//string b = richTextBox1.Text[richTextBox1.Text.Length - 1] == '\n' ? "\n" : "\n\n";
+
+			//richTextBox1.SelectionStart = richTextBox1.Text.Length;
+			//richTextBox1.SelectionLength = 0;
+			//richTextBox1.SelectedText = $"{b}>!!!> {DateTime.Now:dd-MM-yyyy HH:mm}\n";
+			//richTextBox1.Select();
+
+			// 0 1 2 3 4 5 6 7 8 9 = 7
+			if (richTextBox1.SelectionStart >= richTextBox1.TextLength - 3)
 			{
-				richTextBox1.SelectionLength = 0;
-				richTextBox1.SelectedRtf = InsertTableInRichTextBox(3, 3);
 				richTextBox1.Select();
+				return;
 			}
-			catch (Exception ex)
+
+			int pos = richTextBox1.SelectionStart;
+
+			if (richTextBox1.Text.Substring(pos, 3).Equals(">>>")) pos += 3;
+
+			while (!richTextBox1.Text.Substring(pos, 3).Equals(">>>"))
 			{
-				MessageBox.Show(ex.Message);
-			}
+				pos++;
+				if (pos > richTextBox1.TextLength - 4) break;
+			};
+
+			//richTextBox1.Lines
+
+			richTextBox1.SelectionStart = pos;
+			richTextBox1.Select();
 		}
 
 		private void UpdateModeTitle()
@@ -219,6 +287,26 @@ namespace WhatMeDid
 			{
 				if (!saved) saveReport();
 			}
+		}
+
+		private void richTextBox1_SelectionChanged(object sender, EventArgs e)
+		{
+			label2.Text = $"{richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart) +1}";
+		}
+
+		private void btnStop_Click(object sender, EventArgs e)
+		{
+			string b = "";
+
+			if (!string.IsNullOrEmpty(richTextBox1.Text))
+			{
+				b = richTextBox1.Text[richTextBox1.Text.Length - 1] == '\n' ? "\n" : "\n\n";
+			}
+
+			richTextBox1.SelectionStart = richTextBox1.Text.Length;
+			richTextBox1.SelectionLength = 0;
+			richTextBox1.SelectedText = $"{b}<<< {DateTime.Now:dd-MM-yyyy HH:mm}\n";
+			richTextBox1.Select();
 		}
 	}
 }

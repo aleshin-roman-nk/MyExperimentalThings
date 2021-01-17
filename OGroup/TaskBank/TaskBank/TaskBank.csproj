@@ -68,12 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\DBAccess\DataProvider.cs" />
     <Compile Include="BL\DBAccess\SQLiteConfig.cs" />
-    <Compile Include="BL\DBAccess\TaskDA.cs" />
-    <Compile Include="BL\DBAccess\MainDb.cs" />
+    <Compile Include="BL\DBAccess\RmTaskRepository.cs" />
+    <Compile Include="BL\DBAccess\MainContext.cs" />
     <Compile Include="BL\Entities\RmTask.cs" />
-    <Compile Include="BL\Models\TaskCollection.cs" />
+    <Compile Include="BL\Models\TaskBankModel.cs" />
     <Compile Include="Dlg\forms\RmTaskForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -31,5 +31,15 @@ namespace WhatMeDid.BL
 			var o = Tasks.FirstOrDefault(x => x.Id == r.Id);
 			o.Body = r.Body;
 		}
+
+		public void ReindexAll()
+		{
+			int i = 1;
+			foreach (var item in Tasks)
+			{
+				item.Id = i;
+				i++;
+			}
+		}
 	}
 }

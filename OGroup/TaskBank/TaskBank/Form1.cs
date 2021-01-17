@@ -18,7 +18,7 @@ namespace TaskBank
 {
 	public partial class Form1 : Form
 	{
-		TaskCollection _taskCollection;
+		TaskBankModel _taskCollection;
 		BindingSource bs;
 
 		RmTask currentTask = null;
@@ -51,7 +51,7 @@ namespace TaskBank
 			dataGridView1.Columns.Add(c1);
 			dataGridView1.Columns.Add(c2);
 			dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-			dataGridView1.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+			//dataGridView1.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
 			init();
 		}
@@ -87,15 +87,15 @@ namespace TaskBank
 
 		private void init()
 		{
-			TaskDA dbModel = new TaskDA();
+			RmTaskRepository dbModel = new RmTaskRepository();
 			var list = dbModel.GetAll();
-			_taskCollection = new TaskCollection(list);
+			_taskCollection = new TaskBankModel(list);
 			displayTasks(_taskCollection.Tasks);
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			TaskDA dbModel = new TaskDA();
+			RmTaskRepository dbModel = new RmTaskRepository();
 
 			IRmTaskForm f = new RmTaskForm();
 
@@ -107,13 +107,8 @@ namespace TaskBank
 			dbModel.Create(res);
 
 			var list = dbModel.GetAll();
-			_taskCollection = new TaskCollection(list);
+			_taskCollection = new TaskBankModel(list);
 			displayTasks(_taskCollection.Tasks);
-		}
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

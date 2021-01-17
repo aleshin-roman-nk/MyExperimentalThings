@@ -1,0 +1,23 @@
+Описание.
+Редактирование слова из коллекции фильтра.
+Автоматическое сохранение срабатывает, но при сбросе фильтра мы видим в поле упражнений слова старый текст. После изменения фильтра, когда коллекция вновь загружается, слово с последними сохраненными изменениями.
+
+hide 22:17:35
+
+22:18:32 | IMainView.CurrentItemChanged: Current word is (hide 22:18:32)
+
+#1 22:20:47 | >>> IMainView: filtering
+#2 22:20:47 | >>> MainPresenter._view_WordFilterChanged
+#3 22:20:47 | MainPresenter._view_WordFilterChanged: loading data from DB
+#4 22:20:47 | MainPresenter._view_WordFilterChanged: sending data to MainView
+#5 22:20:47 | IMainView: SAVING And LEAVING (hide 22:18:32)
+22:20:47 | IMainView.CurrentItemChanged: Current word is (buy 22:20:47)
+22:20:47 | IMainView: JUST LEAVING. (buy 22:20:47)
+22:20:47 | IMainView.CurrentItemChanged: Current word is (buy 22:20:47)
+22:20:47 | <<< MainPresenter._view_WordFilterChanged
+22:20:47 | <<< IMainView: filtering
+
+
+#3. Сначала загружаем данные из БД. Загружена старая версия сущности.
+#4. Отправляем данные в окно. Данные ДО сохранения.
+#5 строка 9. Сохранение в БД новой версии сущности.

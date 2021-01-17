@@ -45,8 +45,18 @@ namespace WhatMeDid.Presenters
 			_view.SaveNotation += _view_SaveNotation;
 			_view.DateChanged += _view_DateChanged;
 			_view.NotationLevelChanged += _view_NotationLevelChanged;
+			_view.ReindexTasks += _view_ReindexTasks;
 
 			putNotation(_view.CurrentDate, _view.CurrentLevel);
+		}
+
+		private void _view_ReindexTasks()
+		{
+			//taskCollection.ReindexAll();
+			//DbAccess.SaveTasks(taskCollection, dbfileTasks);
+
+			//reportCollection.ReindexAll();
+			//DbAccess.SaveReports(reportCollection, dbfileReports);
 		}
 
 		private void _view_NotationLevelChanged(NotationLevel obj)

@@ -37,6 +37,8 @@ namespace TagGenerator
 
 			var strres = $">>> {dt.ToString("dd-MM-yyyy HH:mm")}";
 
+			Clipboard.Clear();
+
 			Clipboard.SetText(strres.ToString());
 		}
 	}
