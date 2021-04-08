@@ -62,11 +62,11 @@ namespace Costs.Forms
 			//model.DirectoriesModel.Load();
 
 			// * part presenter: Directory TreeView
-			view.DirectoriesView.CreateDirectoryCmd += View_CreateDirectory;
+			view.DirectoriesView.CommandCreateDirectory += View_CreateDirectory;
 			view.DirectoriesView.DirectoryDroppedCmd += View_DirectoryDroppedCmd;
 			view.DirectoriesView.RenameDirectoryCmd += View_RenameDirectory;
 			view.DirectoriesView.DeleteDirectoryCmd += View_DeleteDirectory;
-			view.DirectoriesView.PurchaseDroppedCmd += View_PurchaseDroppedCmd;
+			view.DirectoriesView.CommandPurchaseDropped += View_PurchaseDroppedCmd;
 
 			view.DateSelector.ValuesChanged += (e) =>
 				reloadPurchases(view.DirectoriesView.Current, e.Date, e.OneMonth);
@@ -81,7 +81,7 @@ namespace Costs.Forms
 
 		private void View_ShowDocumentsViewerCmd()
 		{
-			DocumentsViewerPresenterPart _pres = new DocumentsViewerPresenterPart(_factory);
+			DocumentsViewerPresenter _pres = new DocumentsViewerPresenter(_factory);
 			_pres.Run();
 			reloadPurchases(view.DirectoriesView.Current, view.DateSelector.CurrentDate, view.DateSelector.OneMonth);
 		}

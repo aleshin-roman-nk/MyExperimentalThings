@@ -27,19 +27,19 @@ namespace Costs.Forms.UC
 			directoriesTreeViewHandler = new DirectoriesTreeViewHandler(treeView1);
 
 			directoriesTreeViewHandler.DragDrop.DirectoryDropped += (e) => DirectoryDroppedCmd?.Invoke(e);
-			directoriesTreeViewHandler.DragDrop.PurchaseDropped += (e) => PurchaseDroppedCmd?.Invoke(e);
+			directoriesTreeViewHandler.DragDrop.PurchaseDropped += (e) => CommandPurchaseDropped?.Invoke(e);
 
 			directoriesTreeViewHandler.DeleteDirectory += (e) => DeleteDirectoryCmd?.Invoke(e);
 			directoriesTreeViewHandler.RenameDirectory += (e) => RenameDirectoryCmd?.Invoke(e);
-			directoriesTreeViewHandler.CreateDirectory += (e) => CreateDirectoryCmd?.Invoke(e);
+			directoriesTreeViewHandler.CreateDirectory += (e) => CommandCreateDirectory?.Invoke(e);
 			directoriesTreeViewHandler.CurrentDirectoryChanged += (e) => CurrentDirChanged?.Invoke(e);
 		}
 
 		public Directory Current => directoriesTreeViewHandler.Current;
 
 		public event Action<DirectoryDroppedEventArg> DirectoryDroppedCmd;
-		public event Action<PurchaseDroppedEventArg> PurchaseDroppedCmd;
-		public event Action<Directory> CreateDirectoryCmd;
+		public event Action<PurchaseDroppedEventArg> CommandPurchaseDropped;
+		public event Action<Directory> CommandCreateDirectory;
 		public event Action<Directory> RenameDirectoryCmd;
 		public event Action<Directory> DeleteDirectoryCmd;
 		public event Action<Directory> CurrentDirChanged;

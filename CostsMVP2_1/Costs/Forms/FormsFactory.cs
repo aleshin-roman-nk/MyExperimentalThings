@@ -29,7 +29,7 @@ namespace Costs.Forms
 			}
 		}
 
-		public IPurchaseView CreatePurchaseView()
+		public IEditPurchaseView CreatePurchaseView()
 		{
 			return new EditPurchaseForm();
 		}

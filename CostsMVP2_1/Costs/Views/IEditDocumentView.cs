@@ -22,5 +22,6 @@ namespace Costs.Views
 		ICategoriesViewPart CategoriesView { get; }
 
 		event EventHandler ShopNameRequested;
+		event EventHandler<FormClosingEventArg> FormClosing1;
 	}
 }

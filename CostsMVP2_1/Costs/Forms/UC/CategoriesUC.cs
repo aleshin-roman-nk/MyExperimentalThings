@@ -29,11 +29,11 @@ namespace Costs.Forms.UC
 
 		public event Action<Category> UpdateProductTypes;
 		public event Action UpdateCategories;
-		public event Action CreateCategoryCmd;
-		public event Action<Category> CreateProductTypeCmd;
-		public event Action<Category> DeleteCategoryCmd;
-		public event Action<ProductType> DeleteProductTypeCmd;
-		public event Action<ProductType> AddPointToDoc;
+		public event Action CommandCreateCategory;
+		public event Action<Category> CommandCreateProductType;
+		public event Action<Category> CommandDeleteCategory;
+		public event Action<ProductType> CommandDeleteProductType;
+		public event Action<ProductType> CommandAddPointToDoc;
 
 		public void SetCategories(IEnumerable<Category> categs)
 		{
@@ -90,7 +90,7 @@ namespace Costs.Forms.UC
 			else
 			{
 				// rise an event to add a point into the document
-				AddPointToDoc?.Invoke(_item as ProductType);
+				CommandAddPointToDoc?.Invoke(_item as ProductType);
 			}
 
 		}
@@ -156,14 +156,14 @@ namespace Costs.Forms.UC
 		{
 			if (currentCategoryObserver.IsCategoryLevel)
 			{
-				DeleteCategoryCmd?.Invoke(currentCategoryObserver.CurrentCategory);
+				CommandDeleteCategory?.Invoke(currentCategoryObserver.CurrentCategory);
 			}
 			else
 			{
 				var pt = lvProductTypes.SelectedItems.Count == 0 ? null : lvProductTypes.SelectedItems[0].Tag as ProductType;
 
 				if (pt == null) return;
-				DeleteProductTypeCmd?.Invoke(pt);
+				CommandDeleteProductType?.Invoke(pt);
 			}
 		}
 
@@ -171,11 +171,11 @@ namespace Costs.Forms.UC
 		{
 			if (currentCategoryObserver.IsCategoryLevel)
 			{
-				CreateCategoryCmd?.Invoke();
+				CommandCreateCategory?.Invoke();
 			}
 			else
 			{
-				CreateProductTypeCmd?.Invoke(currentCategoryObserver.CurrentCategory);
+				CommandCreateProductType?.Invoke(currentCategoryObserver.CurrentCategory);
 			}
 		}
 

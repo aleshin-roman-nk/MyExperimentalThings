@@ -27,7 +27,7 @@ using Costs.Views;
 
 namespace Costs.Forms
 {
-	public partial class EditPurchaseForm : Form, IPurchaseView
+	public partial class EditPurchaseForm : Form, IEditPurchaseView
 	{
 		List<ProductType> sampleProducts = new List<ProductType>();
 		Purchase purchase = null;

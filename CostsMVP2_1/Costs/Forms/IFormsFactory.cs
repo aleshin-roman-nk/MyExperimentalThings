@@ -7,7 +7,7 @@ namespace Costs.Forms
 	{
 		IDocumentsView CreateDocumentsView();
 		IEditDocumentView CreateEditDocumentView();
-		IPurchaseView CreatePurchaseView();
+		IEditPurchaseView CreatePurchaseView();
 		IDialogMessages CreateDialogMessages();
 		IMainView CreateMainView();
 		IShopView CreateShopsView();

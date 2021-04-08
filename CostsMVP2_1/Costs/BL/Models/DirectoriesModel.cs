@@ -97,6 +97,7 @@ namespace Costs.Models
 			return dirs.FirstOrDefault(x => x.ID == dir.ParentID);
 		}
 
+		// В репозиторий
 		public IEnumerable<Directory> GetDirectories()
 		{
 			Directories = DirectoryDBA.ReadAll();
@@ -104,6 +105,7 @@ namespace Costs.Models
 			//return DirectoryDBA.ReadAll();
 		}
 
+		// В репозиторий
 		public Directory GetDirectory(int id)
 		{
 			using (AppData db = new AppData())

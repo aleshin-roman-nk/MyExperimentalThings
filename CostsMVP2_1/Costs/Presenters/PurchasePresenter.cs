@@ -33,10 +33,10 @@ namespace Costs.Presenters
 	 */
 	public class EditPurchasePresenter
 	{
-		IPurchaseView view;
+		IEditPurchaseView view;
 		DirectoriesModel directoryModel;
 
-		public EditPurchasePresenter(IPurchaseView v)
+		public EditPurchasePresenter(IEditPurchaseView v)
 		{
 			view = v;
 			directoryModel = new DirectoriesModel();

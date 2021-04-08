@@ -44,6 +44,16 @@ namespace Costs.BL.Domain.Entities
 			} 
 		}
 
+		public bool HasUnattachedPosition()
+		{
+			foreach (var item in Purchases)
+			{
+				if (item.DirectoryID == 0) return true;
+			}
+
+			return false;
+		}
+
 		public PaymentDoc Clone()
 		{
 			var res = new PaymentDoc
