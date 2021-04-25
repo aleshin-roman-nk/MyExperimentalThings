@@ -1,0 +1,46 @@
+﻿[
+  {
+    "Started": "2021-02-20T12:11:05.9504958+07:00",
+    "Ended": "2021-02-20T12:11:10.2370124+07:00",
+    "Title": null,
+    "Notes": null,
+    "SessionState": 0,
+    "IsClosed": true,
+    "Pauses": [],
+    "LastPause": null,
+    "TotalPausesInMinutes": 0,
+    "TotalTimeInMinutes": 0,
+    "VisibleTitle": "20.02.2021 12:11 - 0"
+  },
+  {
+    "Started": "2021-02-20T12:11:13.0474229+07:00",
+    "Ended": "2021-02-20T12:11:40.7774545+07:00",
+    "Title": null,
+    "Notes": null,
+    "SessionState": 0,
+    "IsClosed": true,
+    "Pauses": [
+      {
+        "Start": "2021-02-20T12:11:14.9304234+07:00",
+        "End": "2021-02-20T12:11:16.9199378+07:00",
+        "Closed": true,
+        "Total": "00:00:01.9895144"
+      },
+      {
+        "Start": "2021-02-20T12:11:18.3157932+07:00",
+        "End": "2021-02-20T12:11:40.7774545+07:00",
+        "Closed": true,
+        "Total": "00:00:22.4616613"
+      }
+    ],
+    "LastPause": {
+      "Start": "2021-02-20T12:11:18.3157932+07:00",
+      "End": "2021-02-20T12:11:40.7774545+07:00",
+      "Closed": true,
+      "Total": "00:00:22.4616613"
+    },
+    "TotalPausesInMinutes": 0,
+    "TotalTimeInMinutes": 0,
+    "VisibleTitle": "20.02.2021 12:11 - 0"
+  }
+]

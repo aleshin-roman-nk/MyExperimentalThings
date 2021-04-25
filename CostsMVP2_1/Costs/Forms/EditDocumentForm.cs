@@ -75,6 +75,7 @@ namespace Costs.Forms
 		public string Shop { get => txtShopName.Text; set => txtShopName.Text = value; }
 
 		public event EventHandler ShopNameRequested;
+		public event EventHandler<FormClosingEventArg> FormClosing1;
 
 		public void SetCategories(IEnumerable<Category> categs)
 		{
@@ -91,9 +92,11 @@ namespace Costs.Forms
 			throw new NotImplementedException();
 		}
 
+		bool user_pressed_green_accept = false;
+
 		private void btnSaveAndClose_Click(object sender, EventArgs e)
 		{
-
+			user_pressed_green_accept = true;
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
@@ -122,6 +125,17 @@ namespace Costs.Forms
 		private void categoriesUC1_KeyDown(object sender, KeyEventArgs e)
 		{
 
+		}
+
+		private void EditDocumentForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (user_pressed_green_accept)
+			{
+				var res = new FormClosingEventArg();
+				FormClosing1?.Invoke(this, res);
+				e.Cancel = !res.Close;
+				user_pressed_green_accept = false;
+			}
 		}
 	}
 }

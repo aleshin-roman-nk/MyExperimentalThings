@@ -33,17 +33,17 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridCalendar = new System.Windows.Forms.DataGridView();
-			this.d1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.d2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.d3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.d4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.d5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.d6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.d7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnSetCurrentMonth = new System.Windows.Forms.Button();
 			this.btnUp = new System.Windows.Forms.Button();
 			this.btnDown = new System.Windows.Forms.Button();
+			this.d7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.d6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.d5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.d4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.d3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.d2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.d1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridCalendar)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -102,48 +102,6 @@
 			this.gridCalendar.TabIndex = 19;
 			this.gridCalendar.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gridCalendar_CellPainting);
 			// 
-			// d1
-			// 
-			this.d1.HeaderText = "Пон";
-			this.d1.Name = "d1";
-			this.d1.ReadOnly = true;
-			// 
-			// d2
-			// 
-			this.d2.HeaderText = "Вторник";
-			this.d2.Name = "d2";
-			this.d2.ReadOnly = true;
-			// 
-			// d3
-			// 
-			this.d3.HeaderText = "Среда";
-			this.d3.Name = "d3";
-			this.d3.ReadOnly = true;
-			// 
-			// d4
-			// 
-			this.d4.HeaderText = "Четверг";
-			this.d4.Name = "d4";
-			this.d4.ReadOnly = true;
-			// 
-			// d5
-			// 
-			this.d5.HeaderText = "Пятница";
-			this.d5.Name = "d5";
-			this.d5.ReadOnly = true;
-			// 
-			// d6
-			// 
-			this.d6.HeaderText = "Суббота";
-			this.d6.Name = "d6";
-			this.d6.ReadOnly = true;
-			// 
-			// d7
-			// 
-			this.d7.HeaderText = "Воскр";
-			this.d7.Name = "d7";
-			this.d7.ReadOnly = true;
-			// 
 			// panel1
 			// 
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -193,6 +151,48 @@
 			this.btnDown.UseVisualStyleBackColor = true;
 			this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
 			// 
+			// d7
+			// 
+			this.d7.HeaderText = "Воскр";
+			this.d7.Name = "d7";
+			this.d7.ReadOnly = true;
+			// 
+			// d6
+			// 
+			this.d6.HeaderText = "Суббота";
+			this.d6.Name = "d6";
+			this.d6.ReadOnly = true;
+			// 
+			// d5
+			// 
+			this.d5.HeaderText = "Пятница";
+			this.d5.Name = "d5";
+			this.d5.ReadOnly = true;
+			// 
+			// d4
+			// 
+			this.d4.HeaderText = "Четверг";
+			this.d4.Name = "d4";
+			this.d4.ReadOnly = true;
+			// 
+			// d3
+			// 
+			this.d3.HeaderText = "Среда";
+			this.d3.Name = "d3";
+			this.d3.ReadOnly = true;
+			// 
+			// d2
+			// 
+			this.d2.HeaderText = "Вторник";
+			this.d2.Name = "d2";
+			this.d2.ReadOnly = true;
+			// 
+			// d1
+			// 
+			this.d1.HeaderText = "Пон";
+			this.d1.Name = "d1";
+			this.d1.ReadOnly = true;
+			// 
 			// MyCalendar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,6 +208,10 @@
 
 		#endregion
 		private System.Windows.Forms.DataGridView gridCalendar;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Button btnSetCurrentMonth;
+		private System.Windows.Forms.Button btnUp;
+		private System.Windows.Forms.Button btnDown;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d3;
@@ -215,9 +219,5 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn d5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d6;
 		private System.Windows.Forms.DataGridViewTextBoxColumn d7;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Button btnSetCurrentMonth;
-		private System.Windows.Forms.Button btnUp;
-		private System.Windows.Forms.Button btnDown;
 	}
 }

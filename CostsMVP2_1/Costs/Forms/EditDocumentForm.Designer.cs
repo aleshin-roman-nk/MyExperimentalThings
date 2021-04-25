@@ -257,6 +257,7 @@
 			this.Name = "EditDocumentForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "ViewDocumentForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditDocumentForm_FormClosing);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.panel1.ResumeLayout(false);

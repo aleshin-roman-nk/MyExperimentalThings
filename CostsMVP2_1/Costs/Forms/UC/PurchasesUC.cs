@@ -20,9 +20,9 @@ namespace Costs.Forms.UC
 	{
 		PurchasesGridHandler purchasesGridHandler;
 
-		public event Action<ProductType> ProductTypeDropped;
-		public event Action<Purchase> EditPurchaseCmd;
-		public event Action<Purchase> DeletePurchaseCmd;
+		public event Action<ProductType> CommandProductTypeDropped;
+		public event Action<Purchase> CommandEditPurchase;
+		public event Action<Purchase> CommandDeletePurchase;
 
 		// >>> 02-07-2020 01:20 НА СЛЕД РАЗ имея ссылуц на др usercontrol можем создавать событие с полноценными данными
 		// Но на самом деле нам может не понадобится создавать событие с полноценными данными. Поэтому можно законфигурировать.
@@ -43,9 +43,9 @@ namespace Costs.Forms.UC
 			dgvPurchases.AutoGenerateColumns = false;
 
 			purchasesGridHandler = new PurchasesGridHandler(dgvPurchases);
-			purchasesGridHandler.CreatePurchase += (pt) => ProductTypeDropped?.Invoke(pt);
-			purchasesGridHandler.EditPurchase += (purch) => EditPurchaseCmd?.Invoke(purch);
-			purchasesGridHandler.DeletePurchase += (purch) => DeletePurchaseCmd?.Invoke(purch);
+			purchasesGridHandler.CreatePurchase += (pt) => CommandProductTypeDropped?.Invoke(pt);
+			purchasesGridHandler.EditPurchase += (purch) => CommandEditPurchase?.Invoke(purch);
+			purchasesGridHandler.DeletePurchase += (purch) => CommandDeletePurchase?.Invoke(purch);
 		}
 		public void SetPurchases(IEnumerable<Purchase> ppList)
 		{

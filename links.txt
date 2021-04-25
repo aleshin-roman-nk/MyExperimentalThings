@@ -1,0 +1,5 @@
+﻿How to use chrom in my c# projects
+
+https://stackoverflow.com/questions/46599857/web-browser-control-in-winform-with-google-chrome-c-sharp
+
+https://www.kino-teatr.ru/kino/acter/m/hollywood/49093/works/

@@ -17,10 +17,10 @@ namespace Costs.Views.Parts
 
 		event Action<Category> UpdateProductTypes;
 		event Action UpdateCategories;
-		event Action CreateCategoryCmd;
-		event Action<Category> CreateProductTypeCmd;
-		event Action<Category> DeleteCategoryCmd;
-		event Action<ProductType> DeleteProductTypeCmd;
-		event Action<ProductType> AddPointToDoc;
+		event Action CommandCreateCategory;
+		event Action<Category> CommandCreateProductType;
+		event Action<Category> CommandDeleteCategory;
+		event Action<ProductType> CommandDeleteProductType;
+		event Action<ProductType> CommandAddPointToDoc;
 	}
 }

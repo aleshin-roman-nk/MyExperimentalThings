@@ -33,8 +33,10 @@ namespace DocBuilder
 
 		public static IEnumerable<string> AllVariables(string templbody)
 		{
-			string pattern = string.Format($"%\\w+(\\:(\\w+)?(\\<[\\w\\s,.]*\\>)?)?%");
-			Regex rx = new Regex(pattern);
+			//string pattern = string.Format($"%\\w+(\\:(\\w+)?(\\<[\\w\\s,.]*\\>)?)?%");
+			//Regex rx = new Regex(pattern);
+
+			Regex rx = new Regex(@"%\w+(\:(\w+)?(\<[\w\s,.]*\>)?)?%");
 			var match = rx.Match(templbody);
 
 			List<string> res = new List<string>();
@@ -59,12 +61,11 @@ namespace DocBuilder
 		// Из хитрой строки с информацией о формате получить конечное значение, готовое для подстановки
 		string format(string keystring, string value)
 		{
-			if (string.IsNullOrWhiteSpace(value)) return "";// Важно! Если имя тега нет в DataRow, его следует убрать из текста.
+			if (string.IsNullOrWhiteSpace(value)) return "";// Важно! Если имя переменая не обнаружена в таблице, тэг следует убрать из текста.
 
 			// Хотя именно html-шаблон "запрашивает" значения тегов
 			//		Поэтому необходим класс, обслуживающий html-шаблон
-			//			И этот сервис "высасывает" данные из источника. Это может быть и DataSet с несколькими таблицами.
-			//		Хотя не все так просто. Ведь нужно знать какую строку из таблицы выбрать.
+			//			И этот сервис "высасывает" данные из источника.
 
 			Dictionary<string, Regex> regexes = new Dictionary<string, Regex>();
 			regexes["valueType"] = new Regex(@"\:[\w]+(\<)?");

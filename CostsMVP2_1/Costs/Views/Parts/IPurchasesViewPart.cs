@@ -26,8 +26,8 @@ namespace Costs.Views.Parts
 		void SetPurchases(IEnumerable<Purchase> ppList);
 		void SetPurchasesAmount(decimal amount);
 
-		event Action<ProductType> ProductTypeDropped;
-		event Action<Purchase> EditPurchaseCmd;
-		event Action<Purchase> DeletePurchaseCmd;
+		event Action<ProductType> CommandProductTypeDropped;
+		event Action<Purchase> CommandEditPurchase;
+		event Action<Purchase> CommandDeletePurchase;
 	}
 }

@@ -43,23 +43,41 @@ namespace Costs.Presenters
 			_editDocumentView.CategoriesView.UpdateProductTypes += (e) =>
 				_editDocumentView.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(e));
 
-			_editDocumentView.CategoriesView.CreateCategoryCmd += CategoriesView_CreateCategoryCmd;
-			_editDocumentView.CategoriesView.CreateProductTypeCmd += CategoriesView_CreateProductTypeCmd;
-			_editDocumentView.CategoriesView.DeleteCategoryCmd += CategoriesView_DeleteCategoryCmd;
-			_editDocumentView.CategoriesView.DeleteProductTypeCmd += CategoriesView_DeleteProductTypeCmd;
-			_editDocumentView.CategoriesView.AddPointToDoc += CategoriesView_AddPointToDoc;
+			_editDocumentView.CategoriesView.CommandCreateCategory += CategoriesView_CommandCreateCategory;
+			_editDocumentView.CategoriesView.CommandCreateProductType += CategoriesView_CommandCreateProductType;
+			_editDocumentView.CategoriesView.CommandDeleteCategory += CategoriesView_CommandDeleteCategory;
+			_editDocumentView.CategoriesView.CommandDeleteProductType += CategoriesView_CommandDeleteProductType;
+			_editDocumentView.CategoriesView.CommandAddPointToDoc += CategoriesView_AddPointToDoc;
 
-			_editDocumentView.DirectoriesView.CreateDirectoryCmd += DirectoriesView_CreateDirectoryCmd;
-			_editDocumentView.DirectoriesView.PurchaseDroppedCmd += DirectoriesView_PurchaseDroppedCmd;
+			_editDocumentView.DirectoriesView.CommandCreateDirectory += DirectoriesView_CommandCreateDirectory;
+			_editDocumentView.DirectoriesView.CommandPurchaseDropped += DirectoriesView_CommandPurchaseDropped;
 
-			_editDocumentView.PurchasesView.ProductTypeDropped += PurchasesView_ProductTypeDropped;
-			_editDocumentView.PurchasesView.DeletePurchaseCmd += PurchasesView_DeletePurchaseCmd;
+			_editDocumentView.PurchasesView.CommandProductTypeDropped += PurchasesView_CommandProductTypeDropped;
+			_editDocumentView.PurchasesView.CommandDeletePurchase += PurchasesView_CommandDeletePurchase;
 			_editDocumentView.ShopNameRequested += _editDocumentView_ShopNameRequested;
+			_editDocumentView.PurchasesView.CommandEditPurchase += PurchasesView_CommandEditPurchase;
+		}
+
+		private void PurchasesView_CommandEditPurchase(Purchase obj)
+		{
+			IEditPurchaseView purchaseView = _factory.CreatePurchaseView();
+			purchaseView.SetPurchase(obj);
+			purchaseView.SetDirectoryName(obj.DirName);
+
+			var res = purchaseView.GetResult();
+
+			if (res.Answer == ResponseCode.Ok)
+			{
+				obj.Accept(res.Result);
+				obj.Save();
+				//model.PayDocumentModel.AddPosition(obj);
+				updatePurchases(model.PayDocumentModel.Document.Purchases, model.PayDocumentModel.Document.Amount);
+			}
 		}
 
 		private void CategoriesView_AddPointToDoc(ProductType obj)
 		{
-			PurchasesView_ProductTypeDropped(obj);
+			PurchasesView_CommandProductTypeDropped(obj);
 		}
 
 		private void _editDocumentView_ShopNameRequested(object sender, EventArgs e)
@@ -94,7 +112,7 @@ namespace Costs.Presenters
 				_editDocumentView.Shop = res.Result;
 		}
 
-		private void PurchasesView_DeletePurchaseCmd(Purchase obj)
+		private void PurchasesView_CommandDeletePurchase(Purchase obj)
 		{
 			if (obj == null) return;
 
@@ -118,7 +136,7 @@ namespace Costs.Presenters
 			_editDocumentView.PurchasesView.SetPurchasesAmount(doc.Amount);
 		}
 
-		private void DirectoriesView_CreateDirectoryCmd(Directory obj)
+		private void DirectoriesView_CommandCreateDirectory(Directory obj)
 		{
 			string name = _dlgView.InputText("", $"Родительская директория :{obj.Name}\r\nВведите имя новой директории");
 
@@ -129,7 +147,7 @@ namespace Costs.Presenters
 			}
 		}
 
-		private void DirectoriesView_PurchaseDroppedCmd(PurchaseDroppedEventArg obj)
+		private void DirectoriesView_CommandPurchaseDropped(PurchaseDroppedEventArg obj)
 		{
 			// необязательно записывать в БД и перезагружать все сущности
 			//	можно дублировать операцию - изменить в памяти и отправить фиксацию в бд без перезагрузки картины из бд
@@ -146,18 +164,20 @@ namespace Costs.Presenters
 		/// Добавление позиции в документ без записи в БД
 		/// </summary>
 		/// <param name="e"></param>
-		private void PurchasesView_ProductTypeDropped(ProductType e)
+		private void PurchasesView_CommandProductTypeDropped(ProductType e)
 		{
 			Purchase product = EntityFactory.CreatePurchase();
 
 			if (e != null) product.Name = e.Name;
 
-			_editDocumentView.DirectoriesView.Current.Attach(product, model.DirectoriesModel);
+			// >>> 03-03-2021 00:09
+			// Постоянно зыбавю разбрасывать по категориям. Поэтому убираю автоматическое присвоение директории.
+			//_editDocumentView.DirectoriesView.Current.Attach(product, model.DirectoriesModel);
 
 			//product.DirectoryID = _editDocumentView.DirectoriesView.Current.ID;
 			//product.DirName = model.DirectoriesModel.GetDirFullName(_editDocumentView.DirectoriesView.Current.ID);
 
-			IPurchaseView purchaseView = _factory.CreatePurchaseView();
+			IEditPurchaseView purchaseView = _factory.CreatePurchaseView();
 			purchaseView.SetPurchase(product);
 			purchaseView.SetDirectoryName(product.DirName);
 
@@ -172,7 +192,7 @@ namespace Costs.Presenters
 			}
 		}
 
-		private void CategoriesView_DeleteProductTypeCmd(ProductType obj)
+		private void CategoriesView_CommandDeleteProductType(ProductType obj)
 		{
 			if (_dlgView.UserAnsweredYes($"Тип продукта '{obj.Name}' будет удален. Подтвердите."))
 			{
@@ -181,7 +201,7 @@ namespace Costs.Presenters
 			}
 		}
 
-		private void CategoriesView_DeleteCategoryCmd(Category obj)
+		private void CategoriesView_CommandDeleteCategory(Category obj)
 		{
 			if (_dlgView.UserAnsweredYes($"Категория {obj.Name} будет удалена со всеми вложенными элементами. Подтвердите."))
 			{
@@ -196,7 +216,7 @@ namespace Costs.Presenters
 		// Так много раз приходится дублировать код (категории, типы продуктов)
 		// Ввобще прорисовать схему взаимодействия всех модулей (презентеров, вьюшек, моделей.)
 		// Одна стрелка означает кто к кому обращается.
-		private void CategoriesView_CreateProductTypeCmd(Category obj)
+		private void CategoriesView_CommandCreateProductType(Category obj)
 		{
 			var res = _dlgView.InputText("", "Создание нового типа продукта\r\nВведите имя типа");
 			if (string.IsNullOrWhiteSpace(res)) return;
@@ -206,7 +226,7 @@ namespace Costs.Presenters
 			_editDocumentView.CategoriesView.SetProductTypes(model.ProductTypeModel.GetProductTypes(obj));
 		}
 
-		private void CategoriesView_CreateCategoryCmd()
+		private void CategoriesView_CommandCreateCategory()
 		{
 			var res = _dlgView.InputText("", "Создание новой категории\r\nВведите имя категории");
 
@@ -231,17 +251,26 @@ namespace Costs.Presenters
 			_editDocumentView.CategoriesView.SetCategories(model.CategoriesModel.Categories);
 			_editDocumentView.DirectoriesView.SetDirectories(model.DirectoriesModel.GetDirectories());
 
-			//_editDocumentView.PurchasesView.SetPurchases(model.PayDocumentModel.Document.Purchases);
-			//_editDocumentView.CurrentDateTime = doc.DateTime == default ? DateTime.Now : doc.DateTime;
-			//_editDocumentView.Shop = model.PayDocumentModel.Document.Shop;
-
 			updateDocument(model.PayDocumentModel.Document);
+
+			_editDocumentView.FormClosing1 += (s, p) =>
+			{
+				p.Close = true;
+				if (model.PayDocumentModel.Document.HasUnattachedPosition())
+				{
+					Messages.ShowError("Документ имеет висящие позиции. Необходимо разместить по директориям", "Позиции не привязаны!");
+					p.Close = false;
+				}
+			};
+
+			IInputDateTimeView inputDateTimeForm = new InputDateTimeForm();
+			inputDateTimeForm.Go();
+			_editDocumentView.CurrentDateTime = inputDateTimeForm.UserDateTime;
 
 			var res = _editDocumentView.GetResult();
 
 			if(res.Answer == ResponseCode.Ok)
 			{
-				// !!! Не нравится мне такое неавное применение. Где я должен видеть о том, как применяются измененные покупки?
 				model.PayDocumentModel.Document.DateTime = _editDocumentView.CurrentDateTime;
 				model.PayDocumentModel.Document.Shop = _editDocumentView.Shop;
 				model.PayDocumentModel.Save();

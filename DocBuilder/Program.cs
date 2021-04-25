@@ -15,9 +15,10 @@ namespace DocBuilder
 
 			var table = new Dictionary<string, string>();
 
-			string body = "Адрес %kv:<, кв kv>%";
+			string body = "Адрес: дом %h%%kv:<, кв kv>%";
 
-			table["kv"] = "123";
+			table["kv"] = "78";
+			table["h"] = "39";
 
 
 			DBiuld doc = new DBiuld(table, body);

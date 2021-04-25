@@ -11,7 +11,7 @@ namespace Costs.BL.Models
 	{
 		public static Purchase CreatePurchase()
 		{
-			return new Purchase { Count = 1.0M, Price = 0.0M };
+			return new Purchase { Count = 1.0M, Price = 0.0M, DirectoryID = 0, DirName = null };
 		}
 	}
 }
