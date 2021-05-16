@@ -15,7 +15,7 @@ namespace Costs.BL.DB
 		{
 			using (AppData db = new AppData())
 			{
-				return db.PaymentDocs.Include("Purchases").Where(x => x.DateTime >= from && x.DateTime <= to).ToList();
+				return db.PaymentDocs.Include("Purchases").Where(x => x.DateTime >= from && x.DateTime <= to).OrderBy(x=>x.DateTime).ToList();
 			}
 		}
 		public static void Save(PaymentDoc doc)
